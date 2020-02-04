@@ -64,28 +64,25 @@
         }
 
 /*ASIDE-ARE*/
-.aside-area {
-    position: relative;
+
+.aside-area h2 {
+    margin: 0px;
+    padding: 0px;
 }
 
-    .aside-area h2 {
-        margin: 0px;
-        padding: 0px;
-    }
-
-    .aside-area h2 {
-        padding-bottom: 5px;
-    }
+.aside-area h2 {
+    padding-bottom: 5px;
+}
 
 .container-aside-area p {
     padding: 5px 15px;
-    z-index: -1;
 }
 
-.power {
-    position: absolute;
-    bottom: 0;
-    padding: 5px;
+.power p{
+  text-align:left;
+}
+.aside-area .power {
+padding:5px;
 }
 
 
