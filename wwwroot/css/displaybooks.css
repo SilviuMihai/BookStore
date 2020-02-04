@@ -1,0 +1,146 @@
+﻿.top-area {
+    grid-area: t;
+    background-color: blue;
+}
+
+.comedy {
+    grid-area: c;
+    background-color: brown;
+}
+
+.drama {
+    grid-area: d;
+    background-color: coral;
+}
+
+.science-fiction {
+    grid-area: s;
+    background-color: cornflowerblue;
+}
+
+.nature-science {
+    grid-area: n;
+    background-color: darkgray;
+}
+
+.footer-area {
+    grid-area: f;
+    background-color: darkseagreen;
+}
+
+body {
+    margin: 10px;
+    background-color: skyblue;
+}
+
+
+/* CSS Design !!! */
+
+.top-area, .comedy, .drama, .science-fiction, .nature-science, .footer-area {
+    border-radius: 15px;
+    padding: 5px;
+}
+
+
+
+    /*TOP-AREA*/
+    .top-area h1, p {
+        margin: 0px;
+        padding: 0px;
+    }
+    .top-area h1 {
+        text-align: center;
+    }
+    .top-area p {
+        text-align: left;
+    }
+
+/*Genre Area*/
+    .comedy h3 {
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .drama h3 {
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .science-fiction h3 {
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .nature-science h3 {
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .comedy p {
+        text-align: left;
+    }
+
+    .drama p {
+        text-align: left;
+    }
+
+    .science-fiction p {
+        text-align: left;
+    }
+
+    .nature-science p {
+        text-align: left;
+    }
+
+    /*FOOTER-AREA*/
+    .footer-area h1, h2, p {
+        margin: 0;
+        padding: 0;
+    }
+
+    .footer-area h2, p {
+        text-align: center;
+    }
+
+
+/* Grid Layout !!! */
+.container {
+    display: grid;
+    grid-template-areas: 
+        "t t t t t t t t" 
+        "c c s s n n d d" 
+        "c c s s n n d d" 
+        "c c s s n n d d" 
+        "c c s s n n d d" 
+        "c c s s n n d d" 
+        "f f f f f f f f";
+    padding: 10px;
+    border-radius: 25px;
+    border: 2px solid black;
+    grid-gap: 10px;
+}
+
+@media screen and (max-width:760px) {
+    .container {
+        display: grid;
+        grid-template-areas: 
+            "t t t t t t t t" 
+            "c c c c c c c c" 
+            "s s s s s s s s" 
+            "n n n n n n n n" 
+            "d d d d d d d d" 
+            "f f f f f f f f";
+        padding: 10px;
+        border-radius: 15px;
+        border: 2px solid black;
+        gap: 10px;
+    }
+}

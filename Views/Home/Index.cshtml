@@ -1,0 +1,60 @@
+﻿@model BookStoreTime
+
+@{
+    ViewBag.Title = "BookStore Page";
+ }
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/index.css">
+</head>
+<body>
+    <div class="container">
+        <div class="top-area">
+            <h1>bookstore.com</h1>
+            <p>Date:@Model.GetDate</p>
+            <p>Time:@Model.GetTime</p>
+        </div>
+        <div class="main-area">
+            Main Area
+            <h1>Imbogatesteti cunostiintele, alegand o carte !</h1>
+            <ul class="style-list-main">
+                <li>Comedie</li>
+                <li>Drama</li>
+                <li>Horror</li>
+                <li>Science Fiction</li>
+                <li>Stiintele naturii</li>
+            </ul>
+            <div class="books-link"><p><a asp-controller="home" asp-action="DisplayBooks">Alege o carte !</a></p></div>
+            <form>
+                Introduce o carte pe care ai dorii sa o citesti:
+                <input type="text" name="introduceretext">
+            </form>
+        </div>
+        <div class="aside-area">
+            <h2>Citate</h2>
+            <div class="container-aside-area">
+                <p>„Tocmai posibilitatea de a realiza un vis face viaţa interesantă.” („Alchimistul”, Paulo Coelho)</p>
+                <p>„Nu există mai mare agonie decât cea de a purta cu tine o poveste nespusă.” (I Know Where the Caged Bird Sings”, Maya Angelou)</p>
+                <p>„Sunt întunecimi în viață și sunt lumini, iar tu ești una dintre lumini, lumina tuturor luminilor” („Dracula”, Bram Stoker)</p>
+                <p>„Tu ești templul meu, murmur, în timp ce îngenunchez lângă ea. Tu îmi ești preot. Tu îmi ești iertarea păcatelor”. („Elias și spioana cărturarilor. II. O torță în noapte”, Sabaa Tahir).</p>
+            </div>
+            <p class="power">Knowledge is power !</p>
+        </div>
+        <div class="nav-area">
+            <h2>Informatii</h2>
+            <ul class="style-list">
+                <li>Contact</li>
+                <li>Logare</li>
+                <li>Creaza Cont</li>
+                <li>Profilul tau</li>
+            </ul>
+        </div>
+        <div class="footer-area">
+            <h1>Bored, read a book !</h1>
+            <h2>bookstore.com</h2>
+            <p>Made by Silviu 2019/December</p>
+            <p>All rights Reserved</p>
+        </div>
+    </div>
+</body>
+

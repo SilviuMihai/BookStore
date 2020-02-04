@@ -1,0 +1,158 @@
+﻿body {
+    margin: 10px;
+    background-color: skyblue;
+}
+
+.top-area {
+    grid-area: t;
+    background: burlywood;
+}
+
+.main-area {
+    background-color: rgb(209, 230, 227);
+    grid-area: m;
+}
+
+.aside-area {
+    background-color: darkkhaki;
+    grid-area: a;
+}
+
+.nav-area {
+    background-color: darkseagreen;
+    grid-area: n;
+}
+
+.footer-area {
+    background-color: slategray;
+    grid-area: f;
+}
+
+
+/* CSS Design !!! */
+
+.top-area, .aside-area, .main-area, .nav-area, .footer-area {
+    border-radius: 15px;
+    padding: 5px;
+}
+
+    /*TOP-AREA*/
+    .top-area h1, p {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .top-area h1 {
+        text-align: center;
+    }
+
+    .top-area p {
+        text-align: left;
+    }
+
+    /*Navigation-Area*/
+    .nav-area ul.style-list {
+        list-style-type: circle;
+    }
+
+        .nav-area ul.style-list li:hover {
+            color: rgb(10, 129, 165);
+        }
+
+        .nav-area ul.style-list li:active {
+            color: rgb(2, 51, 54);
+        }
+
+/*ASIDE-ARE*/
+.aside-area {
+    position: relative;
+}
+
+    .aside-area h2 {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .aside-area h2 {
+        padding-bottom: 5px;
+    }
+
+.container-aside-area p {
+    padding: 5px 15px;
+    z-index: -1;
+}
+
+.power {
+    position: absolute;
+    bottom: 0;
+    padding: 5px;
+}
+
+
+
+
+/*Main-Area*/
+.main-area h1 {
+    margin: 0;
+    padding: 0;
+}
+.style-list-main {
+    margin: 0;
+    padding: 0;
+}
+
+.style-list-main li {
+        list-style-type: none;
+        padding-top: 2px;
+}
+
+.main-area .books-link p {
+    padding: 25px;
+}
+
+.main-area p {
+    padding-bottom: 10px;
+}
+
+/*FOOTER-AREA*/
+.footer-area h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+.footer-area h2, p {
+    text-align: center;
+}
+
+
+
+
+/* Grid Layout !!! */
+.container {
+    display: grid;
+    grid-template-areas: 
+        "t t t t t t" 
+        "f f f f f f" 
+        "m m m m m m" 
+        "m m m m m m" 
+        "n n n n n n" 
+        "a a a a a a";
+    padding: 10px;
+    border-radius: 25px;
+    border: 2px solid black;
+    grid-gap: 10px;
+}
+
+@media screen and (min-width:760px) {
+    .container {
+        display: grid;
+        grid-template-areas: 
+            "t t t t t t" 
+            "n n m m m m" 
+            "a a m m m m" 
+            "f f f f f f";
+        padding: 10px;
+        border-radius: 15px;
+        border: 2px solid black;
+        grid-gap: 10px;
+    }
+}
