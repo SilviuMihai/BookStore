@@ -14,5 +14,10 @@ namespace BookStore.Models
         }
         //public DbSet<UserProfile> TheUsersProfile { get; set; }
         public DbSet<BooksDisplayed> BooksInStore { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed();
+        }
     }
 }
