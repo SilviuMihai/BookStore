@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookStore
 {
@@ -19,13 +20,15 @@ namespace BookStore
 	{
         Configuration=configuration;
 	}
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BooksDBConnection")));
             //services.AddMvc();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                    .AddEntityFrameworkStores<AppDBContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
             //services.AddSingleton<IBookStore, BookStoreRepository>();
@@ -41,6 +44,7 @@ namespace BookStore
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

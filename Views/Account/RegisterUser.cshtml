@@ -1,0 +1,60 @@
+﻿@model RegisterUserViewModel
+
+
+@{
+    ViewBag.Title = "User Registration";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/registeruser.css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="top-area">
+            <h1>bookstore.com</h1>
+            <p>Date:</p>
+            <p>Time:</p>
+        </div>
+
+        <div class="main-area">
+            <h3>Introduce datele, pentru creearea unui cont:</h3>
+            <form method="post">
+                <div asp-validation-summary="All"></div>
+                <label asp-for="Email">Email: </label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+
+                <br>
+                <label asp-for="Password"><strong>Parola:</strong></label>
+                <input asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+
+                <br>
+                <label asp-for="ConfirmPassword"><strong>Confirma Parola: </strong></label>
+                <input asp-for="ConfirmPassword" />
+                <span asp-validation-for="ConfirmPassword"></span>
+                <br>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+            <p><a href="#Index Page">Pagina Principala</a></p>
+        </div>
+
+        <div class="contact">
+            <p>Detalii, pentru a ne contacta:</p>
+            <p>Telefon:</p>
+            <p>Fax:</p>
+            <p>Email: bookstore@email.com</p>
+            <p>Adresa:</p>
+        </div>
+
+        <div class="footer-area">
+            <h1>Bored, read a book !</h1>
+            <h2>bookstore.com</h2>
+            <p>Made by Silviu 2019/December</p>
+            <p>All rights Reserved</p>
+        </div>
+
+    </div>
+</body>

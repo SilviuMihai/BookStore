@@ -15,11 +15,13 @@ namespace BookStore.Controllers
         {
             _bookStore = bookStore;
         }
+        [HttpGet]
        public ViewResult Index()
         {
             var model = _bookStore.GetDateandTime();
             return View(model);
         }
+        [HttpGet]
         public ViewResult DisplayBooks() 
         {
             //var model = _bookStore.GetBooks();

@@ -1,0 +1,95 @@
+.top-area{
+    grid-area: t;
+    background-color: cadetblue;
+}
+.main-area{
+    grid-area: m;
+    background-color: rgb(209, 230, 227);
+}
+.contact{
+    grid-area: con;
+    background-color: chocolate;
+}
+.footer-area{
+    grid-area: f;
+    background-color: slategray;
+}
+
+/*CSS DESIGN*/
+.top-area, .main-area , .contact , .footer-area{
+    border-radius:15px;
+    padding:5px;
+}
+* {
+    box-sizing: border-box;
+}
+
+
+
+
+/*TOP-AREA*/
+.top-area h1,p{
+    margin:0px;
+    padding:0px;
+}
+.top-area h1{
+text-align: center;
+}
+.top-area p{
+    text-align: left;
+}
+
+/*Main-Area*/
+.main-area{
+    box-sizing: border-box;
+}
+.main-area h3{
+    margin: 0;
+    padding: 0;
+}
+input{
+ width:100%;
+}
+
+
+
+/*FOOTER-AREA*/
+.footer-area h1,h2,p{
+    margin:0;
+    padding: 0;
+   }
+   .footer-area h2,p{
+       text-align: center;
+   }
+
+/*Grid Layout*/
+.container{
+    display: grid;
+    grid-template-areas:
+    "t t t t t t"
+    "f f f f f f"
+    "con con con con con con"
+    "m m m m m m"
+    "m m m m m m"
+    "n n n n n n"
+    "a a a a a a";
+    padding:10px;
+    border-radius:25px;
+    border: 2px solid black;
+    gap: 10px;
+}
+@media screen and (min-width:760px){
+    .container{
+        display: grid;
+        grid-template-areas:
+        "t t t t t t"
+        "m m m m m m"
+        "m m m m m m"
+        "con con con con con con"
+        "f f f f f f";
+        padding:10px;
+        border-radius:15px;
+        border: 2px solid black;
+        gap: 10px;
+    }
+    }
