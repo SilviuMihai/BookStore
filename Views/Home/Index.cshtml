@@ -1,4 +1,4 @@
-﻿@model BookStoreTime
+﻿<!-- nu se poate avea "un model aici cat si in layout" , va trebuie sa se faca injectand, cel mai probabil (inject)-->
 
 @{
     ViewBag.Title = "BookStore Page";
@@ -9,11 +9,6 @@
 </head>
 <body>
     <div class="container">
-        <div class="top-area">
-            <h1>bookstore.com</h1>
-            <p>Date:@Model.GetDate</p>
-            <p>Time:@Model.GetTime</p>
-        </div>
         <div class="main-area">
             Main Area
             <h1>Imbogatesteti cunostiintele, alegand o carte !</h1>
@@ -46,16 +41,10 @@
             <h2>Informatii</h2>
             <ul class="style-list">
                 <li>Contact</li>
-                <li>Logare</li>
+                <li><a asp-controller="Account" asp-action="RegisterUser">Logare</a></li>
                 <li>Creaza Cont</li>
                 <li>Profilul tau</li>
             </ul>
-        </div>
-        <div class="footer-area">
-            <h1>Bored, read a book !</h1>
-            <h2>bookstore.com</h2>
-            <p>Made by Silviu 2019/December</p>
-            <p>All rights Reserved</p>
         </div>
     </div>
 </body>

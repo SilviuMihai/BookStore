@@ -18,7 +18,13 @@ namespace BookStore.Controllers
         [HttpGet]
        public ViewResult Index()
         {
-            var model = _bookStore.GetDateandTime();
+            //var model = _bookStore.GetDateandTime();
+            //return View(model);
+            HomeViewModels model = new HomeViewModels()
+            {
+                GetBookStoreTime = _bookStore.GetDateandTime(),
+                BooksDisplayedInStore = _bookStore.GetBooks()
+            };
             return View(model);
         }
         [HttpGet]

@@ -3,11 +3,6 @@
     background-color: skyblue;
 }
 
-.top-area {
-    grid-area: t;
-    background: burlywood;
-}
-
 .main-area {
     background-color: rgb(209, 230, 227);
     grid-area: m;
@@ -23,32 +18,13 @@
     grid-area: n;
 }
 
-.footer-area {
-    background-color: slategray;
-    grid-area: f;
-}
-
 
 /* CSS Design !!! */
 
-.top-area, .aside-area, .main-area, .nav-area, .footer-area {
+.top-area, .aside-area, .main-area, .nav-area {
     border-radius: 15px;
     padding: 5px;
 }
-
-    /*TOP-AREA*/
-    .top-area h1, p {
-        margin: 0px;
-        padding: 0px;
-    }
-
-    .top-area h1 {
-        text-align: center;
-    }
-
-    .top-area p {
-        text-align: left;
-    }
 
     /*Navigation-Area*/
     .nav-area ul.style-list {
@@ -111,45 +87,30 @@ padding:5px;
     padding-bottom: 10px;
 }
 
-/*FOOTER-AREA*/
-.footer-area h1, h2, p {
-    margin: 0;
-    padding: 0;
-}
-.footer-area h2, p {
-    text-align: center;
-}
 
 
 
-
-/* Grid Layout !!! */
+/* Grid Layout !!!    (Structure of the grid)*/
 .container {
     display: grid;
-    grid-template-areas: 
-        "t t t t t t" 
-        "f f f f f f" 
+    grid-template-areas:  
         "m m m m m m" 
         "m m m m m m" 
         "n n n n n n" 
         "a a a a a a";
-    padding: 10px;
-    border-radius: 25px;
-    border: 2px solid black;
+    padding: 0px 10px;
     grid-gap: 10px;
 }
 
+
+/*Structure of the grid in case it gets lower than 760px*/
 @media screen and (min-width:760px) {
     .container {
         display: grid;
         grid-template-areas: 
-            "t t t t t t" 
             "n n m m m m" 
-            "a a m m m m" 
-            "f f f f f f";
-        padding: 10px;
-        border-radius: 15px;
-        border: 2px solid black;
+            "a a m m m m";
+        padding: 0px 10px;
         grid-gap: 10px;
     }
 }

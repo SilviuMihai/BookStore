@@ -2,12 +2,30 @@
 
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="~/css/layout.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
+    <div class="capture-all-areas">
+    <div class="first-container">
+        <div class="top-area">
+            <h1>bookstore.com</h1>
+            <p>Date: </p>
+            <p>Time: </p>
+        </div>
+    </div>
     <div>
         @RenderBody()
+    </div>
+    <div class="first-container">
+        <div class="footer-area">
+            <h1>Bored, read a book !</h1>
+            <h2>bookstore.com</h2>
+            <p>Made by Silviu 2019/December</p>
+            <p>All rights Reserved</p>
+        </div>
+    </div>
     </div>
 </body>
 </html>

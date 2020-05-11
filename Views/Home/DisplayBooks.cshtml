@@ -10,11 +10,6 @@
 </head>
 <body>
     <div class="container">
-        <div class="top-area">
-            <h1>bookstore.com</h1>
-            <p>Date:@Model.GetBookStoreTime.GetDate</p>
-            <p>Time:@Model.GetBookStoreTime.GetTime</p>
-        </div>
         <div class="comedy">
             <h3>Comedy</h3>
             @foreach (var books in Model.BooksDisplayedInStore)
@@ -54,13 +49,6 @@
                     <p>@books.BooksInStore</p>
                 }
             }
-        </div>
-        <div class="footer-area">
-            <h3>Footer Area</h3>
-                <h1>Bored, read a book !</h1>
-                <h2>bookstore.com</h2>
-            <p>Made by Silviu 2019/December</p>
-            <p>All rights Reserved</p>
         </div>
     </div>
 </body>

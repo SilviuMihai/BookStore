@@ -1,8 +1,4 @@
-﻿.top-area {
-    grid-area: t;
-    background-color: blue;
-}
-
+﻿
 .comedy {
     grid-area: c;
     background-color: brown;
@@ -21,11 +17,6 @@
 .nature-science {
     grid-area: n;
     background-color: darkgray;
-}
-
-.footer-area {
-    grid-area: f;
-    background-color: darkseagreen;
 }
 
 body {
@@ -111,33 +102,31 @@ body {
     }
 
 
-/* Grid Layout !!! */
+/* Grid Layout !!! (Structure of the grid)*/
 .container {
     display: grid;
-    grid-template-areas: 
-        "t t t t t t t t" 
+    grid-template-areas:  
         "c c s s n n d d" 
         "c c s s n n d d" 
         "c c s s n n d d" 
         "c c s s n n d d" 
-        "c c s s n n d d" 
-        "f f f f f f f f";
+        "c c s s n n d d";
     padding: 10px;
     border-radius: 25px;
     border: 2px solid black;
     grid-gap: 10px;
 }
 
+
+/*Structure of the grid when it's smaller than 760px*/
 @media screen and (max-width:760px) {
     .container {
         display: grid;
         grid-template-areas: 
-            "t t t t t t t t" 
             "c c c c c c c c" 
             "s s s s s s s s" 
             "n n n n n n n n" 
-            "d d d d d d d d" 
-            "f f f f f f f f";
+            "d d d d d d d d";
         padding: 10px;
         border-radius: 15px;
         border: 2px solid black;
