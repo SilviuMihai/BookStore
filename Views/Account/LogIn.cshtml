@@ -1,8 +1,6 @@
 ﻿@model RegisterUserViewModel
-
-
 @{
-    ViewBag.Title = "User Registration";
+    ViewBag.Title = "Log In";
 }
 
 <head>
@@ -25,10 +23,6 @@
                 <span asp-validation-for="Password"></span>
 
                 <br>
-                <label asp-for="ConfirmPassword"><strong>Confirma Parola: </strong></label>
-                <input asp-for="ConfirmPassword" />
-                <span asp-validation-for="ConfirmPassword"></span>
-                <br>
                 <br>
                 <input type="submit" value="Submit">
             </form>
@@ -36,3 +30,4 @@
 
     </div>
 </body>
+

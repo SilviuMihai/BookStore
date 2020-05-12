@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-
+@inject SignInManager<IdentityUser> signInManager;
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/layout.css">
@@ -10,9 +10,29 @@
     <div class="capture-all-areas">
     <div class="first-container">
         <div class="top-area">
-            <h1>bookstore.com</h1>
-            <p>Date: </p>
-            <p>Time: </p>
+            <div class="top-title">
+                <h1>bookstore.com</h1>
+            </div>
+            <div class="top-home-section">
+                <h3>Home</h3>
+            </div>
+            <div class="top-userfeedback">
+                <ul> 
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                    <li><a asp-controller="Account" asp-action="BooksDetails" >Admin</a></li>
+                    <li><a asp-controller="Account" asp-action="UserDetails">@User.Identity.Name</a></li>
+                    <form method="post" asp-controller="Account" asp-action="LogOut">
+                        <li>Log Out: @User.Identity.Name</li>
+                    </form>
+                    }
+                    else
+                    {
+                    <li><a asp-controller="Account" asp-action="RegisterUser" >Register</a></li>
+                    <li><a asp-controller="Account" asp-action="LogIn">Log In</a></li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
     <div>

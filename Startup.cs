@@ -33,6 +33,8 @@ namespace BookStore
             services.AddRazorPages();
             //services.AddSingleton<IBookStore, BookStoreRepository>();
             services.AddScoped<IBookStore, SQLBooksRepository>();
+
+            //IdentityOptions to configure the user inputs (like password(add number of characters))
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

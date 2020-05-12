@@ -20,6 +20,25 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
+        public IActionResult LogIn()
+        {
+            return View();
+        }
+        //[HttpPost]
+        //public IActionResult LogIn()
+        //{
+        //    return View();
+        //}
+
+        [HttpPost]
+        public async Task<IActionResult> LogOut()
+        {
+               await signInManager.SignOutAsync();
+
+            return RedirectToAction("index", "home");
+        }
+
+        [HttpGet]
         public IActionResult RegisterUser()
         {
             return View();
@@ -28,19 +47,20 @@ namespace BookStore.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterUser(RegisterUserViewModel registerUserViewModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // checks the fields, when the user adds all the details (like password,username)
             {
-                var user = new IdentityUser() { Email = registerUserViewModel.Email, UserName = registerUserViewModel.Email };
-                var result = await userManager.CreateAsync(user, registerUserViewModel.Password);
+                //IdentityUser is very configurable and the developer can overwrite some commands.
+                var user = new IdentityUser() { Email = registerUserViewModel.Email, UserName = registerUserViewModel.Email }; // to add the user to the database
+                var result = await userManager.CreateAsync(user, registerUserViewModel.Password); // create the user and the password hashed to the database
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("index", "home"); // if succeeded, returns the user to the index
                 } 
                 //In case the Registration fails
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError("", error.Description); // add errors to ModelState to list the problems regarding the registration
+                    ModelState.AddModelError("", error.Description); // add errors to ModelState, to list the problems regarding the registration
                 }
             }
             return View(registerUserViewModel);
