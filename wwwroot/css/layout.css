@@ -55,15 +55,21 @@
     text-align: center;
 }
 
-    .top-userfeedback ul li {
-        display: inline;
-        padding-right: 5px;
+.top-userfeedback ul li {
+    display: inline;
+    padding-right: 5px;
     }
+.top-home-section h3 {
+    text-align:center;
+}
 
 /*Container Grid for top area*/
 .top-area {
     display: grid;
-    grid-template-areas: "book book book book book book book" "home home home home home user user";
+    grid-template-areas: 
+        "book book book book book book book"
+        "home home home home home user user";
+    padding:0px;
 }
 /*============================================*/
 

@@ -14,22 +14,25 @@
                 <h1>bookstore.com</h1>
             </div>
             <div class="top-home-section">
-                <h3>Home</h3>
+                <h3><a asp-controller="Home" asp-action="Index">Home</a></h3>
             </div>
             <div class="top-userfeedback">
-                <ul> 
+                <ul>
                     @if (signInManager.IsSignedIn(User))
                     {
-                    <li><a asp-controller="Account" asp-action="BooksDetails" >Admin</a></li>
-                    <li><a asp-controller="Account" asp-action="UserDetails">@User.Identity.Name</a></li>
-                    <form method="post" asp-controller="Account" asp-action="LogOut">
-                        <li>Log Out: @User.Identity.Name</li>
-                    </form>
+                        <li><a asp-controller="Account" asp-action="BooksDetails">Admin</a></li>
+                        <li><a asp-controller="Account" asp-action="UserDetails">@User.Identity.Name</a></li>
+                        <li>
+                            <form method="post" asp-controller="Account" asp-action="LogOut">
+                                <button type="submit">Log Out: @User.Identity.Name</button>
+                            </form>
+                        </li>
+            
                     }
                     else
                     {
-                    <li><a asp-controller="Account" asp-action="RegisterUser" >Register</a></li>
-                    <li><a asp-controller="Account" asp-action="LogIn">Log In</a></li>
+                        <li><a asp-controller="Account" asp-action="RegisterUser">Register</a></li>
+                        <li><a asp-controller="Account" asp-action="LogIn">Log In</a></li>
                     }
                 </ul>
             </div>

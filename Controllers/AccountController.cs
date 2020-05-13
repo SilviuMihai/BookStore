@@ -24,11 +24,24 @@ namespace BookStore.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public IActionResult LogIn()
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> LogIn(LoginViewModels loginViewModels)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync(loginViewModels.Email, loginViewModels.Password,
+                    isPersistent: loginViewModels.RememberMe, lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index", "home");
+                }
+                //In case the Login fails
+               
+                    ModelState.AddModelError(string.Empty, "Invalid Login Attempt !"); // add errors to ModelState, to list the problems regarding the registration
+            }
+            return View(loginViewModels);
+        }
 
         [HttpPost]
         public async Task<IActionResult> LogOut()

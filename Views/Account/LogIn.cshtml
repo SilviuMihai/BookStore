@@ -1,6 +1,6 @@
-﻿@model RegisterUserViewModel
+﻿@model LoginViewModels
 @{
-    ViewBag.Title = "Log In";
+    ViewBag.Title = "User Login";
 }
 
 <head>
@@ -21,6 +21,11 @@
                 <label asp-for="Password"><strong>Parola:</strong></label>
                 <input asp-for="Password" />
                 <span asp-validation-for="Password"></span>
+                <br>
+                <label asp-for="RememberMe">
+                <input asp-for="RememberMe"/>
+                    @Html.DisplayNameFor(m=>m.RememberMe)
+                </label>
 
                 <br>
                 <br>
