@@ -19,11 +19,34 @@ namespace BookStore.Controllers
             this.signInManager = signInManager;
         }
 
+        [HttpPost]
+        [HttpGet]
+        //or [AcceptVerbs("Get",Post)]
+        //jquery validate method(scripts) issues an ajax call to this method, and the jquery method expects a Json response
+        //this is the reason why is returning a Json response
+        //check to see the Remote attribute in RegisterViewModel
+        public async Task<IActionResult> IsEmailInUse(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return Json(true); // to make an ajax call possible, accessing the Email from RegisterUserViewModel with the attribute Remote
+                                   // also we need the 3 scripts files, in the same order, that are presented in Layout file (jquery)
+                                   // so we need to respond with a Json result
+            }
+            else 
+            {
+                return Json($"The Email {email}, is already in use.");
+            }
+        }
+
         [HttpGet]
         public IActionResult LogIn()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> LogIn(LoginViewModels loginViewModels)
         {
@@ -60,7 +83,7 @@ namespace BookStore.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterUser(RegisterUserViewModel registerUserViewModel)
         {
-            if (ModelState.IsValid) // checks the fields, when the user adds all the details (like password,username)
+            if (ModelState.IsValid) // checks the fields, when the user adds all the details (like password,username) also checks if they are empty(thats why we have data annotations added in view models or models)
             {
                 //IdentityUser is very configurable and the developer can overwrite some commands.
                 var user = new IdentityUser() { Email = registerUserViewModel.Email, UserName = registerUserViewModel.Email }; // to add the user to the database
