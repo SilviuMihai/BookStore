@@ -1,4 +1,5 @@
-﻿using BookStore.ViewModels;
+﻿using BookStore.Models;
+using BookStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,10 +11,10 @@ namespace BookStore.Controllers
 {
     public class AccountController:Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager,SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -25,6 +26,7 @@ namespace BookStore.Controllers
         //jquery validate method(scripts) issues an ajax call to this method, and the jquery method expects a Json response
         //this is the reason why is returning a Json response
         //check to see the Remote attribute in RegisterViewModel
+        //An Ajax call is an asynchronous request initiated by the browser that does not directly result in a page transition.
         public async Task<IActionResult> IsEmailInUse(string email)
         {
             var user = await userManager.FindByEmailAsync(email);
@@ -86,7 +88,7 @@ namespace BookStore.Controllers
             if (ModelState.IsValid) // checks the fields, when the user adds all the details (like password,username) also checks if they are empty(thats why we have data annotations added in view models or models)
             {
                 //IdentityUser is very configurable and the developer can overwrite some commands.
-                var user = new IdentityUser() { Email = registerUserViewModel.Email, UserName = registerUserViewModel.Email }; // to add the user to the database
+                var user = new ApplicationUser() { Email = registerUserViewModel.Email, UserName = registerUserViewModel.Email }; // to add the user to the database
                 var result = await userManager.CreateAsync(user, registerUserViewModel.Password); // create the user and the password hashed to the database
                 if (result.Succeeded)
                 {
