@@ -22,15 +22,13 @@
                 <input asp-for="Password" />
                 <span asp-validation-for="Password"></span>
                 <br>
-                
-                <label asp-for="RememberMe">
-                <input asp-for="RememberMe" />
-                    @Html.DisplayNameFor(m => m.RememberMe)
-                </label>                
-        <br>
-        <br>
-        <input type="submit" value="Submit">
-        </form>
+
+                @Html.DisplayNameFor(m => m.RememberMe)
+                <input asp-for="RememberMe"/>
+                <br>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
     </div>
 
     </div>

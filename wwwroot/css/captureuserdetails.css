@@ -1,6 +1,7 @@
 ﻿.main-area {
     grid-area: m;
     background-color: rgb(209, 230, 227);
+    border-radius: 15px;
 }
 
 /*Grid Layout*/
@@ -10,8 +11,8 @@
         "m m m m m m"
         "m m m m m m"
         "m m m m m m";
-    padding: 10px;
-    gap: 10px;
+    padding: 0px 10px;
+    grid-gap: 10px;
 }
 
 @media screen and (min-width:760px) {
@@ -21,7 +22,7 @@
             "m m m m m m" 
             "m m m m m m" 
             "m m m m m m";
-        padding: 10px;
-        gap: 10px;
+        padding: 0px 10px;
+        grid-gap: 10px;
     }
 }

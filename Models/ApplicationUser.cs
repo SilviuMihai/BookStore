@@ -16,5 +16,7 @@ namespace BookStore.Models
         public string Country { get; set; }
 
         public string PersonName { get; set; }
+
+        public string BooksBought { get; set; }
     }
 }
