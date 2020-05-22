@@ -30,7 +30,27 @@ namespace BookStore.Controllers
             //check if has the user values entered all the fields, if not redirect to CaptureDetails
             //must return the values from the database in here
             //example homecontroller
-            return View();
+            var userData = new ApplicationUser();
+            if (string.IsNullOrEmpty(userData.FullName) || string.IsNullOrEmpty(userData.PhoneNumber) ||
+                string.IsNullOrEmpty(userData.Adress) || ((userData.Age == 0) || (userData.City == 0) || (userData.Country == 0)))
+            {
+                RedirectToAction("CaptureUserDetails", "UserDetails");
+            }
+
+                UserDetailsViewModels userDetailsViewModels = new UserDetailsViewModels()
+                {
+                    PhoneNumber = userData.PhoneNumber,
+                    Books = userData.BooksBought,
+                    City = userData.City,
+                    Country = userData.Country,
+                    Email = userData.Email,
+                    Age = userData.Age,
+                    FamilyName = userData.FullName,
+                    Name = userData.FullName,
+                    Adress = userData.Adress
+                };
+
+            return View(userDetailsViewModels);
         }
 
 
@@ -42,12 +62,12 @@ namespace BookStore.Controllers
             {
                 var addUserDetails = new ApplicationUser()
                 {
-                    PhoneNumber = userDetailsViewModels.PhoneNumber,
-                    PersonName = userDetailsViewModels.FamilyName + userDetailsViewModels.Name,
-                    BooksBought = userDetailsViewModels.Books,
-                    Adress = userDetailsViewModels.Adress,
-                    City = userDetailsViewModels.City.ToString(),
-                    Country = userDetailsViewModels.Country.ToString()
+                   PhoneNumber = userDetailsViewModels.PhoneNumber,
+                   FullName = userDetailsViewModels.FamilyName +" "+ userDetailsViewModels.Name,
+                   BooksBought = userDetailsViewModels.Books,
+                   Adress = userDetailsViewModels.Adress,
+                   City = userDetailsViewModels.City,
+                   Country = userDetailsViewModels.Country
                 };
 
                 var user = await userManager.UpdateAsync(addUserDetails);

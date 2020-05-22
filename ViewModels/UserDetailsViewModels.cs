@@ -23,14 +23,18 @@ namespace BookStore.ViewModels
         //to be changed 
         public string PhoneNumber { get; set; }
 
-        [Required]
         public string Books { get; set; }
 
         [Required]
-        public Cities City { get; set; }
+        public Cities? City { get; set; }
 
         [Required]
-        public Countries Country { get; set; }
+        public Countries? Country { get; set; }
+
+        public string Email { get; set; }
+
+        [Required]
+        public int Age { get; set; }
 
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BookStore.Migrations
 {
-    public partial class Extend_IdentityUser_NewPropertiesAdded : Migration
+    public partial class AddedPropertiesToIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,18 +11,29 @@ namespace BookStore.Migrations
                 table: "AspNetUsers",
                 nullable: true);
 
+            migrationBuilder.AddColumn<int>(
+                name: "Age",
+                table: "AspNetUsers",
+                nullable: false,
+                defaultValue: 0);
+
             migrationBuilder.AddColumn<string>(
+                name: "BooksBought",
+                table: "AspNetUsers",
+                nullable: true);
+
+            migrationBuilder.AddColumn<int>(
                 name: "City",
                 table: "AspNetUsers",
                 nullable: true);
 
-            migrationBuilder.AddColumn<string>(
+            migrationBuilder.AddColumn<int>(
                 name: "Country",
                 table: "AspNetUsers",
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "PersonName",
+                name: "FullName",
                 table: "AspNetUsers",
                 nullable: true);
         }
@@ -34,6 +45,14 @@ namespace BookStore.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
+                name: "Age",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "BooksBought",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
                 name: "City",
                 table: "AspNetUsers");
 
@@ -42,7 +61,7 @@ namespace BookStore.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "PersonName",
+                name: "FullName",
                 table: "AspNetUsers");
         }
     }
