@@ -34,7 +34,7 @@ namespace BookStore.Controllers
             if (string.IsNullOrEmpty(userData.FullName) || string.IsNullOrEmpty(userData.PhoneNumber) ||
                 string.IsNullOrEmpty(userData.Adress) || ((userData.Age == 0) || (userData.City == 0) || (userData.Country == 0)))
             {
-                RedirectToAction("CaptureUserDetails", "UserDetails");
+                return RedirectToAction("CaptureUserDetails", "UserDetails");
             }
 
                 UserDetailsViewModels userDetailsViewModels = new UserDetailsViewModels()
