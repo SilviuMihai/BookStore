@@ -72,7 +72,7 @@ namespace BookStore.Controllers
                         //addUserDetails.Country = userDetailsViewModels.Country; 
                 
 
-                var user = await userManager.UpdateAsync(addUserDetails);
+               // var user = await userManager.UpdateAsync(addUserDetails);
 
                 if (user.Succeeded)
                 {
