@@ -1,33 +1,49 @@
-﻿<head>
+﻿@model UserDetailsViewModels
+
+<head>
     <link rel="stylesheet" type="text/css" href="~/css/captureuserdetails.css">
 </head>
 <body>
     <div class="container">
         <div class="main-area">
 
-            <form>
-                <label for="prenume">Prenume:</label>
-                <input type="text" name="personname" id="prenume">
+            <form method="post">
+                <div asp-validation-summary="All"></div>
+                <label asp-for="Name">Prenume:</label>
+                <input asp-for="Name">
+                <span asp-validation-for="Name"></span>
 
                 <br>
-                <label for="nume">Nume:</label>
-                <input type="text" name="name" for="nume">
+                <label asp-for="FamilyName">Nume:</label>
+                <input asp-for="FamilyName">
+                <span asp-validation-for="FamilyName"></span>
 
                 <br>
-                <label for="nume">Numar de telefon:</label>
-                <input type="text" name="name" for="nume">
+                <label asp-for="Age">Varsta:</label>
+                <input asp-for="Age">
+                <span asp-validation-for="Age"></span>
 
                 <br>
-                <label for="oras">Oras:</label>
-                <input type="text" name="city" id="oras">
+                <label asp-for="PhoneNumber">Numar de telefon:</label>
+                <input asp-for="PhoneNumber">
+                <span asp-validation-for="PhoneNumber"></span>
 
                 <br>
-                <label for="tara">Tara:</label>
-                <input type="text" name="country" id="tara">
+                <label asp-for="City">Oras:</label>
+                <select asp-for="City" asp-items="Html.GetEnumSelectList<Cities>()">
+                </select>
+                <span asp-validation-for="City"></span>
 
                 <br>
-                <label for="adresa">Adresa:</label>
-                <input type="text" name="Adress" id="adresa">
+                <label asp-for="Country">Tara:</label>
+                <select asp-for="Country" asp-items="Html.GetEnumSelectList<Countries>()">
+                </select>
+                <span asp-validation-for="Country"></span>
+
+                <br>
+                <label asp-for="Adress">Adresa:</label>
+                <input asp-for="Adress" >
+                <span asp-validation-for="Adress"></span>
 
                 <br>
                 <br>

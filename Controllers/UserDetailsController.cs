@@ -60,15 +60,17 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var addUserDetails = new ApplicationUser()
-                {
-                   PhoneNumber = userDetailsViewModels.PhoneNumber,
-                   FullName = userDetailsViewModels.FamilyName +" "+ userDetailsViewModels.Name,
-                   BooksBought = userDetailsViewModels.Books,
-                   Adress = userDetailsViewModels.Adress,
-                   City = userDetailsViewModels.City,
-                   Country = userDetailsViewModels.Country
-                };
+               // var addUserDetails = await userManager.FindByIdAsync(); // trebuie sa gasesc o solutie valida
+                                                                          // trebuie sa iau utilizatorul care este logat deja !!!
+                                                                          // trebuie adaugat aici
+
+                        //addUserDetails.PhoneNumber = userDetailsViewModels.PhoneNumber;
+                        //addUserDetails.FullName = userDetailsViewModels.FamilyName + " " + userDetailsViewModels.Name;
+                        //addUserDetails.BooksBought = userDetailsViewModels.Books;
+                        //addUserDetails.Adress = userDetailsViewModels.Adress;
+                        //addUserDetails.City = userDetailsViewModels.City;
+                        //addUserDetails.Country = userDetailsViewModels.Country; 
+                
 
                 var user = await userManager.UpdateAsync(addUserDetails);
 

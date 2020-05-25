@@ -1,4 +1,4 @@
-﻿
+﻿@model UserDetailsViewModels
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/showuserdetails.css">
 </head>
@@ -6,17 +6,17 @@
     <div class="container">
         <div class="main-area">
             <div>
-                <p>Email Adress:</p>
-                <p>Prenume: </p>
-                <p>Nume: </p>
-                <p>Numar de telefon: </p>
-                <p>Oras: </p>
-                <p>Tara: </p>
-                <p>Adresa: </p>
-                <p>Carti Comandate: </p>
+                <p>Email Adress:@Model.Email</p>
+                <p>Prenume:@Model.Name </p>
+                <p>Nume:@Model.FamilyName </p>
+                <p>Numar de telefon:@Model.PhoneNumber </p>
+                <p>Oras: @Model.City </p>
+                <p>Tara: @Model.Country</p>
+                <p>Adresa: @Model.Adress</p>
+                <p>Carti Comandate: @Model.Books</p>
             </div>
 
-            <h4>Detaliile contului dumneavoastra sunt in regula ? Click aici, pentru a modifica datele !</h4>
+            <h4>Detaliile contului dumneavoastra sunt in regula ? <a asp-action="CaptureUserDetails" asp-controller="UserDetails">Click aici</a>, pentru a modifica datele !</h4>
             <h2>Comanda o carte !</h2>
 
         </div>

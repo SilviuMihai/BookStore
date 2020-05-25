@@ -7,6 +7,7 @@ namespace BookStore.Models
 {
     public enum Countries
     {
+        Selecteaza,
         Romania,
         Albania,
         Algeria,

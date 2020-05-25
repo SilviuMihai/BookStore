@@ -7,6 +7,7 @@ namespace BookStore.Models
 {
     public enum Cities
     {
+        Selecteaza,
         București,
         Cluj,
         Timișoara,
