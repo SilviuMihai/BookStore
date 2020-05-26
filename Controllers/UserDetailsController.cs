@@ -25,12 +25,12 @@ namespace BookStore.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult ShowUserDetails()
+        public async Task<IActionResult> ShowUserDetails()
         {
             //check if has the user values entered all the fields, if not redirect to CaptureDetails
             //must return the values from the database in here
             //example homecontroller
-            var userData = new ApplicationUser();
+            var userData = await userManager.GetUserAsync(HttpContext.User);
             if (string.IsNullOrEmpty(userData.FullName) || string.IsNullOrEmpty(userData.PhoneNumber) ||
                 string.IsNullOrEmpty(userData.Adress) || ((userData.Age == 0) || (userData.City == 0) || (userData.Country == 0)))
             {
@@ -60,19 +60,26 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-               // var addUserDetails = await userManager.FindByIdAsync(); // trebuie sa gasesc o solutie valida
-                                                                          // trebuie sa iau utilizatorul care este logat deja !!!
-                                                                          // trebuie adaugat aici
 
-                        //addUserDetails.PhoneNumber = userDetailsViewModels.PhoneNumber;
-                        //addUserDetails.FullName = userDetailsViewModels.FamilyName + " " + userDetailsViewModels.Name;
-                        //addUserDetails.BooksBought = userDetailsViewModels.Books;
-                        //addUserDetails.Adress = userDetailsViewModels.Adress;
-                        //addUserDetails.City = userDetailsViewModels.City;
-                        //addUserDetails.Country = userDetailsViewModels.Country; 
+                var addUserDetails = await userManager.GetUserAsync(HttpContext.User);                                                                               
+                                                                             
+                if (addUserDetails == null)
+                {
+
+                    ViewBag.ErrorMessage = $"User with Id = {addUserDetails} cannot be found";
+                    return RedirectToAction("Index", "Home");
+                    
+                }
+                        addUserDetails.PhoneNumber = userDetailsViewModels.PhoneNumber;
+                        addUserDetails.FullName = userDetailsViewModels.FamilyName + " " + userDetailsViewModels.Name;
+                        addUserDetails.BooksBought = userDetailsViewModels.Books;
+                        addUserDetails.Adress = userDetailsViewModels.Adress;
+                        addUserDetails.City = userDetailsViewModels.City;
+                        addUserDetails.Country = userDetailsViewModels.Country;
+                        addUserDetails.Age = userDetailsViewModels.Age;
                 
 
-               // var user = await userManager.UpdateAsync(addUserDetails);
+                var user = await userManager.UpdateAsync(addUserDetails);
 
                 if (user.Succeeded)
                 {
