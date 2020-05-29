@@ -1,5 +1,6 @@
 ﻿using BookStore.Models;
 using BookStore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace BookStore.Controllers
         {
             _bookStore = bookStore;
         }
+        [AllowAnonymous]
         [HttpGet]
        public ViewResult Index()
         {

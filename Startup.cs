@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace BookStore
 {
@@ -29,7 +31,17 @@ namespace BookStore
             //services.AddMvc();
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<AppDBContext>();
-            services.AddControllersWithViews();
+
+            services.AddControllersWithViews(
+                config => 
+                {
+                    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                    config.Filters.Add(new AuthorizeFilter(policy)); 
+                    //added a policy that restricts to view the pages without being logged in
+                    //to get acces to different pages we put attribute [AllowAnonymous]
+                }
+                ).AddXmlSerializerFormatters();
+
             services.AddRazorPages();
             //services.AddSingleton<IBookStore, BookStoreRepository>();
             services.AddScoped<IBookStore, SQLBooksRepository>();

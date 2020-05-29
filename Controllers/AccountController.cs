@@ -1,5 +1,6 @@
 ﻿using BookStore.Models;
 using BookStore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -42,13 +43,14 @@ namespace BookStore.Controllers
                 return Json($"The Email {email}, is already in use.");
             }
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult LogIn()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> LogIn(LoginViewModels loginViewModels)
         {
@@ -75,13 +77,13 @@ namespace BookStore.Controllers
 
             return RedirectToAction("index", "home");
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult RegisterUser()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> RegisterUser(RegisterUserViewModel registerUserViewModel)
         {
