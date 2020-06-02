@@ -24,7 +24,16 @@
                     <ul>
                         @if (signInManager.IsSignedIn(User))
                         {
-                            <li><a asp-controller="Account" asp-action="BooksDetails">Admin</a></li>
+                        <li>
+                            <div class="dropdown">
+                                <button onclick="myFunction()" class="dropbtn">Management</button>
+                                <div id="myDropdown" class="dropdown-content">
+                                    <a href="#home">Home</a>
+                                    <a href="#about">About</a>
+                                    <a href="#contact">Contact</a>
+                                </div>
+                            </div>
+                        </li>
                             <li><a asp-controller="UserDetails" asp-action="ShowUserDetails">@User.Identity.Name</a></li>
                             <li>
                                 <form method="post" asp-controller="Account" asp-action="LogOut">
@@ -58,5 +67,6 @@
     {
         @RenderSection("Scripts", required: true)
     }
+        <script src="~/js/DropDownScript.js"></script>
 </body>
 </html>
