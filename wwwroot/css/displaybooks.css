@@ -24,7 +24,6 @@ body {
     background-color: skyblue;
 }
 
-
 /* CSS Design !!! */
 
 .top-area, .comedy, .drama, .science-fiction, .nature-science, .footer-area {
@@ -112,8 +111,6 @@ body {
         "c c s s n n d d" 
         "c c s s n n d d";
     padding: 10px;
-    border-radius: 25px;
-    border: 2px solid black;
     grid-gap: 10px;
 }
 
@@ -128,8 +125,6 @@ body {
             "n n n n n n n n" 
             "d d d d d d d d";
         padding: 10px;
-        border-radius: 15px;
-        border: 2px solid black;
-        gap: 10px;
+        grid-gap: 10px;
     }
 }

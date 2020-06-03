@@ -37,7 +37,7 @@
                             <li><a asp-controller="UserDetails" asp-action="ShowUserDetails">@User.Identity.Name</a></li>
                             <li>
                                 <form method="post" asp-controller="Account" asp-action="LogOut">
-                                    <button type="submit">Log Out: @User.Identity.Name</button>
+                                    <button type="submit" class="logoutbtn">Log Out: @User.Identity.Name</button>
                                 </form>
                             </li>
 
