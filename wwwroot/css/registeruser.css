@@ -2,10 +2,6 @@
     grid-area: m;
     background-color: rgb(209, 230, 227);
 }
-.contact{
-    grid-area: con;
-    background-color: chocolate;
-}
 
 /*CSS DESIGN*/
 .main-area {

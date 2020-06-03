@@ -110,7 +110,7 @@ body {
         "c c s s n n d d" 
         "c c s s n n d d" 
         "c c s s n n d d";
-    padding: 10px;
+    padding: 0px 10px;
     grid-gap: 10px;
 }
 
@@ -124,7 +124,7 @@ body {
             "s s s s s s s s" 
             "n n n n n n n n" 
             "d d d d d d d d";
-        padding: 10px;
+        padding: 0px 10px;
         grid-gap: 10px;
     }
 }

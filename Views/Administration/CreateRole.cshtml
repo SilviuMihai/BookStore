@@ -1,25 +1,24 @@
-﻿
-@model CreateRoleViewModels
+﻿@model CreateRoleViewModels
 @{
     ViewBag.Title = "Create Role";
 }
 
 <head>
-    <link rel="stylesheet" type="text/css" href="~/css/registeruser.css">
+    <link rel="stylesheet" type="text/css" href="~/css/createrole.css">
 </head>
 <body>
     <div class="container">
 
         <div class="main-area">
-            <h3>Crearea unui nou Rol in companie:</h3>
+            <h3>Create a new Role in the company:</h3>
             <form method="post">
                 <div asp-validation-summary="All"></div>
-                <label asp-for="RoleName">Numele Rolului: </label>
+                <label asp-for="RoleName">Name of the Role: </label>
                 <input asp-for="RoleName" />
                 <span asp-validation-for="RoleName"></span>
                 <br>
                 <br>
-                <button type="submit" >Creaza Rol</button>
+                <button type="submit" >Create Role</button>
             </form>
         </div>
 

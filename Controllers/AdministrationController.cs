@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BookStore.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,34 @@ namespace BookStore.Controllers
         public IActionResult CreateRole()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRole(CreateRoleViewModels createRoleViewModels)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var role = new IdentityRole()
+                {
+                    Name = createRoleViewModels.RoleName
+                };
+
+                var result = await roleManager.CreateAsync(role);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index", "home");
+                }
+                //In case that CreateRole fails
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description); // add errors to ModelState, to list the problems regarding the createrole
+                }
+            }
+
+            //When the Model State fails , the user can return and add the details again
+            return View(createRoleViewModels);
         }
     }
 }
