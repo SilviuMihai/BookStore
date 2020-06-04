@@ -38,7 +38,7 @@ namespace BookStore.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("ListRoles", "Administration");
                 }
                 //In case that CreateRole fails
                 foreach (var error in result.Errors)
@@ -49,6 +49,14 @@ namespace BookStore.Controllers
 
             //When the Model State fails , the user can return and add the details again
             return View(createRoleViewModels);
+        }
+
+        [HttpGet]
+        public IActionResult ListRoles()
+        {
+            var roles = roleManager.Roles;
+
+            return View(roles);
         }
     }
 }
