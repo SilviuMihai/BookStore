@@ -1,4 +1,5 @@
-﻿using BookStore.ViewModels;
+﻿using BookStore.Models;
+using BookStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,10 +12,12 @@ namespace BookStore.Controllers
     public class AdministrationController:Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager,UserManager<ApplicationUser> userManager)
         {
             this.roleManager = roleManager;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -57,6 +60,66 @@ namespace BookStore.Controllers
             var roles = roleManager.Roles;
 
             return View(roles);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditRole(string id)
+        {
+
+            var role = await roleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                //to add a view that says not found or create an ajax
+                return RedirectToAction("index", "home");
+            }
+            
+                var model = new EditRoleViewModels()
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+            
+
+            foreach (var user in await userManager.GetUsersInRoleAsync(role.Name))
+            {
+                if (await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    model.Users.Add(user.Email);
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRole(EditRoleViewModels editRoleViewModels)
+        {
+            if (ModelState.IsValid)
+            {
+                var role = await roleManager.FindByIdAsync(editRoleViewModels.RoleId);
+
+                if (role == null)
+                {
+                    //to add a view that says not found or create an ajax
+                    return RedirectToAction("index", "home");
+                }
+
+                role.Name = editRoleViewModels.RoleName;
+
+                var rolename = await roleManager.UpdateAsync(role);
+                if (rolename.Succeeded)
+                {
+                    return RedirectToAction("ListRoles", "Administration");
+                }
+                //In case that EditRole fails
+                foreach (var error in rolename.Errors)
+                {
+                    ModelState.AddModelError("", error.Description); // add errors to ModelState, to list the problems regarding the editrole
+                }
+            }
+            return View(editRoleViewModels);
         }
     }
 }

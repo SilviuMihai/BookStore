@@ -1,0 +1,39 @@
+﻿.main-area {
+    grid-area: m;
+    background-color: rgb(209, 230, 227);
+    border-radius: 15px;
+}
+.second-area {
+    grid-area: s;
+    background-color: rgb(209, 230, 227);
+    border-radius: 15px;
+}
+
+/*Grid Layout*/
+.container {
+    display: grid;
+    grid-template-areas: 
+        "m m m m m m"
+        "m m m m m m" 
+        "m m m m m m"
+        "s s s s s s"
+        "s s s s s s"
+        "s s s s s s";
+    padding: 0px 10px;
+    grid-gap: 10px;
+}
+
+@media screen and (min-width:760px) {
+    .container {
+        display: grid;
+        grid-template-areas: 
+            "m m m m m m" 
+            "m m m m m m" 
+            "m m m m m m" 
+            "s s s s s s" 
+            "s s s s s s" 
+            "s s s s s s";
+        padding: 0px 10px;
+        grid-gap: 10px;
+    }
+}

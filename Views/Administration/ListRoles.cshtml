@@ -22,7 +22,7 @@
                         <p>Role Id:@role.Id</p>
                         <p>Role Name:@role.Name</p>
 
-                        <button><a href="#">Edit Role</a></button>
+                        <button><a asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit Role</a></button>
                         <button><a href="#">Delete Role</a></button>
                     }
                 }
