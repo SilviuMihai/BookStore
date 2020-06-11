@@ -94,18 +94,17 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditRole(EditRoleViewModels editRoleViewModels)
+        public async Task<IActionResult> EditRole(string id,EditRoleViewModels editRoleViewModels)
         {
+            var role = await roleManager.FindByIdAsync(editRoleViewModels.RoleId);
+
+            if (id != editRoleViewModels.RoleId)
+            {
+                //to add a view that says not found or create an ajax
+                return RedirectToAction("index", "home");
+            }
             if (ModelState.IsValid)
             {
-                var role = await roleManager.FindByIdAsync(editRoleViewModels.RoleId);
-
-                if (role == null)
-                {
-                    //to add a view that says not found or create an ajax
-                    return RedirectToAction("index", "home");
-                }
-
                 role.Name = editRoleViewModels.RoleName;
 
                 var rolename = await roleManager.UpdateAsync(role);
