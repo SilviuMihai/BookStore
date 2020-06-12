@@ -120,5 +120,41 @@ namespace BookStore.Controllers
             }
             return View(editRoleViewModels);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUsersInRole(string id)
+        {
+            ViewBag.roleId = id;
+            var role = await roleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                //trebuie creat un alt view, pentru a specifica ca acel id nu se gaseste
+                return RedirectToAction("index", "home");
+            }
+
+            var listOfUserInRole = new List<EditUsersInRoleViewModels>();
+
+            foreach (var user in await userManager.GetUsersInRoleAsync(role.Name)) // este o problema aici , in momentul cand se face get, nu poate parsa prin elemente
+                // am adaugat getusersinrole, dar am nevoie de toti utilizatorii
+            {
+                var userInRole = new EditUsersInRoleViewModels()
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName
+                };
+
+                if (await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userInRole.IsSelected = true;
+                }
+                else 
+                {
+                    userInRole.IsSelected = false;
+                }
+                listOfUserInRole.Add(userInRole);
+            }     
+            return View(listOfUserInRole);
+        }
     }
 }

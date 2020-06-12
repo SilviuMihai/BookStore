@@ -34,9 +34,12 @@
                 }
             }
             else
-            { 
+            {
                 <p>None at the moment</p>
             }
+            <br>
+            <br>
+            <button><a asp-controller="Administration" asp-action="EditUsersInRole" asp-route-id="@Model.RoleId">Add or Remove Users</a></button>
         </div>
     </div>
 </body>
