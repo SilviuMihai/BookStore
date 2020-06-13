@@ -135,8 +135,7 @@ namespace BookStore.Controllers
 
             var listOfUserInRole = new List<EditUsersInRoleViewModels>();
 
-            foreach (var user in await userManager.GetUsersInRoleAsync(role.Name)) // este o problema aici , in momentul cand se face get, nu poate parsa prin elemente
-                // am adaugat getusersinrole, dar am nevoie de toti utilizatorii
+            foreach (var user in userManager.Users) // so I can parse through the users in database, I used MultipleActiveResultSets=true in appsettings.json
             {
                 var userInRole = new EditUsersInRoleViewModels()
                 {
