@@ -155,5 +155,49 @@ namespace BookStore.Controllers
             }     
             return View(listOfUserInRole);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUsersInRole(List<EditUsersInRoleViewModels> model, string roleId)
+        {
+            var role = await roleManager.FindByIdAsync(roleId);
+
+            if (role == null)
+            {
+                //trebuie creat un alt view, pentru a specifica ca acel id nu se gaseste
+                return RedirectToAction("index", "home");
+            }
+            for (int i = 0; i < model.Count; i++)
+            {
+                var user = await userManager.FindByIdAsync(model[i].UserId);
+
+                IdentityResult identityResult = null;
+
+                if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name))) //checks if the user is selected and checks if the user is not already in that specific role
+                {
+                    identityResult = await userManager.AddToRoleAsync(user, role.Name);//add user for that specific role
+                }
+                else if (!(model[i].IsSelected) && await userManager.IsInRoleAsync(user, role.Name)) //checks if the user is unselected and if the user is already in that specific role - to remove the user from the role 
+                {
+                    identityResult = await userManager.RemoveFromRoleAsync(user, role.Name); //remove user from the role
+                }
+                else 
+                {
+                    continue;
+                }
+
+                if (identityResult.Succeeded)
+                {
+                    if (i < model.Count - 1) 
+                    {
+                        continue; // if there are more users, set to continue the for instruction
+                    }
+                    else
+                    {
+                        return RedirectToAction("EditRole",new { Id = roleId}); // if there are no remainig users, redirect
+                    }
+                }
+            }
+            return RedirectToAction("EditRole", new { Id = roleId });
+        }
     }
 }

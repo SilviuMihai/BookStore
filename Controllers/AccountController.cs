@@ -20,7 +20,7 @@ namespace BookStore.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-
+        [AllowAnonymous]
         [HttpPost]
         [HttpGet]
         //or [AcceptVerbs("Get",Post)]
