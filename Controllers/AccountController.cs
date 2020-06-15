@@ -94,6 +94,10 @@ namespace BookStore.Controllers
                 var result = await userManager.CreateAsync(user, registerUserViewModel.Password); // create the user and the password hashed to the database
                 if (result.Succeeded)
                 {
+                    if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListUsers","Account");
+                    }
                     await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "home"); // if succeeded, returns the user to the index
                 } 
@@ -104,6 +108,12 @@ namespace BookStore.Controllers
                 }
             }
             return View(registerUserViewModel);
+        }
+
+        public IActionResult ListUsers()
+        {
+            var users = userManager.Users;
+            return View(users);
         }
 
     }

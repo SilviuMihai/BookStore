@@ -60,7 +60,7 @@ namespace BookStore
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseRouting();
-
+            app.UseAuthorization(); // for the Roles, we use authorization
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ApplicationUser>
+
+@{
+    ViewBag.Title = "List Users";
+}
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/listusers.css">
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="main-area">
+                <h2>List of Users:</h2>
+                <button><a asp-controller="Account" asp-action="RegisterUser">Add a new User</a></button>
+                <!--check if there are any users-->
+                @if (Model.Any())
+                {
+                @foreach (var users in Model)
+                {
+                    <p>@users</p>
+                }
+                }
+                else
+                {
+                <p>Currently there are no users.</p>
+                }
+            </div>
+
+        </div>
+    </body>
