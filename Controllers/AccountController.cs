@@ -116,5 +116,37 @@ namespace BookStore.Controllers
             return View(users);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> EditUsers(string id)
+        {
+           var user = await userManager.FindByIdAsync(id);
+
+            if (user ==null)
+            {
+                ViewBag.ErrorMessage = $"User with the respective ID:{id} cannot be found.";
+                return View("NotFound");
+            }
+
+            var userGetClaims = await userManager.GetClaimsAsync(user); //get claims from this user
+            var userGetRoles = await userManager.GetRolesAsync(user); //get roles from this user
+
+            var editUserModel = new EditUserViewModels()
+            {
+                FamilyName = user.FullName,
+                Name = user.FullName,
+                Adress = user.Adress,
+                PhoneNumber = user.PhoneNumber,
+                City = user.City,
+                Country = user.Country,
+                Email = user.Email,
+                Age = user.Age,
+                Roles = userGetRoles,
+                Claims = userGetClaims.Select(c => c.Value).ToList()
+            };
+
+
+            return View(editUserModel);
+        }
     }
 }

@@ -19,6 +19,10 @@
                 @foreach (var users in Model)
                 {
                     <p>@users</p>
+                    <br />
+                    <br />
+                    <button><a asp-controller="Account" asp-action="EditUser" asp-route-id="@users.Id">Edit User</a></button>
+                    <button>Delete</button>
                 }
                 }
                 else
