@@ -2,5 +2,98 @@
 
 @{
     ViewBag.Title = "Edit User";
- }
+}
 
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/edituser.css">
+</head>
+<body>
+    <div class="container">
+            <div class="main-area">
+                <form method="post" asp-action="EditUser">
+                    <h2>Edit User</h2>
+                    <p>Id:@Model.Id</p>
+                    <input asp-for="Id" type="hidden" />
+                    <br>
+                    <label asp-for="FamilyName">Family Name:</label>
+                    <input asp-for="FamilyName">
+                    <span asp-validation-for="FamilyName"></span>
+                    <br>
+                    <label asp-for="Name">Name:</label>
+                    <input asp-for="Name" />
+                    <span asp-validation-for="Name"></span>
+                    <br>
+                    <label asp-for="Adress">Adress:</label>
+                    <input asp-for="Adress">
+                    <span asp-validation-for="Adress"></span>
+                    <br>
+                    <label asp-for="PhoneNumber">Phone Number:</label>
+                    <input asp-for="PhoneNumber">
+                    <span asp-validation-for="PhoneNumber"></span>
+                    <br>
+                    <label asp-for="City">City:</label>
+                    <select asp-for="City" asp-items="Html.GetEnumSelectList<Cities>()">
+                    </select>
+                    <span asp-validation-for="City"></span>
+                    <br>
+                    <label asp-for="Country">Country:</label>
+                    <select asp-for="Country" asp-items="Html.GetEnumSelectList<Countries>()">
+                    </select>
+                    <span asp-validation-for="Country"></span>
+                    <br>
+                    <label asp-for="Email">Email:</label>
+                    <input asp-for="Email">
+                    <span asp-validation-for="Email"></span>
+                    <br>
+                    <label asp-for="Age">Age:</label>
+                    <input asp-for="Age">
+                    <span asp-validation-for="Age"></span>
+
+
+                    <br>
+                    <br>
+                    <div asp-validation-summary="All"></div>
+                    <button type="submit">Update</button>
+                    <button><a asp-controller="Account" asp-action="ListUsers">Cancel</a></button>
+                    </form>
+            </div>
+            <div class="second-layer-roles">
+                <form method="post" asp-action="EditUser">
+                    <h3>User Roles</h3>
+                    @if (Model.Roles.Any())
+                    {
+                        foreach (var role in Model.Roles)
+                        {
+                            <p>@role</p>
+                        }
+                    }
+                    else
+                    {
+                        <p>None at the moment</p>
+                    }
+                    <br>
+                    <br>
+                    <button><a href="#">Manage Roles</a></button>
+                    </form>
+            </div>
+            <div class="third-layer-claims">
+                <form method="post" asp-action="EditUser">
+                    <h3>User Claims</h3>
+                    @if (Model.Claims.Any())
+                    {
+                        foreach (var claim in Model.Claims)
+                        {
+                            <p>@claim</p>
+                        }
+                    }
+                    else
+                    {
+                        <p>None at the moment</p>
+                    }
+                    <br>
+                    <br>
+                    <button><a href="#">Manage Claims</a></button>
+                    </form>
+                </div>
+    </div>
+</body>

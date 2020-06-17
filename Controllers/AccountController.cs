@@ -110,6 +110,7 @@ namespace BookStore.Controllers
             return View(registerUserViewModel);
         }
 
+        [HttpGet]
         public IActionResult ListUsers()
         {
             var users = userManager.Users;
@@ -118,7 +119,7 @@ namespace BookStore.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> EditUsers(string id)
+        public async Task<IActionResult> EditUser(string id)
         {
            var user = await userManager.FindByIdAsync(id);
 
@@ -133,6 +134,7 @@ namespace BookStore.Controllers
 
             var editUserModel = new EditUserViewModels()
             {
+                Id = user.Id,
                 FamilyName = user.FullName,
                 Name = user.FullName,
                 Adress = user.Adress,

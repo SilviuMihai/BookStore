@@ -15,6 +15,7 @@ namespace BookStore.ViewModels
             Roles = new List<string>();
         }
 
+        public string Id { get; set; }
         [Required]
         public string FamilyName { get; set; }
 
