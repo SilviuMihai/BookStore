@@ -71,7 +71,7 @@ namespace BookStore.Controllers
                     
                 }
                         addUserDetails.PhoneNumber = userDetailsViewModels.PhoneNumber;
-                        addUserDetails.FullName = userDetailsViewModels.FamilyName + " " + userDetailsViewModels.Name;
+                        addUserDetails.FullName = userDetailsViewModels.FamilyName + " " + userDetailsViewModels.Name; 
                         addUserDetails.BooksBought = userDetailsViewModels.Books;
                         addUserDetails.Adress = userDetailsViewModels.Adress;
                         addUserDetails.City = userDetailsViewModels.City;

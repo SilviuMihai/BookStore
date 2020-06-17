@@ -58,6 +58,7 @@
                     </form>
             </div>
             <div class="second-layer-roles">
+                <!--form if it is not used should be deleted(reminder)-->
                 <form method="post" asp-action="EditUser">
                     <h3>User Roles</h3>
                     @if (Model.Roles.Any())
@@ -77,6 +78,7 @@
                     </form>
             </div>
             <div class="third-layer-claims">
+                <!--form if it is not used should be deleted(reminder)-->
                 <form method="post" asp-action="EditUser">
                     <h3>User Claims</h3>
                     @if (Model.Claims.Any())
@@ -93,7 +95,8 @@
                     <br>
                     <br>
                     <button><a href="#">Manage Claims</a></button>
-                    </form>
-                </div>
+                </form>
+            </div>
+
     </div>
 </body>

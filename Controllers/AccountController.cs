@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
-    public class AccountController:Controller
+    public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -38,7 +38,7 @@ namespace BookStore.Controllers
                                    // also we need the 3 scripts files, in the same order, that are presented in Layout file (jquery)
                                    // so we need to respond with a Json result
             }
-            else 
+            else
             {
                 return Json($"The Email {email}, is already in use.");
             }
@@ -64,8 +64,8 @@ namespace BookStore.Controllers
                     return RedirectToAction("index", "home");
                 }
                 //In case the Login fails
-               
-                    ModelState.AddModelError(string.Empty, "Invalid Login Attempt !"); // add errors to ModelState, to list the problems regarding the registration
+
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt !"); // add errors to ModelState, to list the problems regarding the registration
             }
             return View(loginViewModels);
         }
@@ -73,7 +73,7 @@ namespace BookStore.Controllers
         [HttpPost]
         public async Task<IActionResult> LogOut()
         {
-               await signInManager.SignOutAsync();
+            await signInManager.SignOutAsync();
 
             return RedirectToAction("index", "home");
         }
@@ -96,11 +96,11 @@ namespace BookStore.Controllers
                 {
                     if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
-                        return RedirectToAction("ListUsers","Account");
+                        return RedirectToAction("ListUsers", "Account");
                     }
                     await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "home"); // if succeeded, returns the user to the index
-                } 
+                }
                 //In case the Registration fails
                 foreach (var error in result.Errors)
                 {
@@ -121,9 +121,9 @@ namespace BookStore.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
-           var user = await userManager.FindByIdAsync(id);
+            var user = await userManager.FindByIdAsync(id);
 
-            if (user ==null)
+            if (user == null)
             {
                 ViewBag.ErrorMessage = $"User with the respective ID:{id} cannot be found.";
                 return View("NotFound");
@@ -149,6 +149,43 @@ namespace BookStore.Controllers
 
 
             return View(editUserModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModels editUserViewModels)
+        {
+            var user = await userManager.FindByIdAsync(editUserViewModels.Id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with the respective ID:{editUserViewModels.Id} cannot be found.";
+                return View("NotFound");
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    user.FullName = editUserViewModels.FamilyName + " " + editUserViewModels.Name; //issue here, adds every time the name, when it's update it.
+                    user.Adress = editUserViewModels.Adress;
+                    user.PhoneNumber = editUserViewModels.PhoneNumber;
+                    user.City = editUserViewModels.City;
+                    user.Country = editUserViewModels.Country;
+                    user.Email = editUserViewModels.Email;
+                    user.Age = editUserViewModels.Age;
+
+                    var result = await userManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                    {
+                       return RedirectToAction("ListUsers", "Account");
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description); // add errors to ModelStats
+                    }
+                }
+            }
+            return View(editUserViewModels);
         }
     }
 }

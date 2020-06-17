@@ -18,7 +18,7 @@ namespace BookStore.ViewModels
         [Required]
         public string Adress { get; set; }
         
-        [Required]
+        [Required][Phone]
         //[RegularExpression("([1-9][0-9]*)", ErrorMessage = "Count must be a natural number")]
         //to be changed 
         public string PhoneNumber { get; set; }
