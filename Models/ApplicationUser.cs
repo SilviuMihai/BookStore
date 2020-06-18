@@ -25,11 +25,14 @@ namespace BookStore.Models
         public int Age { get; set; }
     }
 }
-//To change a Column Name
+//To change a Column Name in DataBase
 /*
  * I added the attribute [Column("NewName")] above the property that I wanted to change the name
  * Add-Migration
  * Update Database
- * See Results
- * Then change in all the parts of the code the old name that was used
+ * 
+ * See Results in DataBase
+ * 
+ * Then you can change the property name, if you want and delete the attribute [Column("NewName")] from the respective property.
+ * Then change in all the parts of the code the old name that was used.
  */
