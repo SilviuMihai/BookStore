@@ -31,7 +31,7 @@ namespace BookStore.Controllers
             //must return the values from the database in here
             //example homecontroller
             var userData = await userManager.GetUserAsync(HttpContext.User);
-            if (string.IsNullOrEmpty(userData.FullName) || string.IsNullOrEmpty(userData.PhoneNumber) ||
+            if (string.IsNullOrEmpty(userData.SurName) || string.IsNullOrEmpty(userData.PhoneNumber) ||
                 string.IsNullOrEmpty(userData.Adress) || ((userData.Age == 0) || (userData.City == 0) || (userData.Country == 0)))
             {
                 return RedirectToAction("CaptureUserDetails", "UserDetails");
@@ -45,8 +45,7 @@ namespace BookStore.Controllers
                     Country = userData.Country,
                     Email = userData.Email,
                     Age = userData.Age,
-                    FamilyName = userData.FullName,
-                    Name = userData.FullName,
+                    FamilyName = userData.SurName,
                     Adress = userData.Adress
                 };
 
@@ -71,7 +70,7 @@ namespace BookStore.Controllers
                     
                 }
                         addUserDetails.PhoneNumber = userDetailsViewModels.PhoneNumber;
-                        addUserDetails.FullName = userDetailsViewModels.FamilyName + " " + userDetailsViewModels.Name; 
+                        addUserDetails.SurName = userDetailsViewModels.FamilyName + " " + userDetailsViewModels.Name; 
                         addUserDetails.BooksBought = userDetailsViewModels.Books;
                         addUserDetails.Adress = userDetailsViewModels.Adress;
                         addUserDetails.City = userDetailsViewModels.City;

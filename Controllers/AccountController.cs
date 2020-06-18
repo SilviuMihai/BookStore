@@ -135,8 +135,7 @@ namespace BookStore.Controllers
             var editUserModel = new EditUserViewModels()
             {
                 Id = user.Id,
-                FamilyName = user.FullName,
-                Name = user.FullName,
+                FamilyName = user.SurName,
                 Adress = user.Adress,
                 PhoneNumber = user.PhoneNumber,
                 City = user.City,
@@ -165,7 +164,7 @@ namespace BookStore.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    user.FullName = editUserViewModels.FamilyName + " " + editUserViewModels.Name; //issue here, adds every time the name, when it's update it.
+                    user.SurName = editUserViewModels.FamilyName + " " + editUserViewModels.Name; //issue here, adds every time the name, when it's update it.
                     user.Adress = editUserViewModels.Adress;
                     user.PhoneNumber = editUserViewModels.PhoneNumber;
                     user.City = editUserViewModels.City;
