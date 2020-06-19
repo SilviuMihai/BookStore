@@ -136,6 +136,7 @@ namespace BookStore.Controllers
             {
                 Id = user.Id,
                 FamilyName = user.SurName,
+                Name = user.Name,
                 Adress = user.Adress,
                 PhoneNumber = user.PhoneNumber,
                 City = user.City,
@@ -164,7 +165,8 @@ namespace BookStore.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    user.SurName = editUserViewModels.FamilyName + " " + editUserViewModels.Name; //issue here, adds every time the name, when it's update it.
+                    user.SurName = editUserViewModels.FamilyName;
+                    user.Name = editUserViewModels.Name;
                     user.Adress = editUserViewModels.Adress;
                     user.PhoneNumber = editUserViewModels.PhoneNumber;
                     user.City = editUserViewModels.City;
@@ -185,6 +187,29 @@ namespace BookStore.Controllers
                 }
             }
             return View(editUserViewModels);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with the respective ID:{id} cannot be found.";
+                return View("NotFound");
+            }
+
+            var deletedUser = await userManager.DeleteAsync(user);
+
+            if (deletedUser.Succeeded)
+            {
+                return RedirectToAction("ListUsers", "Account");
+            }
+            foreach (var error in deletedUser.Errors)
+            {
+                ModelState.AddModelError("", error.Description); // add errors to ModelStats
+            }
+            return View("ListUsers");
         }
     }
 }

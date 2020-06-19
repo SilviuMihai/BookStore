@@ -26,16 +26,16 @@
                         {
                             if (User.IsInRole("Admin"))
                             {
-                                  <li>
-                                     <div class="dropdown">
-                                         <button onclick="myFunction()" class="dropbtn">Management</button>
-                                         <div id="myDropdown" class="dropdown-content">
-                                             <a asp-controller="Administration" asp-action="ListRoles">List Roles</a>
-                                             <a asp-controller="Account" asp-action="ListUsers">List Users</a>
-                                             <a href="#contact">Contact</a>
-                                         </div>
-                                     </div>
-                                  </li>
+                                <li>
+                                    <div class="dropdown">
+                                        <button onclick="myFunction()" class="dropbtn">Management</button>
+                                        <div id="myDropdown" class="dropdown-content">
+                                            <a asp-controller="Administration" asp-action="ListRoles">List Roles</a>
+                                            <a asp-controller="Account" asp-action="ListUsers">List Users</a>
+                                            <a href="#contact">Contact</a>
+                                        </div>
+                                    </div>
+                                </li>
                             }
                             <li><a asp-controller="UserDetails" asp-action="ShowUserDetails">@User.Identity.Name</a></li>
                             <li>
@@ -70,6 +70,7 @@
     {
         @RenderSection("Scripts", required: true)
     }
-        <script src="~/js/DropDownScript.js"></script>
+    <script src="~/js/DropDownScript.js"></script>
+    <script src="~/js/DeleteConfirmationScript.js"></script>
 </body>
 </html>
