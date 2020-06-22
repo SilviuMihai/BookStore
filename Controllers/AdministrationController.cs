@@ -201,5 +201,38 @@ namespace BookStore.Controllers
             }
             return RedirectToAction("EditRole", new { Id = roleId });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with the respective ID:{id} cannot be found.";
+                return View("NotFound");
+            }
+
+            //to check if there are any users in this role
+            //foreach (var user in userManager.Users)
+            //{
+            //if (await userManager.IsInRoleAsync(user, role.Name))
+            //{
+
+            //}
+            //}
+
+            var deletedRole = await roleManager.DeleteAsync(role);
+
+            if (deletedRole.Succeeded)
+            {
+                return RedirectToAction("ListRoles", "Administration");
+            }
+            foreach (var error in deletedRole.Errors)
+            {
+                ModelState.AddModelError("", error.Description); // add errors to ModelStats
+            }
+
+            return View("ListRoles");
+        }
     }
 }

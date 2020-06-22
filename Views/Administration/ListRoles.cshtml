@@ -23,7 +23,16 @@
                         <p>Role Name:@role.Name</p>
 
                         <button><a asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit Role</a></button>
-                        <button><a href="#">Delete Role</a></button>
+                        <form asp-controller="Administration" asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                            <span id="confirmationDeleteSpan_@role.Id" style="display:none">
+                                <span>Are you sure, you want to delete the user ?</span>
+                                <button type="submit">Yes</button>
+                                <button><a href="#" onclick="confirmDelete('@role.Id', false)">No</a></button>
+                            </span>
+                            <span id="deleteSpan_@role.Id">
+                                <button><a href="#" onclick="confirmDelete('@role.Id', true)">Delete</a></button>
+                            </span>
+                        </form>
                     }
                 }
                 else
