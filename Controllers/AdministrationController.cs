@@ -131,8 +131,8 @@ namespace BookStore.Controllers
 
             if (role == null)
             {
-                //trebuie creat un alt view, pentru a specifica ca acel id nu se gaseste
-                return RedirectToAction("index", "home");
+                ViewBag.ErrorMessage = $"Role with the respective ID:{id} cannot be found.";
+                return View("NotFound");
             }
 
             var listOfUserInRole = new List<EditUsersInRoleViewModels>();
@@ -219,7 +219,7 @@ namespace BookStore.Controllers
                 if (await userManager.IsInRoleAsync(user, role.Name))
                 {
                     userInRole = true;
-                    if(userInRole)
+                    if(userInRole) // if there are users in Role, than post this message
                     {
                         ViewBag.ErrorTitle = $"{role.Name}  - role, it is used by other users !";
                         ViewBag.ErrorMessage = $"{role.Name}- role, cannot be deleted because it used by other users." +
@@ -241,6 +241,42 @@ namespace BookStore.Controllers
             }
 
             return View("ListRoles");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ManageUserRoles(string userId)
+        {
+            ViewBag.userId = userId;
+
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with the respective ID:{userId} cannot be found.";
+                return View("NotFound");
+            }
+
+            var listOfRoles = new List<ManageUserRolesViewModels>();
+
+            foreach (var roles in roleManager.Roles)
+            {
+                var manageUserRoles = new ManageUserRolesViewModels()
+                {
+                    RoleId = roles.Id,
+                    RoleName = roles.Name
+                };
+
+                if (await userManager.IsInRoleAsync(user, roles.Name))
+                {
+                    manageUserRoles.IsSelected = true;
+                }
+                else
+                {
+                    manageUserRoles.IsSelected = false;
+                }
+                listOfRoles.Add(manageUserRoles);
+            }
+            return View(listOfRoles);
         }
     }
 }

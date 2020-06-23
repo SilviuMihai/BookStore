@@ -74,8 +74,9 @@
                     }
                     <br>
                     <br>
-                    <button><a href="#">Manage Roles</a></button>
-                    </form>
+                    <input asp-for="Id" type="hidden" />
+                    <button><a asp-controller="Administration" asp-action="ManageUserRoles" asp-route-id="@Model.Id">Manage Roles</a></button>
+                </form>
             </div>
             <div class="third-layer-claims">
                 <!--form if it is not used should be deleted(reminder)-->
