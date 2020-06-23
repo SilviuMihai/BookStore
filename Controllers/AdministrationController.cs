@@ -205,6 +205,7 @@ namespace BookStore.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteRole(string id)
         {
+            bool userInRole = false;
             var role = await roleManager.FindByIdAsync(id);
             if (role == null)
             {
@@ -212,14 +213,21 @@ namespace BookStore.Controllers
                 return View("NotFound");
             }
 
-            //to check if there are any users in this role
-            //foreach (var user in userManager.Users)
-            //{
-            //if (await userManager.IsInRoleAsync(user, role.Name))
-            //{
-
-            //}
-            //}
+            // check if there are any users in this role
+            foreach (var user in userManager.Users)
+            {
+                if (await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userInRole = true;
+                    if(userInRole)
+                    {
+                        ViewBag.ErrorTitle = $"{role.Name}  - role, it is used by other users !";
+                        ViewBag.ErrorMessage = $"{role.Name}- role, cannot be deleted because it used by other users." +
+                            $" If you want to delete the role, remove the users from this role and try again.";
+                        return View("Error");
+                    }
+                }
+            }
 
             var deletedRole = await roleManager.DeleteAsync(role);
 
