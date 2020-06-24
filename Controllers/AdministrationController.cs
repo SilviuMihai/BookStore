@@ -165,8 +165,8 @@ namespace BookStore.Controllers
 
             if (role == null)
             {
-                //trebuie creat un alt view, pentru a specifica ca acel id nu se gaseste
-                return RedirectToAction("index", "home");
+                ViewBag.ErrorMessage = $"Role with the respective ID:{roleId} cannot be found.";
+                return View("NotFound");
             }
             for (int i = 0; i < model.Count; i++)
             {
@@ -278,5 +278,52 @@ namespace BookStore.Controllers
             }
             return View(listOfRoles);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ManageUserRoles(List<ManageUserRolesViewModels> model, string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with the respective ID:{userId} cannot be found.";
+                return View("NotFound");
+            }
+            var roles = await userManager.GetRolesAsync(user);
+            var result = await userManager.RemoveFromRolesAsync(user, roles);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot remove user existing roles");
+                return View(model);
+            }
+
+            result = await userManager.AddToRolesAsync(user, model.Where(x => x.IsSelected).Select(y => y.RoleName));
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot add selected roles to the user");
+                return View(model);
+            }
+
+            return RedirectToAction("EditUser","Account", new { Id = userId });
+        }
     }
 }
+/*
+ * Notes:
+ Regarding the tag helpers:
+ On the Post operation, we need the id from the database in case that element will be changed, so in the view interface
+ with the "model.id" is not possible. It is possible to do that with <input asp-for="id" type="hidden"/>.
+ Because in the function of the Post operation, that function has a parameter "(string id)" which expects the id from the View.
+
+ On the Get operation in the case when we have an anchor and we use "asp-route". It is important that the name of asp-route-"id"
+
+ is exactly the same with the name in the function paramater of the Get operation.
+ example:
+ <a asp-controller="Account" asp-action="EditUser" asp-route-userId="@userId"></a>
+ Now in the controller:
+ public IActionResult EditUser(string userId)
+
+    As you can see they are both the same.
+ */
