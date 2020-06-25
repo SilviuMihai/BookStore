@@ -321,27 +321,35 @@ namespace BookStore.Controllers
                 return View("NotFound");
             }
 
+            //To keep all the Claims in this object
             var userDataBaseClaims = await userManager.GetClaimsAsync(user);
 
             var model = new UserClaimsViewModels()
             {
                 UserId = userId
             };
-            //ClaimStore contains the List of Claims of type Claims
+            //ClaimStore contains the List of Claims(Claim type and Claim value)
             foreach (Claim claims in ClaimsStore.AllClaims)
             {
                 //populate the UserClaim with the Type from the ClaimStore.AllClaims
+                //is taken the "Type" from ClaimStore
+                //So we can see the values displayed on the view (I mean the Claims Type)
                 UserClaim userClaim = new UserClaim()
                 {
-                    ClaimType = claims.Type
+                    //ClaimType it is string
+                    ClaimType = claims.Type 
                 };
 
-                //Check in Database if the user has that specific Type(if it has set to true that Type)
+                //Check in Database if the user has that specific Type(if it has set to true IsSelected)
+                //"c" is a Claim that has the Type(string) 
+                //userDataBaseClaims contains all the Claims that were gathered "var userDataBaseClaims = await userManager.GetClaimsAsync(user);"
+                //comparing if it has that Type.
+                //populating IsSelected with True
                 if (userDataBaseClaims.Any(c => c.Type == userClaim.ClaimType))
                 {
                     userClaim.IsSelected = true;
                 }
-                //Add all the Types to the ViewModel(UserClaimsViewModels()), so that can be displayed on the View
+                //Add all the ClaimTypes and IsSelected to the ViewModel(UserClaimsViewModels()), so that can be displayed on the View
                 model.Claims.Add(userClaim);
             }
             return View(model);

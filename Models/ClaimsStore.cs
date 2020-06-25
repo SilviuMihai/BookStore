@@ -10,6 +10,7 @@ namespace BookStore.Models
     {
         public static List<Claim> AllClaims = new List<Claim>()
         {
+            //has string type(claim type) and string value(claim value)
             new Claim("Create Role","Create Role"),
             new Claim("Edit Role","Edit Role"),
             new Claim("Delete Role","Delete Role")
