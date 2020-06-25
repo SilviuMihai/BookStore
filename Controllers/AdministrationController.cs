@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BookStore.Controllers
@@ -308,6 +309,43 @@ namespace BookStore.Controllers
 
             return RedirectToAction("EditUser","Account", new { Id = userId });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ManageUserClaims(string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with the respective ID:{userId} cannot be found.";
+                return View("NotFound");
+            }
+
+            var userDataBaseClaims = await userManager.GetClaimsAsync(user);
+
+            var model = new UserClaimsViewModels()
+            {
+                UserId = userId
+            };
+            //ClaimStore contains the List of Claims of type Claims
+            foreach (Claim claims in ClaimsStore.AllClaims)
+            {
+                //populate the UserClaim with the Type from the ClaimStore.AllClaims
+                UserClaim userClaim = new UserClaim()
+                {
+                    ClaimType = claims.Type
+                };
+
+                //Check in Database if the user has that specific Type(if it has set to true that Type)
+                if (userDataBaseClaims.Any(c => c.Type == userClaim.ClaimType))
+                {
+                    userClaim.IsSelected = true;
+                }
+                //Add all the Types to the ViewModel(UserClaimsViewModels()), so that can be displayed on the View
+                model.Claims.Add(userClaim);
+            }
+            return View(model);
+        }
     }
 }
 /*
@@ -318,7 +356,6 @@ namespace BookStore.Controllers
  Because in the function of the Post operation, that function has a parameter "(string id)" which expects the id from the View.
 
  On the Get operation in the case when we have an anchor and we use "asp-route". It is important that the name of asp-route-"id"
-
  is exactly the same with the name in the function paramater of the Get operation.
  example:
  <a asp-controller="Account" asp-action="EditUser" asp-route-userId="@userId"></a>
