@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
-    [Authorize(Roles ="Admin")]
-    public class AdministrationController:Controller
+    [Authorize(Roles = "Admin")]
+    public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager,UserManager<ApplicationUser> userManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
@@ -77,13 +77,13 @@ namespace BookStore.Controllers
                 //to add a view that says not found or create an ajax
                 return RedirectToAction("index", "home");
             }
-            
-                var model = new EditRoleViewModels()
-                {
-                    RoleId = role.Id,
-                    RoleName = role.Name
-                };
-            
+
+            var model = new EditRoleViewModels()
+            {
+                RoleId = role.Id,
+                RoleName = role.Name
+            };
+
 
             foreach (var user in await userManager.GetUsersInRoleAsync(role.Name))
             {
@@ -97,7 +97,7 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditRole(string id,EditRoleViewModels editRoleViewModels)
+        public async Task<IActionResult> EditRole(string id, EditRoleViewModels editRoleViewModels)
         {
             var role = await roleManager.FindByIdAsync(editRoleViewModels.RoleId);
 
@@ -150,12 +150,12 @@ namespace BookStore.Controllers
                 {
                     userInRole.IsSelected = true;
                 }
-                else 
+                else
                 {
                     userInRole.IsSelected = false;
                 }
                 listOfUserInRole.Add(userInRole);
-            }     
+            }
             return View(listOfUserInRole);
         }
 
@@ -174,7 +174,6 @@ namespace BookStore.Controllers
                 var user = await userManager.FindByIdAsync(model[i].UserId);
 
                 IdentityResult identityResult = null;
-
                 if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name))) //checks if the user is selected and checks if the user is not already in that specific role
                 {
                     identityResult = await userManager.AddToRoleAsync(user, role.Name);//add user for that specific role
@@ -183,20 +182,20 @@ namespace BookStore.Controllers
                 {
                     identityResult = await userManager.RemoveFromRoleAsync(user, role.Name); //remove user from the role
                 }
-                else 
+                else
                 {
                     continue;
                 }
 
                 if (identityResult.Succeeded)
                 {
-                    if (i < model.Count - 1) 
+                    if (i < model.Count - 1)
                     {
                         continue; // if there are more users, set to continue the for instruction
                     }
                     else
                     {
-                        return RedirectToAction("EditRole",new { Id = roleId}); // if there are no remainig users, redirect
+                        return RedirectToAction("EditRole", new { Id = roleId }); // if there are no remainig users, redirect
                     }
                 }
             }
@@ -220,7 +219,7 @@ namespace BookStore.Controllers
                 if (await userManager.IsInRoleAsync(user, role.Name))
                 {
                     userInRole = true;
-                    if(userInRole) // if there are users in Role, than post this message
+                    if (userInRole) // if there are users in Role, than post this message
                     {
                         ViewBag.ErrorTitle = $"{role.Name}  - role, it is used by other users !";
                         ViewBag.ErrorMessage = $"{role.Name}- role, cannot be deleted because it used by other users." +
@@ -307,7 +306,7 @@ namespace BookStore.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("EditUser","Account", new { Id = userId });
+            return RedirectToAction("EditUser", "Account", new { Id = userId });
         }
 
         [HttpGet]
@@ -337,7 +336,7 @@ namespace BookStore.Controllers
                 UserClaim userClaim = new UserClaim()
                 {
                     //ClaimType it is string
-                    ClaimType = claims.Type 
+                    ClaimType = claims.Type
                 };
 
                 //Check in Database if the user has that specific Type(if it has set to true IsSelected)
@@ -353,6 +352,36 @@ namespace BookStore.Controllers
                 model.Claims.Add(userClaim);
             }
             return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ManageUserClaims(UserClaimsViewModels model)
+        {
+            var user = await userManager.FindByIdAsync(model.UserId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with the respective ID:{model.UserId} cannot be found.";
+                return View("NotFound");
+            }
+
+            var userClaims = await userManager.GetClaimsAsync(user);
+            var result = await userManager.RemoveClaimsAsync(user, userClaims);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot remove user existing claims !");
+                return View(model);
+            }
+
+            result = await userManager.AddClaimsAsync(user, model.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot add selected claim to the user !");
+                return View(model);
+            }
+
+            return RedirectToAction("EditUser", "Account", new { Id = model.UserId });
         }
     }
 }

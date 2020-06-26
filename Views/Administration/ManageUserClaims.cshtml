@@ -1,4 +1,4 @@
-﻿
+﻿@model UserClaimsViewModels
 @{ 
     ViewBag.Title = "Manage User Claims";
 }
@@ -8,21 +8,20 @@
 <body>
     <div class="container">
         <div class="main-area">
-            <form method="post" asp-controller="Administration" asp-action="ManageUserRoles">
+            <form method="post" asp-controller="Administration" asp-action="ManageUserClaims">
                 <h2>Manage User Roles</h2>
-                @for (int i = 0; i < Model.Count; i++)
+                @for (int i = 0; i < Model.Claims.Count; i++)
                 {
-                    <input type="hidden" asp-for="@userId" />
-                    <input type="hidden" asp-for="@Model[i].RoleId" />
-                    <input type="hidden" asp-for="@Model[i].RoleName" />
-                    <input type="checkbox" asp-for="@Model[i].IsSelected" />
-                    <label asp-for="@Model[i].IsSelected">@Model[i].RoleName</label>
+                    <input type="hidden" asp-for="@Model.UserId"/>
+                    <input type="hidden" asp-for="@Model.Claims[i].ClaimType" />
+                    <input type="checkbox" asp-for="@Model.Claims[i].IsSelected" />
+                    <label asp-for="@Model.Claims[i].IsSelected">@Model.Claims[i].ClaimType</label>
                 }
                 <div asp-validation-summary="All"></div>
                 <br>
                 <br>
                 <button type="submit">Update</button>
-                <button><a asp-controller="Account" asp-action="EditUser" asp-route-id="@userId">Cancel</a></button>
+                <button><a asp-controller="Account" asp-action="EditUser" asp-route-id="@Model.UserId">Cancel</a></button>
             </form>
         </div>
     </div>
