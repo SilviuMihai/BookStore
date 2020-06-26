@@ -363,8 +363,11 @@ namespace BookStore.Controllers
                 ViewBag.ErrorMessage = $"User with the respective ID:{model.UserId} cannot be found.";
                 return View("NotFound");
             }
-
+            //Get all Claims for the user
             var userClaims = await userManager.GetClaimsAsync(user);
+            //Remove all Claims for the user
+            //We avoid putting more conditions(if's), to test if the user is selected on the respective Claim, or not -
+            //this is the reason why all claims are deleted
             var result = await userManager.RemoveClaimsAsync(user, userClaims);
 
             if (!result.Succeeded)
@@ -373,6 +376,9 @@ namespace BookStore.Controllers
                 return View(model);
             }
 
+            //Here it checks for what is selected on the view, to add the claims to the user
+            //I want to add just only what is selected, this is the reason that I use Where and Select.
+            //("Where" returns Ienumarable of UserClaim and we need to return Ienumarable of Claim object(because of AddClaimAsync), this is the reason is put Select function, because return Ienumerable of Claim object)
             result = await userManager.AddClaimsAsync(user, model.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
 
             if (!result.Succeeded)
@@ -381,7 +387,7 @@ namespace BookStore.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("EditUser", "Account", new { Id = model.UserId });
+            return RedirectToAction("EditUser", "Account", new { Id = model.UserId }); //created an anonymous object because we need to return to the page of EditUser, so it needs the userId
         }
     }
 }
