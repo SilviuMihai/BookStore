@@ -24,15 +24,17 @@
                     <ul>
                         @if (signInManager.IsSignedIn(User))
                         {
-                            if (User.IsInRole("Admin"))
+                            if (User.IsInRole("Admin") || User.IsInRole("Operators") || User.IsInRole("Manager"))
                             {
                                 <li>
                                     <div class="dropdown">
                                         <button onclick="myFunction()" class="dropbtn">Management</button>
                                         <div id="myDropdown" class="dropdown-content">
+                                            @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                                            {
                                             <a asp-controller="Administration" asp-action="ListRoles">List Roles</a>
-                                            <a asp-controller="Account" asp-action="ListUsers">List Users</a>
-                                            <a href="#contact">Contact</a>
+                                            }
+                                            <a asp-controller="Administration" asp-action="ListUsers">List Users</a>
                                         </div>
                                     </div>
                                 </li>

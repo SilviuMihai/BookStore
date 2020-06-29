@@ -21,7 +21,7 @@
                         <p>@users</p>
                         <br />
                         <br />
-                        <button><a asp-controller="Account" asp-action="EditUser" asp-route-id="@users.Id">Edit User</a></button>
+                        <button><a asp-controller="Administration" asp-action="EditUser" asp-route-id="@users.Id">Edit User</a></button>
                         <!--delete confirmation with onclick event-->
                         <!--
                         <form asp-controller="Account" asp-action="DeleteUser" asp-route-id="@users.Id">
@@ -29,7 +29,7 @@
 
                         </form>
                             -->
-                        <form asp-controller="Account" asp-action="DeleteUser" asp-route-id="@users.Id" method="post">
+                        <form asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@users.Id" method="post">
                             <span id="confirmationDeleteSpan_@users.Id" style="display:none">
                                 <span>Are you sure, you want to delete the user ?</span>
                                 <button type="submit">Yes</button>

@@ -10,7 +10,7 @@
 <body>
     <div class="container">
             <div class="main-area">
-                <form method="post" asp-action="EditUser">
+                <form method="post"  asp-controller="Administration"  asp-action="EditUser">
                     <h2>Edit User</h2>
                     <p>Id:@Model.Id</p>
                     <input asp-for="Id" type="hidden" />
@@ -54,12 +54,12 @@
                     <br>
                     <div asp-validation-summary="All"></div>
                     <button type="submit">Update</button>
-                    <button><a asp-controller="Account" asp-action="ListUsers">Cancel</a></button>
+                    <button><a asp-controller="Administration" asp-action="ListUsers">Cancel</a></button>
                     </form>
             </div>
             <div class="second-layer-roles">
                 <!--form if it is not used should be deleted(reminder)-->
-                <form method="post" asp-action="EditUser">
+                <form method="post" asp-controller="Administration" asp-action="EditUser">
                     <h3>User Roles</h3>
                     @if (Model.Roles.Any())
                     {
@@ -79,7 +79,7 @@
             </div>
             <div class="third-layer-claims">
                 <!--form if it is not used should be deleted(reminder)-->
-                <form method="post" asp-action="EditUser">
+                <form method="post" asp-controller="Administration" asp-action="EditUser">
                     <h3>User Claims</h3>
                     @if (Model.Claims.Any())
                     {

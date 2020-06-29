@@ -27,10 +27,14 @@ namespace BookStore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContextPool<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BooksDBConnection")));
+            
             //services.AddMvc();
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<AppDBContext>();
+
 
             services.AddControllersWithViews(
                 config => 
@@ -42,7 +46,16 @@ namespace BookStore
                 }
                 ).AddXmlSerializerFormatters();
 
+
             services.AddRazorPages();
+
+            //Added Policy for Claim types
+            services.AddAuthorization(options => options.AddPolicy("DeleteRolePolicy", policy => policy.RequireClaim("Delete Role")));
+
+
+            //Added Policy for Roles
+            //services.AddAuthorization(options => options.AddPolicy("AdminRolePolicy", policy => policy.RequireRole("Admin")));
+
             //services.AddSingleton<IBookStore, BookStoreRepository>();
             services.AddScoped<IBookStore, SQLBooksRepository>();
 
