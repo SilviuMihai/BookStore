@@ -50,12 +50,12 @@ namespace BookStore
             services.AddRazorPages();
 
             //Added Policy for Claim types
-            services.AddAuthorization(options => options.AddPolicy("DeleteRolePolicy", policy => policy.RequireClaim("Delete Role")));
+            services.AddAuthorization(options => options.AddPolicy("DeleteRolePolicy", policy => policy.RequireClaim("Delete Role","true"))); // here added the second parameter, that checks if the value is set on true (case sensitive)
 
 
-            //Added Policy for Roles
+            // (*) Added Policy for Roles 
             //services.AddAuthorization(options => options.AddPolicy("AdminRolePolicy", policy => policy.RequireRole("Admin")));
-
+            // (*)
             //services.AddSingleton<IBookStore, BookStoreRepository>();
             services.AddScoped<IBookStore, SQLBooksRepository>();
 

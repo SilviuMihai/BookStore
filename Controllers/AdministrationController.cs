@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
-    [Authorize(Roles = "Manager,Admin,Operators")]
+    [Authorize(Roles = "Admin")]
 
-    //[Authorize(Policy ="AdminRolePolicy")]
+    //(*)[Authorize(Policy ="AdminRolePolicy")](*)
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -347,12 +347,16 @@ namespace BookStore.Controllers
                 //userDataBaseClaims contains all the Claims that were gathered "var userDataBaseClaims = await userManager.GetClaimsAsync(user);"
                 //comparing if it has that Type.
                 //populating IsSelected with True
-                if (userDataBaseClaims.Any(c => c.Type == userClaim.ClaimType))
-                {
-                    userClaim.IsSelected = true;
-                }
-                //Add all the ClaimTypes and IsSelected to the ViewModel(UserClaimsViewModels()), so that can be displayed on the View
-                model.Claims.Add(userClaim);
+                //if (userDataBaseClaims.Any(c => c.Type == userClaim.ClaimType))
+                // {
+                //    userClaim.IsSelected = true;
+                //}
+                if (userDataBaseClaims.Any(c => c.Type == userClaim.ClaimType && c.Value == "true")) //(added value in post)
+                    {
+                        userClaim.IsSelected = true;
+                    }
+                    //Add all the ClaimTypes and IsSelected to the ViewModel(UserClaimsViewModels()), so that can be displayed on the View
+                    model.Claims.Add(userClaim);
             }
             return View(model);
         }
@@ -382,7 +386,10 @@ namespace BookStore.Controllers
             //Here it checks for what is selected on the view, to add the claims to the user
             //I want to add just only what is selected, this is the reason that I use Where and Select.
             //("Where" returns Ienumarable of UserClaim and we need to return Ienumarable of Claim object(because of AddClaimAsync), this is the reason is put Select function, because return Ienumerable of Claim object)
-            result = await userManager.AddClaimsAsync(user, model.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
+            //result = await userManager.AddClaimsAsync(user, model.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
+
+
+            result = await userManager.AddClaimsAsync(user, model.Claims.Select(c => new Claim(c.ClaimType, c.IsSelected ? "true" : "false")));
 
             if (!result.Succeeded)
             {
@@ -428,7 +435,7 @@ namespace BookStore.Controllers
                 Email = user.Email,
                 Age = user.Age,
                 Roles = userGetRoles,
-                Claims = userGetClaims.Select(c => c.Value).ToList()
+                Claims = userGetClaims.Select(c => c.Type).ToList()
             };
 
 
