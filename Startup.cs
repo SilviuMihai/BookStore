@@ -29,11 +29,15 @@ namespace BookStore
         {
 
             services.AddDbContextPool<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BooksDBConnection")));
-            
+
             //services.AddMvc();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddEntityFrameworkStores<AppDBContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>
+                (
+                options => options.SignIn.RequireConfirmedEmail = true // to use confirmation email
+                )
+                    .AddEntityFrameworkStores<AppDBContext>()
+                    .AddDefaultTokenProviders();
 
 
             services.AddControllersWithViews(

@@ -52,12 +52,20 @@ namespace BookStore.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> LogIn(LoginViewModels loginViewModels)
+        public async Task<IActionResult> LogIn(LoginViewModels model)
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(loginViewModels.Email, loginViewModels.Password,
-                    isPersistent: loginViewModels.RememberMe, lockoutOnFailure: false);
+                var userEmail = await userManager.FindByEmailAsync(model.Email);
+
+                if (userEmail != null && !userEmail.EmailConfirmed && (await userManager.CheckPasswordAsync(userEmail,model.Password)))
+                {
+                    ModelState.AddModelError(string.Empty, "Email not confirmed yet !");
+                    return View(model);
+                }
+
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,
+                    isPersistent: model.RememberMe, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
@@ -67,7 +75,7 @@ namespace BookStore.Controllers
 
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt !"); // add errors to ModelState, to list the problems regarding the registration
             }
-            return View(loginViewModels);
+            return View(model);
         }
 
         [HttpPost]
@@ -85,21 +93,32 @@ namespace BookStore.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> RegisterUser(RegisterUserViewModel registerUserViewModel)
+        public async Task<IActionResult> RegisterUser(RegisterUserViewModel model)
         {
             if (ModelState.IsValid) // checks the fields, when the user adds all the details (like password,username) also checks if they are empty(thats why we have data annotations added in view models or models)
             {
                 //IdentityUser is very configurable and the developer can overwrite some commands.
-                var user = new ApplicationUser() { Email = registerUserViewModel.Email, UserName = registerUserViewModel.Email }; // to add the user to the database
-                var result = await userManager.CreateAsync(user, registerUserViewModel.Password); // create the user and the password hashed to the database
+                var user = new ApplicationUser() { Email = model.Email, UserName = model.Email }; // to add the user to the database
+                var result = await userManager.CreateAsync(user, model.Password); // create the user and the password hashed to the database
                 if (result.Succeeded)
                 {
-                    if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token }, Request.Scheme);
+
+
+                    if (signInManager.IsSignedIn(User) && User.IsInRole("Admin")) // in case an Admin creates a user
                     {
-                        return RedirectToAction("ListUsers", "Account");
+                        return RedirectToAction("ListUsers", "Administration"); //returns to the listusers
                     }
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("index", "home"); // if succeeded, returns the user to the index
+                    //await signInManager.SignInAsync(user, isPersistent: false);
+                    //return RedirectToAction("index", "home"); // if succeeded, returns the user to the index
+
+                    ViewBag.ErrorTitle = "Registration Successfull";
+                    ViewBag.ErrorMessage = "Before you can Login, please confirm your " +
+                        "email, by clicking on the confirmation link, that we have emailed you.";
+                    return View("Error");
                 }
                 //In case the Registration fails
                 foreach (var error in result.Errors)
@@ -107,7 +126,35 @@ namespace BookStore.Controllers
                     ModelState.AddModelError("", error.Description); // add errors to ModelState, to list the problems regarding the registration
                 }
             }
-            return View(registerUserViewModel);
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var user = await userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with the respective ID:{userId} cannot be found.";
+                return View("NotFound");
+            }
+
+            var result = await userManager.ConfirmEmailAsync(user, token);
+
+            if (result.Succeeded)
+            {
+                return View(); //return the view ConfirmEmail
+            }
+
+            ViewBag.ErrorTitle = "Email cannot be confirmed !";
+            return View("Error");
         }
     }
 }
