@@ -34,7 +34,7 @@ namespace BookStore
 
             services.AddIdentity<ApplicationUser, IdentityRole>
                 (
-                //options => options.SignIn.RequireConfirmedEmail = true // to use confirmation email
+                options => options.SignIn.RequireConfirmedEmail = true // to use confirmation email
                 )
                     .AddEntityFrameworkStores<AppDBContext>()
                     .AddDefaultTokenProviders();

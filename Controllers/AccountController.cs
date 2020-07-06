@@ -56,13 +56,13 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var userEmail = await userManager.FindByEmailAsync(model.Email);
+                var userEmail = await userManager.FindByEmailAsync(model.Email);
 
-                //if (userEmail != null && !userEmail.EmailConfirmed && (await userManager.CheckPasswordAsync(userEmail,model.Password)))
-                //{
-                    //ModelState.AddModelError(string.Empty, "Email not confirmed yet !");
-                    //return View(model);
-                //}
+                if (userEmail != null && !userEmail.EmailConfirmed && (await userManager.CheckPasswordAsync(userEmail, model.Password)))
+                {
+                    ModelState.AddModelError(string.Empty, "Email not confirmed yet !");
+                    return View(model);
+                }
 
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,
                     isPersistent: model.RememberMe, lockoutOnFailure: false);
@@ -103,22 +103,26 @@ namespace BookStore.Controllers
                 if (result.Succeeded)
                 {
 
-                    //var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    //var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token }, Request.Scheme);
+                    var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token }, Request.Scheme);
+
+                    // WriteAllText creates a file, writes the specified string to the file,
+                    // and then closes the file.    You do NOT need to call Flush() or Close().
+                    System.IO.File.WriteAllText(@"C:\Users\Silviu Mihai\Documents\CsharpTokenUsers\TokenUsers.txt", confirmationLink);
 
 
                     if (signInManager.IsSignedIn(User) && User.IsInRole("Admin")) // in case an Admin creates a user
                     {
                         return RedirectToAction("ListUsers", "Administration"); //returns to the listusers
                     }
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("index", "home"); // if succeeded, returns the user to the index
+                    //await signInManager.SignInAsync(user, isPersistent: false);
+                    //return RedirectToAction("index", "home"); // if succeeded, returns the user to the index
 
-                    //ViewBag.ErrorTitle = "Registration Successfull";
-                    //ViewBag.ErrorMessage = "Before you can Login, please confirm your " +
-                    //    "email, by clicking on the confirmation link, that we have emailed you.";
-                   // return View("Error");
+                    ViewBag.ErrorTitle = "Registration Successfull";
+                    ViewBag.ErrorMessage = "Before you can Login, please confirm your " +
+                        "email, by clicking on the confirmation link, that we have emailed you.";
+                    return View("Error");
                 }
                 //In case the Registration fails
                 foreach (var error in result.Errors)
@@ -155,6 +159,23 @@ namespace BookStore.Controllers
 
             ViewBag.ErrorTitle = "Email cannot be confirmed !";
             return View("Error");
+        }
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModels model)
+        {
+            var email = await userManager.FindByEmailAsync(model.Email);
+
+            if (email == null)
+            {
+                ViewBag.ErrorMessage = $"Email:{model.Email} cannot be found.";
+                return View("NotFound");
+            }
         }
     }
 }
