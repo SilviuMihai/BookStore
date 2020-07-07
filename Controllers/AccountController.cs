@@ -161,21 +161,73 @@ namespace BookStore.Controllers
             return View("Error");
         }
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModels model)
         {
-            var email = await userManager.FindByEmailAsync(model.Email);
-
-            if (email == null)
+            if (ModelState.IsValid)
             {
-                ViewBag.ErrorMessage = $"Email:{model.Email} cannot be found.";
-                return View("NotFound");
+                var user = await userManager.FindByEmailAsync(model.Email);
+
+                if (user != null && await userManager.IsEmailConfirmedAsync(user))
+                {
+                    var token = await userManager.GeneratePasswordResetTokenAsync(user);
+
+                    var passwordResetLink = Url.Action("ResetPassword", "Account", new { email = user.Email, token = token }, Request.Scheme);
+
+                    // WriteAllText creates a file, writes the specified string to the file,
+                    // and then closes the file.    You do NOT need to call Flush() or Close().
+                    System.IO.File.WriteAllText(@"C:\Users\Silviu Mihai\Documents\CsharpTokenUsers\TokenResetUsers.txt", passwordResetLink);
+
+                    return View("ForgotPasswordConfirmation");
+                }
+                return View("ForgotPasswordConfirmation");
             }
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string email, string token)
+        {
+            if (email == null || token == null)
+            {
+                ModelState.AddModelError("", "Invalid password reset token !");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModels model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    var result = await userManager.ResetPasswordAsync(user, model.Token, model.ConfirmPassword);
+
+                    if (result.Succeeded)
+                    {
+                        return View("ResetPasswordConfirmation");
+                    }
+                    foreach (var error in result.Errors) //in case there are errors on the input
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(model); // this will re-render the page, but with the issues that are on the input
+                }
+                return View("ResetPasswordConfirmation");
+            }
+            return View(model);
         }
     }
 }
