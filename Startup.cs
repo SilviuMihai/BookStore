@@ -39,6 +39,9 @@ namespace BookStore
                     .AddEntityFrameworkStores<AppDBContext>()
                     .AddDefaultTokenProviders();
 
+            //set the token lifespan to 5 hours
+            services.Configure<DataProtectionTokenProviderOptions>(o => o.TokenLifespan = TimeSpan.FromHours(5));
+
 
             services.AddControllersWithViews(
                 config => 

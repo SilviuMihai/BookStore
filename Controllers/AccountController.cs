@@ -60,6 +60,13 @@ namespace BookStore.Controllers
 
                 if (userEmail != null && !userEmail.EmailConfirmed && (await userManager.CheckPasswordAsync(userEmail, model.Password)))
                 {
+                    //In case I want to make the old users to be true, that have no token confirmation yet
+                    //var token = await userManager.GenerateEmailConfirmationTokenAsync(userEmail);
+
+                    //var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = userEmail.Id, token = token }, Request.Scheme);
+                    //// WriteAllText creates a file, writes the specified string to the file,
+                    //// and then closes the file.    You do NOT need to call Flush() or Close().
+                    //System.IO.File.WriteAllText(@"C:\Users\Silviu Mihai\Documents\CsharpTokenUsers\TokenUsers.txt", confirmationLink);
                     ModelState.AddModelError(string.Empty, "Email not confirmed yet !");
                     return View(model);
                 }
@@ -229,5 +236,43 @@ namespace BookStore.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();        
+        }
+
+        public async Task<IActionResult>ChangePassword(ChangePasswordViewModels model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.GetUserAsync(User);
+
+                if (user == null)
+                {
+                    return RedirectToAction("LogIn", "Account");
+                }
+
+                var password = await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.ConfirmPassword);
+
+                if (!password.Succeeded)
+                {
+                    foreach (var errors in password.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, errors.Description);
+                    }
+                    return View();
+                }
+                await signInManager.RefreshSignInAsync(user);
+                return View("ConfirmationChangePassword");
+            }
+            return View(model);
+        }
     }
 }
+/*
+ Notes:
+ Default Life span of a token is 1 day
+
+*/
