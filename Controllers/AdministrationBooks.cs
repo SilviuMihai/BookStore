@@ -1,6 +1,5 @@
 ﻿using BookStore.Models;
 using BookStore.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,27 +8,21 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
-    public class HomeController : Controller
+    public class AdministrationBooks:Controller
     {
         private readonly IBookStore _bookStore;
-        public HomeController(IBookStore bookStore)
+
+        public AdministrationBooks(IBookStore bookStore)
         {
             _bookStore = bookStore;
         }
-        [AllowAnonymous]
+
         [HttpGet]
-       public ViewResult Index()
-        {
-            return View();
-        }
-        [HttpGet]
-        [AllowAnonymous]
-        public ViewResult DisplayBooks() 
+        public ViewResult ListBooks()
         {
             HomeViewModels model = new HomeViewModels();
             model.BooksDisplayedInStore = _bookStore.GetBooks();
             return View(model);
         }
-  
     }
 }

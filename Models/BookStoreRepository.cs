@@ -7,11 +7,9 @@ namespace BookStore.Models
 {
     public class BookStoreRepository : IBookStore
     {
-        private readonly BookStoreTime _book;
         private readonly List<BooksDisplayed> _getBooks;
         public BookStoreRepository()
-        {
-            _book = new BookStoreTime() { GetDate = DateTime.Now.ToShortDateString(), GetTime = DateTime.Now.ToShortTimeString() };
+        { 
             _getBooks = new List<BooksDisplayed>()
             {
             new BooksDisplayed(){Id=1 ,BookGenre="Comedy",BooksInStore="Bossypants" },
@@ -32,11 +30,6 @@ namespace BookStore.Models
         public IEnumerable<BooksDisplayed> GetBooks()
         {
             return _getBooks;
-        }
-
-        public BookStoreTime GetDateandTime()
-        {
-            return _book;
         }
     }
 }

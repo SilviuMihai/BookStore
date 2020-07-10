@@ -8,7 +8,6 @@ namespace BookStore.ViewModels
 {
     public class HomeViewModels
     {
-        public BookStoreTime GetBookStoreTime { get; set; }
         public IEnumerable<BooksDisplayed> BooksDisplayedInStore { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace BookStore.Models
         public string BooksInStore { get; set; }
         public int Id { get; set; }
         public string BookGenre { get; set; }
+        public int Price { get; set; }
     }
 }

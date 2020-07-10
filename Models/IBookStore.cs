@@ -7,7 +7,6 @@ namespace BookStore.Models
 {
   public  interface IBookStore
     {
-        BookStoreTime GetDateandTime();
         IEnumerable<BooksDisplayed>GetBooks();
     }
 }
