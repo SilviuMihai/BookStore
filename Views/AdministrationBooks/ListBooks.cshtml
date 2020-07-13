@@ -1,10 +1,8 @@
 ﻿@model HomeViewModels
 
-
 @{
     ViewBag.Title = "Edit Books";
 }
-
 
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/.css">
@@ -20,7 +18,7 @@
                    <div> 
                         <p>@books.BooksInStore</p>
                         <p>@books.Price</p>
-                        <a asp-controller="AdministrationBooks" asp-action="ListBooks" asp-route-id="@books.Id">Edit Book</a>
+                        <a asp-controller="AdministrationBooks" asp-action="EditBooks" asp-route-id="@books.Id">Edit Book</a>
                    </div>
                 }
             }
@@ -34,7 +32,7 @@
                      <div>
                          <p>@books.BooksInStore</p>
                          <p>@books.Price</p>
-                         <a asp-controller="AdministrationBooks" asp-action="ListBooks" asp-route-id="@books.Id">Edit Book</a>
+                         <a asp-controller="AdministrationBooks" asp-action="EditBooks" asp-route-id="@books.Id">Edit Book</a>
                      </div>
                 }
             }
@@ -48,7 +46,7 @@
                     <div>
                         <p>@books.BooksInStore</p>
                         <p>@books.Price</p>
-                        <a asp-controller="AdministrationBooks" asp-action="ListBooks" asp-route-id="@books.Id">Edit Book</a>
+                        <a asp-controller="AdministrationBooks" asp-action="EditBooks" asp-route-id="@books.Id">Edit Book</a>
                     </div>
                 }
             }
@@ -62,7 +60,7 @@
                      <div>
                          <p>@books.BooksInStore</p>
                          <p>@books.Price</p>
-                         <a asp-controller="AdministrationBooks" asp-action="ListBooks" asp-route-id="@books.Id">Edit Book</a>
+                         <a asp-controller="AdministrationBooks" asp-action="EditBooks" asp-route-id="@books.Id">Edit Book</a>
                      </div>
                 }
             }

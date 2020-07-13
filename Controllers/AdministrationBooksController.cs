@@ -1,5 +1,6 @@
 ﻿using BookStore.Models;
 using BookStore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
-    public class AdministrationBooks:Controller
+    [Authorize(Roles = "Admin")]
+    public class AdministrationBooksController:Controller
     {
         private readonly IBookStore _bookStore;
 
-        public AdministrationBooks(IBookStore bookStore)
+        public AdministrationBooksController(IBookStore bookStore)
         {
             _bookStore = bookStore;
         }
@@ -24,5 +26,11 @@ namespace BookStore.Controllers
             model.BooksDisplayedInStore = _bookStore.GetBooks();
             return View(model);
         }
+
+        //[HttpGet]
+        //public ViewResult EditBook(int id)
+        //{ 
+            
+        //}
     }
 }

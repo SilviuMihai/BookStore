@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookStore.Models
+namespace BookStore.ViewModels
 {
-    public class BooksDisplayed
+    public class EditBookViewModels
     {
-        public int Id { get; set; }
         public string BooksInStore { get; set; }
         public string BookGenre { get; set; }
         public int Price { get; set; }
