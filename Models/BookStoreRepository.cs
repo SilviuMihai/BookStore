@@ -27,9 +27,29 @@ namespace BookStore.Models
             };
         }
 
+        public BooksDisplayed AddBook(BooksDisplayed books)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BooksDisplayed DeleteBook(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<BooksDisplayed> GetBooks()
         {
             return _getBooks;
+        }
+
+        public BooksDisplayed GetSpecificBook(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BooksDisplayed UpdateBook(BooksDisplayed bookUpdate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

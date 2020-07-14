@@ -28,8 +28,14 @@ namespace BookStore.Controllers
         }
 
         //[HttpGet]
-        //public ViewResult EditBook(int id)
-        //{ 
+        //public ViewResult EditBook(int? id) //It is a short-cut way to write Nullable<int> "?"
+        //{
+        //    if (id == null)
+        //    {
+        //        ViewBag.ErrorMessage = $"Book with the respective ID:{id} cannot be found.";
+        //        return View("NotFound");
+        //    }
+
             
         //}
     }
