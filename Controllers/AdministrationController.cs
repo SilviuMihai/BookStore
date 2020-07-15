@@ -444,27 +444,27 @@ namespace BookStore.Controllers
 
         
         [HttpPost]
-        public async Task<IActionResult> EditUser(EditUserViewModels editUserViewModels)
+        public async Task<IActionResult> EditUser(EditUserViewModels model)
         {
-            var user = await userManager.FindByIdAsync(editUserViewModels.Id);
+            var user = await userManager.FindByIdAsync(model.Id);
 
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"User with the respective ID:{editUserViewModels.Id} cannot be found.";
+                ViewBag.ErrorMessage = $"User with the respective ID:{model.Id} cannot be found.";
                 return View("NotFound");
             }
             else
             {
                 if (ModelState.IsValid)
                 {
-                    user.SurName = editUserViewModels.FamilyName;
-                    user.Name = editUserViewModels.Name;
-                    user.Adress = editUserViewModels.Adress;
-                    user.PhoneNumber = editUserViewModels.PhoneNumber;
-                    user.City = editUserViewModels.City;
-                    user.Country = editUserViewModels.Country;
-                    user.Email = editUserViewModels.Email;
-                    user.Age = editUserViewModels.Age;
+                    user.SurName = model.FamilyName;
+                    user.Name = model.Name;
+                    user.Adress = model.Adress;
+                    user.PhoneNumber = model.PhoneNumber;
+                    user.City = model.City;
+                    user.Country = model.Country;
+                    user.Email = model.Email;
+                    user.Age = model.Age;
 
                     var result = await userManager.UpdateAsync(user);
 
@@ -478,7 +478,7 @@ namespace BookStore.Controllers
                     }
                 }
             }
-            return View(editUserViewModels);
+            return View(model);
         }
 
         

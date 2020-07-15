@@ -32,7 +32,7 @@ namespace BookStore.Models
             throw new NotImplementedException();
         }
 
-        public BooksDisplayed DeleteBook(int Id)
+        public BooksDisplayed DeleteBook(int? Id)
         {
             throw new NotImplementedException();
         }
@@ -42,7 +42,7 @@ namespace BookStore.Models
             return _getBooks;
         }
 
-        public BooksDisplayed GetSpecificBook(int Id)
+        public BooksDisplayed GetSpecificBook(int? Id)
         {
             throw new NotImplementedException();
         }

@@ -1,0 +1,41 @@
+﻿@model EditBookViewModels
+
+@{
+    ViewBag.Title = "Edit Book";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/editbook.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-area">
+            <form method="post" asp-controller="AdministrationBooks" asp-action="EditBook">
+                <h2>Edit Book</h2>
+                <input asp-for="Id" type="hidden" />
+                <br>
+                <label asp-for="BooksInStore">Book:</label>
+                <input asp-for="BooksInStore">
+                <span asp-validation-for="BooksInStore"></span>
+                <br>
+                <label asp-for="BookGenre">Genre of Book:</label>
+                <input asp-for="BookGenre" />
+                <span asp-validation-for="BookGenre"></span>
+                <br>
+                <label asp-for="StockOfBooks">Stock of Books:</label>
+                <input asp-for="StockOfBooks">
+                <span asp-validation-for="StockOfBooks"></span>
+                <br>
+                <label asp-for="Price">Price:</label>
+                <input asp-for="Price">
+                <span asp-validation-for="Price"></span>
+                <br>
+                <br>
+                <div asp-validation-summary="All"></div>
+                <button type="submit">Update</button>
+                <button><a asp-controller="Home" asp-action="Index">Cancel</a></button>
+                <button><a href="#">Delete</a></button>
+            </form>
+        </div>
+    </div>
+</body>

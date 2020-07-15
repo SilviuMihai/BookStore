@@ -21,7 +21,7 @@ namespace BookStore.Models
             return book;
         }
 
-        public BooksDisplayed DeleteBook(int Id)
+        public BooksDisplayed DeleteBook(int? Id)
         {
             BooksDisplayed book = _context.BooksInStore.Find(Id);
             if (book != null)
@@ -37,7 +37,7 @@ namespace BookStore.Models
             return _context.BooksInStore;
         }
 
-        public BooksDisplayed GetSpecificBook(int Id)
+        public BooksDisplayed GetSpecificBook(int? Id)
         {
             return _context.BooksInStore.Find(Id);
         }
