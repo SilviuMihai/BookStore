@@ -1,0 +1,38 @@
+﻿@model AddBookViewModels
+
+@{
+    ViewBag.Title = "Add Book";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/editbook.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-area">
+            <form method="post" asp-controller="AdministrationBooks" asp-action="AddBook">
+                <h2>Add Book</h2>
+                <label asp-for="BooksInStore">Book Name:</label>
+                <input asp-for="BooksInStore">
+                <span asp-validation-for="BooksInStore"></span>
+                <br>
+                <label asp-for="BookGenre">Genre of Book:</label>
+                <input asp-for="BookGenre" />
+                <span asp-validation-for="BookGenre"></span>
+                <br>
+                <label asp-for="StockOfBooks">Stock of Books:</label>
+                <input asp-for="StockOfBooks">
+                <span asp-validation-for="StockOfBooks"></span>
+                <br>
+                <label asp-for="Price">Price:</label>
+                <input asp-for="Price">
+                <span asp-validation-for="Price"></span>
+                <br>
+                <br>
+                <div asp-validation-summary="All"></div>
+                <button type="submit">Add Book</button>
+                <button><a asp-controller="Home" asp-action="Index">Cancel</a></button>
+            </form>
+        </div>
+    </div>
+</body>

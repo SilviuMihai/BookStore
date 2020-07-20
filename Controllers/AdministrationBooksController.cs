@@ -19,17 +19,21 @@ namespace BookStore.Controllers
             _bookStore = bookStore;
         }
 
+        //List all Books
         [HttpGet]
-        public ViewResult ListBooks()
+        public IActionResult ListBooks()
         {
             HomeViewModels model = new HomeViewModels();
             model.BooksDisplayedInStore = _bookStore.GetBooks();
+            //var model = _bookStore.GetBooks();
             return View(model);
         }
 
+        //Edit a Book
         [HttpGet]
-        public ViewResult EditBook(int? id) //It is a short-cut way to write Nullable<int> "?"
+        public IActionResult EditBook(int? id) //It is a short-cut way to write Nullable<int> "?"
         {
+            ViewBag.deleteBookId = id; // need the Id from the database, so I can add the option in the EditBook -View to delete the book
             if (id == null)
             {
                 ViewBag.ErrorMessage = $"Book with the respective ID:{id} cannot be found.";
@@ -56,8 +60,9 @@ namespace BookStore.Controllers
             return View(model);
         }
 
+        //Edit a book (set the changes)
         [HttpPost]
-        public ViewResult EditBook(EditBookViewModels model)
+        public IActionResult EditBook(EditBookViewModels model)
         {
             //Get the book from the database
             BooksDisplayed book = _bookStore.GetSpecificBook(model.Id);
@@ -74,10 +79,62 @@ namespace BookStore.Controllers
                 book.BookGenre = model.BookGenre;
                 book.StockOfBooks = model.StockOfBooks;
                 book.Price = model.Price;
-                book = _bookStore.UpdateBook(book);
+
+                _bookStore.UpdateBook(book);
             }
             return View(model);
             //how to check if the object has been updated in the database ?
         }
+
+        //Delete a book
+        [HttpPost]
+        public IActionResult DeleteBook(int? id)
+        {
+            //Get the book from the database
+            BooksDisplayed book = _bookStore.GetSpecificBook(id);
+            //Check for the book
+            if (book == null)
+            {
+                ViewBag.ErrorMessage = $"Book with the respective ID:{id} cannot be found.";
+                return View("NotFound");
+            }
+            _bookStore.DeleteBook(id);
+            return RedirectToAction("ListBooks","AdministrationBooks");
+        }
+
+        //Add a Book View
+        [HttpGet]
+        public IActionResult AddBook()
+        {
+            return View();
+        }
+
+
+        //Add a book, set action
+        [HttpPost]
+        public IActionResult AddBook(AddBookViewModels model)
+        {
+            if (ModelState.IsValid)
+            {
+                BooksDisplayed newBook = new BooksDisplayed()
+                {
+                    BooksInStore = model.BooksInStore,
+                    BookGenre = model.BookGenre,
+                    StockOfBooks = model.StockOfBooks,
+                    Price = model.Price
+                };
+                _bookStore.AddBook(newBook);
+                return RedirectToAction("ListBooks", "AdministrationBooks");
+            }
+            return View(model);
+        }
     }
 }
+
+
+/*
+ * Notes:
+ * Use binding to prevent overposting - example :https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/controller-methods-views?view=aspnetcore-3.1
+ * 
+ * ViewResult and IActionResult - there are big differences between the two functionalities
+ */

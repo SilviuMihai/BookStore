@@ -1,69 +1,151 @@
 ﻿@model HomeViewModels
+<!-- IEnumerable<BooksDisplayed> -->
 
 @{
-    ViewBag.Title = "Edit Books";
+    ViewBag.Title = "List Books";
 }
 
 <head>
-    <link rel="stylesheet" type="text/css" href="~/css/.css">
+    <link rel="stylesheet" type="text/css" href="~/css/listsbooks.css">
 </head>
 <body>
     <div class="container">
-        <div class="comedy">
-            <h3>Comedy</h3>
-            @foreach (var books in Model.BooksDisplayedInStore)
+        <div class="main-area">
+            @if (Model.BooksDisplayedInStore.Any())
             {
-                @if (books.BookGenre == "Comedy")
-                {                   
-                   <div> 
-                        <p>@books.BooksInStore</p>
-                        <p>@books.Price</p>
-                        <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.Id">Edit Book</a>
-                   </div>
-                }
+                <div class="comedy">
+                    <h3>Comedy</h3>
+                    @foreach (var books in Model.BooksDisplayedInStore)
+                    {
+                        @if (books.BookGenre == "Comedy")
+                        {
+                            <div>
+                                <p>@books.BooksInStore</p>
+                                <p>@books.Price</p>
+                                <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.Id">Edit Book</a>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="drama">
+                    <h3>Drama</h3>
+                    @foreach (var books in Model.BooksDisplayedInStore)
+                    {
+                        @if (books.BookGenre == "Drama")
+                        {
+                            <div>
+                                <p>@books.BooksInStore</p>
+                                <p>@books.Price</p>
+                                <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.Id">Edit Book</a>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="science-fiction">
+                    <h3>Science-Fiction</h3>
+                    @foreach (var books in Model.BooksDisplayedInStore)
+                    {
+                        @if (books.BookGenre == "Science-Fiction")
+                        {
+                            <div>
+                                <p>@books.BooksInStore</p>
+                                <p>@books.Price</p>
+                                <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.Id">Edit Book</a>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="nature-science">
+                    <h3>Nature-Science</h3>
+                    @foreach (var books in Model.BooksDisplayedInStore)
+                    {
+                        @if (books.BookGenre == "Nature-Science")
+                        {
+                            <div>
+                                <p>@books.BooksInStore</p>
+                                <p>@books.Price</p>
+                                <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.Id">Edit Book</a>
+                            </div>
+                        }
+                    }
+
+                </div>
             }
-        </div>
-        <div class="drama">
-            <h3>Drama</h3>
-            @foreach (var books in Model.BooksDisplayedInStore)
+            else
             {
-                @if (books.BookGenre == "Drama")
-                {
-                     <div>
-                         <p>@books.BooksInStore</p>
-                         <p>@books.Price</p>
-                         <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.Id">Edit Book</a>
-                     </div>
-                }
-            }
-        </div>
-        <div class="science-fiction">
-            <h3>Science-Fiction</h3>
-            @foreach (var books in Model.BooksDisplayedInStore)
-            {
-                @if (books.BookGenre == "Science-Fiction")
-                {
-                    <div>
-                        <p>@books.BooksInStore</p>
-                        <p>@books.Price</p>
-                        <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.Id">Edit Book</a>
-                    </div>
-                }
-            }
-        </div>
-        <div class="nature-science">
-            <h3>Nature-Science</h3>
-            @foreach (var books in Model.BooksDisplayedInStore)
-            {
-                @if (books.BookGenre == "Nature-Science")
-                {
-                     <div>
-                         <p>@books.BooksInStore</p>
-                         <p>@books.Price</p>
-                         <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.Id">Edit Book</a>
-                     </div>
-                }
+                <p>There are no Books in the Book Store !</p>
             }
         </div>
     </div>
 </body>
+    
+<!--
+<body>
+    <div class="container">
+        if (Model.Any())
+        {
+            <div class="comedy">
+                <h3>Comedy</h3>
+                foreach (var books in Model)
+                {
+                    if (books.BookGenre == "Comedy")
+                    {
+                        <div>
+                            <p>books.BooksInStore</p>
+                            <p>books.Price</p>
+                            <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="books.Id">Edit Book</a>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="drama">
+                <h3>Drama</h3>
+                foreach (var books in Model)
+                {
+                    if (books.BookGenre == "Drama")
+                    {
+                        <div>
+                            <p>books.BooksInStore</p>
+                            <p>books.Price</p>
+                            <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="books.Id">Edit Book</a>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="science-fiction">
+                <h3>Science-Fiction</h3>
+                foreach (var books in Model)
+                {
+                    if (books.BookGenre == "Science-Fiction")
+                    {
+                        <div>
+                            <p>books.BooksInStore</p>
+                            <p>books.Price</p>
+                            <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="books.Id">Edit Book</a>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="nature-science">
+                <h3>Nature-Science</h3>
+                foreach (var books in Model)
+                {
+                    if (books.BookGenre == "Nature-Science")
+                    {
+                        <div>
+                            <p>books.BooksInStore</p>
+                            <p>books.Price</p>
+                            <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="books.Id">Edit Book</a>
+                        </div>
+                    }
+                }
+
+            </div>
+        }
+        else
+        {
+            <p>There are no Books in the Book Store !</p>
+        }
+    </div>
+</body>
+-->
