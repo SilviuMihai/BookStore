@@ -47,6 +47,11 @@ namespace BookStore.Models
             throw new NotImplementedException();
         }
 
+        public IEnumerable<BooksDisplayed> SearchBook(string searchBook)
+        {
+            throw new NotImplementedException();
+        }
+
         public BooksDisplayed UpdateBook(BooksDisplayed bookUpdate)
         {
             throw new NotImplementedException();

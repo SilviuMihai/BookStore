@@ -10,6 +10,21 @@
 </head>
 <body>
     <div class="container">
+        <div class="searchbook">
+            <form method="get" asp-controller="Home" asp-action="DisplayBooks">
+                <p>
+                    Book Name: <input asp-for="SearchBook" placeholder="Type a book !" />
+                    <input type="submit" value="Search" />
+                </p>
+            </form>
+            @if (Model.SearchBook != null)
+            {
+                @foreach (var book in Model.BooksSearched)
+                {
+                    <p>@book.BooksInStore</p>
+                }
+             }
+        </div>
         <div class="comedy">
             <h3>Comedy</h3>
             @foreach (var books in Model.BooksDisplayedInStore)

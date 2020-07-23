@@ -49,5 +49,16 @@ namespace BookStore.Models
             _context.SaveChanges();
             return bookUpdate;
         }
+
+        public IEnumerable<BooksDisplayed> SearchBook(string searchBook)
+        {
+            var books = from b in _context.BooksInStore select b;
+            if (!String.IsNullOrEmpty(searchBook))
+            {
+                books = books.Where(s => s.BooksInStore.Contains(searchBook));
+            }
+
+            return books;
+        }
     }
 }

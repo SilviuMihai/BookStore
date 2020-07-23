@@ -12,6 +12,7 @@ namespace BookStore.Models
         BooksDisplayed AddBook(BooksDisplayed book);
         BooksDisplayed UpdateBook(BooksDisplayed bookUpdate);
         BooksDisplayed DeleteBook(int? Id);
+        IEnumerable<BooksDisplayed> SearchBook(string searchBook);
 
     }
 }

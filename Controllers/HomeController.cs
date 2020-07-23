@@ -22,14 +22,17 @@ namespace BookStore.Controllers
         {
             return View();
         }
+
+        //This View has two functionalities:
+        //1. Display All Books
+        //2.Search a book, by the name
         [HttpGet]
         [AllowAnonymous]
-        public ViewResult DisplayBooks() 
+        public ViewResult DisplayBooks(HomeViewModels model) 
         {
-            HomeViewModels model = new HomeViewModels();
             model.BooksDisplayedInStore = _bookStore.GetBooks();
+            model.BooksSearched = _bookStore.SearchBook(model.SearchBook);
             return View(model);
         }
-  
     }
 }
