@@ -51,7 +51,7 @@ namespace BookStore.Controllers
 
             EditBookViewModels model = new EditBookViewModels()
             {
-                Id = book.Id,
+                Id = book.BookId,
                 BooksInStore = book.BooksInStore,
                 BookGenre = book.BookGenre,
                 Price = book.Price,
@@ -83,7 +83,6 @@ namespace BookStore.Controllers
                 _bookStore.UpdateBook(book);
             }
             return View(model);
-            //how to check if the object has been updated in the database ?
         }
 
         //Delete a book

@@ -22,6 +22,10 @@
     grid-area: sb;
     background-color: darkgray;
 }
+.statusbooks {
+    grid-area: stb;
+    background-color: darkgray;
+}
 
 body {
     margin: 10px;
@@ -30,7 +34,7 @@ body {
 
 /* CSS Design !!! */
 
-.top-area, .comedy, .drama, .science-fiction, .nature-science, .footer-area, .searchbook {
+.top-area, .comedy, .drama, .science-fiction, .nature-science, .footer-area, .searchbook, .statusbooks {
     border-radius: 15px;
     padding: 5px;
 }
@@ -108,10 +112,11 @@ body {
 /* Grid Layout !!! (Structure of the grid)*/
 .container {
     display: grid;
-    grid-template-areas:
-        "sb sb sb sb sb sb sb sb"
+    grid-template-areas: 
+        "sb sb sb sb sb sb sb sb" 
+        "stb stb stb stb stb stb stb stb"
         "c c s s n n d d" 
-        "c c s s n n d d" 
+        "c c s s n n d d"
         "c c s s n n d d" 
         "c c s s n n d d" 
         "c c s s n n d d";
@@ -125,10 +130,11 @@ body {
     .container {
         display: grid;
         grid-template-areas: 
-            "sb sb sb sb sb sb sb sb"
-            "c c c c c c c c"
-            "s s s s s s s s"
-            "n n n n n n n n"
+            "sb sb sb sb sb sb sb sb" 
+            "stb stb stb stb stb stb stb stb" 
+            "c c c c c c c c" 
+            "s s s s s s s s" 
+            "n n n n n n n n" 
             "d d d d d d d d";
         padding: 0px 10px;
         grid-gap: 10px;

@@ -1,0 +1,32 @@
+﻿@model BookToBuyViewModels
+
+@{
+    ViewBag.Title = "Add Book In Cart !";
+    var userId = ViewBag.userId;
+    var bookId = ViewBag.bookId;
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/bookincart.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-area">
+            <form method="post" asp-controller="Home" asp-action="AddBookInBag">
+                <input asp-for="UserId" type="hidden" />
+                <input asp-for="BookId" type="hidden" />
+                <input asp-for="BooksToBuy" type="hidden" />
+                <p>Email: @Model.Email</p>
+                <p>Price: @Model.Price</p>
+                <p>Book Genre: @Model.BookGenre</p>
+                <p>Your Book: @Model.BooksToBuy</p>
+                <p>Stock for this Book:@Model.StockOfBook (we recommand to buy less books, that are in the stock or contact us for more info)</p>
+                <label asp-for="BooksOrdered">How many books do you want:</label>
+                <input asp-for="BooksOrdered" />
+                <span asp-validation-for="BooksOrdered"></span>
+                <button type="submit">Add to Cart</button>
+            </form>
+            <button><a asp-controller="Home" asp-action="DisplayBooks">List of Books</a></button>
+            <button><a href="#" <!--asp-route-id="userId"-->>Finish Your Order</a></button>
+        </div>
+    </div>
+</body>

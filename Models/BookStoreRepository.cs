@@ -12,22 +12,27 @@ namespace BookStore.Models
         { 
             _getBooks = new List<BooksDisplayed>()
             {
-            new BooksDisplayed(){Id=1 ,BookGenre="Comedy",BooksInStore="Bossypants" },
-            new BooksDisplayed(){Id=2 ,BookGenre="Comedy",BooksInStore="Yes please" },
-            new BooksDisplayed(){Id=3 ,BookGenre="Comedy",BooksInStore="Me Talk Pretty One Day" },
-            new BooksDisplayed(){Id=1 ,BookGenre="Drama",BooksInStore="Hamlet" },
-            new BooksDisplayed(){Id=2 ,BookGenre="Drama",BooksInStore="Visul unei nopti de vara" },
-            new BooksDisplayed(){Id=3 ,BookGenre="Drama",BooksInStore="Vanatorii de zmeie" },
-            new BooksDisplayed(){Id=1 ,BookGenre="Science-Fiction",BooksInStore="Razboiul Lumilor" },
-            new BooksDisplayed(){Id=2 ,BookGenre="Science-Fiction",BooksInStore="Solaris" },
-            new BooksDisplayed(){Id=3 ,BookGenre="Science-Fiction",BooksInStore="The Left Hand of Darkness" },
-            new BooksDisplayed(){Id=1 ,BookGenre="Nature-Science",BooksInStore="Walden" },
-            new BooksDisplayed(){Id=2 ,BookGenre="Nature-Science",BooksInStore="Almanahul unui tinut de nisip" },
-            new BooksDisplayed(){Id=3 ,BookGenre="Nature-Science",BooksInStore="H is for Hawk" }
+            new BooksDisplayed(){BookId=1 ,BookGenre="Comedy",BooksInStore="Bossypants" },
+            new BooksDisplayed(){BookId=2 ,BookGenre="Comedy",BooksInStore="Yes please" },
+            new BooksDisplayed(){BookId=3 ,BookGenre="Comedy",BooksInStore="Me Talk Pretty One Day" },
+            new BooksDisplayed(){BookId=1 ,BookGenre="Drama",BooksInStore="Hamlet" },
+            new BooksDisplayed(){BookId=2 ,BookGenre="Drama",BooksInStore="Visul unei nopti de vara" },
+            new BooksDisplayed(){BookId=3 ,BookGenre="Drama",BooksInStore="Vanatorii de zmeie" },
+            new BooksDisplayed(){BookId=1 ,BookGenre="Science-Fiction",BooksInStore="Razboiul Lumilor" },
+            new BooksDisplayed(){BookId=2 ,BookGenre="Science-Fiction",BooksInStore="Solaris" },
+            new BooksDisplayed(){BookId=3 ,BookGenre="Science-Fiction",BooksInStore="The Left Hand of Darkness" },
+            new BooksDisplayed(){BookId=1 ,BookGenre="Nature-Science",BooksInStore="Walden" },
+            new BooksDisplayed(){BookId=2 ,BookGenre="Nature-Science",BooksInStore="Almanahul unui tinut de nisip" },
+            new BooksDisplayed(){BookId=3 ,BookGenre="Nature-Science",BooksInStore="H is for Hawk" }
             };
         }
 
         public BooksDisplayed AddBook(BooksDisplayed books)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserWithBooksDB AddBookToUser(UserWithBooksDB userWithBooksDB)
         {
             throw new NotImplementedException();
         }
@@ -40,6 +45,11 @@ namespace BookStore.Models
         public IEnumerable<BooksDisplayed> GetBooks()
         {
             return _getBooks;
+        }
+
+        public IEnumerable<UserWithBooksDB> GetBooksBySpecificUser()
+        {
+            throw new NotImplementedException();
         }
 
         public BooksDisplayed GetSpecificBook(int? Id)

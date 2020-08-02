@@ -11,6 +11,16 @@
     <Compile Remove="Migrations\20200515042547_Extend_IdentityUser_NewPropertiesAdded.Designer.cs" />
     <Compile Remove="Migrations\20200518040824_IdentityUser_PropertyAdded_Books.cs" />
     <Compile Remove="Migrations\20200518040824_IdentityUser_PropertyAdded_Books.Designer.cs" />
+    <Compile Remove="Migrations\20200727170248_UserWithBooks_DataBase.cs" />
+    <Compile Remove="Migrations\20200727170248_UserWithBooks_DataBase.Designer.cs" />
+    <Compile Remove="Migrations\20200731045511_Changed_Name_in_BookDisplayed_BookId.cs" />
+    <Compile Remove="Migrations\20200731045511_Changed_Name_in_BookDisplayed_BookId.Designer.cs" />
+    <Compile Remove="Migrations\20200731045820_ChangedName_in_BookDisplayed_BookId.cs" />
+    <Compile Remove="Migrations\20200731045820_ChangedName_in_BookDisplayed_BookId.Designer.cs" />
+    <Compile Remove="Migrations\20200731051217_Add_PK_To_BookDisplayed.cs" />
+    <Compile Remove="Migrations\20200731051217_Add_PK_To_BookDisplayed.Designer.cs" />
+    <Compile Remove="Migrations\20200731055947_Changes_In_UserWithBooksDB_New_PK.cs" />
+    <Compile Remove="Migrations\20200731055947_Changes_In_UserWithBooksDB_New_PK.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

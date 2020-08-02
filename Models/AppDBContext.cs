@@ -16,13 +16,34 @@ namespace BookStore.Models
         {
 
         }
-        //public DbSet<UserProfile> TheUsersProfile { get; set; }
+        //public DbSet<UserWithBooksDB> UserBooksConnectionDB { get; set; }
         public DbSet<BooksDisplayed> BooksInStore { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Seed();
+
+
+            modelBuilder.Entity<BooksDisplayed>().HasKey(c => new { c.BookId });
+
+            //modelBuilder.Entity<UserWithBooksDB>().HasKey(c => new { c.UserBooksId });
+
         }
     }
 }
+/*
+ * How to Revert a Database using Package Manager Console: 
+ * If you have problems in the database and want to be deleted, just revert to a known working database, by looking into migrations
+ * Example:
+ * Migration 1,2,3,4,5
+ * 4 and 5 failed in the database.
+ * 3 is a stable one.
+ * Steps:
+ * Update-Database 3 (now the database was revert it)
+ * Now Migrations can be removed
+ * Remove-Migration 5
+ * Remove-migration 4
+ * 
+ * This is good fix.
+ */

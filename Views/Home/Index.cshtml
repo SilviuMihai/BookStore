@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "BookStore Page";
- }
+}
 
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/index.css">
@@ -10,23 +10,22 @@
 <body>
     <div class="container">
         <div class="main-area">
-            Main Area
-            <h1>Imbogatesteti cunostiintele, alegand o carte !</h1>
+            <h1>Enrich your knowledge, by choosing a book !</h1>
             <ul class="style-list-main">
-                <li>Comedie</li>
+                <li>Comedy</li>
                 <li>Drama</li>
                 <li>Horror</li>
                 <li>Science Fiction</li>
-                <li>Stiintele naturii</li>
+                <li>Nature Science</li>
             </ul>
-            <div class="books-link"><p><a asp-controller="home" asp-action="DisplayBooks">Alege o carte !</a></p></div>
+            <div class="books-link"><p><a asp-controller="home" asp-action="DisplayBooks">Choose a book !</a></p></div>
             <form>
                 Introduce o carte pe care ai dorii sa o citesti:
                 <input type="text" name="introduceretext">
             </form>
         </div>
         <div class="aside-area">
-            <h2>Citate</h2>
+            <h2>Quotes</h2>
             <div class="container-aside-area">
                 <p>„Tocmai posibilitatea de a realiza un vis face viaţa interesantă.” („Alchimistul”, Paulo Coelho)</p>
                 <p>„Nu există mai mare agonie decât cea de a purta cu tine o poveste nespusă.” (I Know Where the Caged Bird Sings”, Maya Angelou)</p>
@@ -38,11 +37,11 @@
             </div>
         </div>
         <div class="nav-area">
-            <h2>Informatii</h2>
+            <h2>Informations</h2>
             <ul class="style-list">
                 <li><a asp-controller="Account" asp-action="RegisterUser">Create Account</a></li>
                 <li><a asp-controller="Account" asp-action="ChangePassword">Change Password</a></li>
-                <li>Profilul Tau</li>
+                <li><a asp-controller="UserDetails" asp-action="ShowUserDetails">Profile</a></li>
             </ul>
         </div>
     </div>

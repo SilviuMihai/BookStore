@@ -1,8 +1,7 @@
 ﻿@model HomeViewModels
 
-
-@{ 
-    ViewBag.Title= "Display Books";
+@{
+    ViewBag.Title = "Display Books";
 }
 
 <head>
@@ -23,15 +22,22 @@
                 {
                     <p>@book.BooksInStore</p>
                 }
-             }
+            }
+        </div>
+        <div class="statusbooks">          
+                <button><a href="#">Order the Books</a></button>
+                <!--books that were ordered-->
         </div>
         <div class="comedy">
             <h3>Comedy</h3>
-            @foreach (var books in Model.BooksDisplayedInStore)
+            @foreach(var books in Model.BooksDisplayedInStore)
             {
                 @if (books.BookGenre == "Comedy")
                 {
-                    <p>@books.BooksInStore</p>
+                     <div>
+                         <p>@books.BooksInStore</p>
+                         <a asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy/Details</a>
+                     </div>
                 }
             }
         </div>
@@ -41,7 +47,10 @@
             {
                 @if (books.BookGenre == "Drama")
                 {
-                    <p>@books.BooksInStore</p>
+                    <div>
+                        <p>@books.BooksInStore</p>
+                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-bookId="@books.BookId">Buy</a>
+                    </div>
                 }
             }
         </div>
@@ -51,7 +60,10 @@
             {
                 @if (books.BookGenre == "Science-Fiction")
                 {
-                    <p>@books.BooksInStore</p>
+                    <div>
+                        <p>@books.BooksInStore</p>
+                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-bookId="@books.BookId">Buy</a>
+                    </div>
                 }
             }
         </div>
@@ -61,7 +73,10 @@
             {
                 @if (books.BookGenre == "Nature-Science")
                 {
-                    <p>@books.BooksInStore</p>
+                    <div>
+                        <p>@books.BooksInStore</p>
+                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-bookId="@books.BookId">Buy</a>
+                    </div>
                 }
             }
         </div>

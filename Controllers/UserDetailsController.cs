@@ -27,15 +27,17 @@ namespace BookStore.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowUserDetails()
         {
-            //check if has the user values entered all the fields, if not redirect to CaptureDetails
-            //must return the values from the database in here
-            //example homecontroller
-            var userData = await userManager.GetUserAsync(HttpContext.User);
-            if (string.IsNullOrEmpty(userData.SurName) || string.IsNullOrEmpty(userData.Name) || string.IsNullOrEmpty(userData.PhoneNumber) ||
-                string.IsNullOrEmpty(userData.Adress) || ((userData.Age == 0) || (userData.City == 0) || (userData.Country == 0)))
+            if (signInManager.IsSignedIn(User))
             {
-                return RedirectToAction("CaptureUserDetails", "UserDetails");
-            }
+                //check if has the user values entered all the fields, if not redirect to CaptureDetails
+                //must return the values from the database in here
+                //example homecontroller
+                var userData = await userManager.GetUserAsync(HttpContext.User);
+                if (string.IsNullOrEmpty(userData.SurName) || string.IsNullOrEmpty(userData.Name) || string.IsNullOrEmpty(userData.PhoneNumber) ||
+                    string.IsNullOrEmpty(userData.Adress) || ((userData.Age == 0) || (userData.City == 0) || (userData.Country == 0)))
+                {
+                    return RedirectToAction("CaptureUserDetails", "UserDetails");
+                }
 
                 UserDetailsViewModels userDetailsViewModels = new UserDetailsViewModels()
                 {
@@ -50,7 +52,13 @@ namespace BookStore.Controllers
                     Adress = userData.Adress
                 };
 
-            return View(userDetailsViewModels);
+                return View(userDetailsViewModels);
+            }
+            else
+            {
+                RedirectToAction("LogIn", "Account");           
+            }
+            return View();
         }
 
 
