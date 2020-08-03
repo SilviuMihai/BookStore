@@ -16,7 +16,7 @@ namespace BookStore.Models
         {
 
         }
-        //public DbSet<UserWithBooksDB> UserBooksConnectionDB { get; set; }
+        public DbSet<UserWithBooksDB> UserBooksConnectionDB { get; set; }
         public DbSet<BooksDisplayed> BooksInStore { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace BookStore.Models
 
             modelBuilder.Entity<BooksDisplayed>().HasKey(c => new { c.BookId });
 
-            //modelBuilder.Entity<UserWithBooksDB>().HasKey(c => new { c.UserBooksId });
+            modelBuilder.Entity<UserWithBooksDB>().HasKey(c => new { c.UserBooksId });
 
         }
     }

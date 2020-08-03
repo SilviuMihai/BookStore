@@ -60,31 +60,11 @@ namespace BookStore.Models
 
             return books;
         }
-
         public UserWithBooksDB AddBookToUser(UserWithBooksDB userWithBooksDB)
         {
-            throw new NotImplementedException();
+            _context.UserBooksConnectionDB.Add(userWithBooksDB);
+            _context.SaveChanges();
+            return userWithBooksDB;
         }
-
-        public IEnumerable<UserWithBooksDB> GetBooksBySpecificUser()
-        {
-            throw new NotImplementedException();
-        }
-        //public UserWithBooksDB AddBookToUser(UserWithBooksDB userWithBooksDB)
-        //{
-        //    _context.UserBooksConnectionDB.Add(userWithBooksDB);
-        //    _context.SaveChanges();
-        //    return userWithBooksDB;
-        //}
-        //
-        //public IEnumerable<UserWithBooksDB> GetAllBooksBySpecificUser()
-        //{
-        //    return _context.UserBooksConnectionDB;
-        //}
-        //
-        //public IEnumerable<UserWithBooksDB> GetBooksBySpecificUser()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

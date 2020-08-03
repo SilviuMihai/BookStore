@@ -9,6 +9,7 @@ namespace BookStore.Models
 {
     public class UserWithBooksDB
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]  // to generate an ID(string) automatically
         [Key]
         public string UserBooksId { get; set; }
 
