@@ -1,0 +1,33 @@
+﻿@model OrderBooksViewModels
+
+@{
+    ViewBag.Title = "Order Books";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/orderedbooks.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-area">
+            <form method="post" asp-controller="Home">
+                @foreach (var userBooks in Model.UserBooksDB)
+                {
+                    @if (userBooks.NrBooksOrdered > 0)
+                    {
+                        <input asp-for="@userBooks.UserBooksId" type="hidden" />
+                        <input asp-for="@userBooks.UserId" type="hidden" />
+                        <input asp-for="@userBooks.BookId" type="hidden" />
+                        <p>Book: @userBooks.BookToBuy</p>
+                        <label asp-for="@userBooks.NrBooksOrdered">Number:</label>
+                        <input asp-for="@userBooks.NrBooksOrdered"/>
+                        <p>Total Price:@userBooks.TotalPriceBooks</p>
+                        <input type="submit" value="Delete Order" asp-action="DeleteBookOrdered" asp-controller="Home" asp-route-id="@userBooks.UserBooksId" />
+                        <input type="submit" value="Change Order" asp-action="OrderBooksX" asp-controller="Home" asp-route-id="@userBooks.UserBooksId" />
+                     }
+                 }
+            </form>
+            <button><a asp-controller="Home" asp-action="DisplayBooks">List of Books</a></button>
+            <button><a asp-controller="Home" asp-action="OrderBooks" >Order the Books</a></button>
+        </div>
+    </div>
+</body>

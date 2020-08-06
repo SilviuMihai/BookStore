@@ -36,6 +36,7 @@
                 {
                      <div>
                          <p>@books.BooksInStore</p>
+                         <p>@books.Price</p>
                          <a asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy/Details</a>
                      </div>
                 }
@@ -49,7 +50,8 @@
                 {
                     <div>
                         <p>@books.BooksInStore</p>
-                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-bookId="@books.BookId">Buy</a>
+                        <p>@books.Price</p>
+                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy</a>
                     </div>
                 }
             }
@@ -62,7 +64,8 @@
                 {
                     <div>
                         <p>@books.BooksInStore</p>
-                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-bookId="@books.BookId">Buy</a>
+                        <p>@books.Price</p>
+                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy</a>
                     </div>
                 }
             }
@@ -75,7 +78,8 @@
                 {
                     <div>
                         <p>@books.BooksInStore</p>
-                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-bookId="@books.BookId">Buy</a>
+                        <p>@books.Price</p>
+                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy</a>
                     </div>
                 }
             }

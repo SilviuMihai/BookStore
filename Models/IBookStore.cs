@@ -14,5 +14,9 @@ namespace BookStore.Models
         BooksDisplayed DeleteBook(int? Id);
         IEnumerable<BooksDisplayed> SearchBook(string searchBook);
         UserWithBooksDB AddBookToUser(UserWithBooksDB userWithBooksDB);
+        IEnumerable<UserWithBooksDB> GetUserSpecificBooks(string id);
+        UserWithBooksDB UpdateUserBook(string id);
+        public UserWithBooksDB DeleteUserBookOrder(string Id);
+        public UserWithBooksDB GetUserBookId(string Id);
     }
 }

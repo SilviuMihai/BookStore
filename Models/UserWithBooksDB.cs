@@ -20,5 +20,6 @@ namespace BookStore.Models
         public int BookId { get; set; }
         public string BookToBuy { get; set; }
         public int NrBooksOrdered { get; set; }
+        public int TotalPriceBooks { get; set; }
     }
 }

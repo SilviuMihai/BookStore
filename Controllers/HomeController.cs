@@ -41,7 +41,6 @@ namespace BookStore.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> AddBookInBag(int? id)
         {
@@ -99,7 +98,8 @@ namespace BookStore.Controllers
                     UserId = model.UserId,
                     BookId = model.BookId,
                     BookToBuy = model.BooksToBuy,
-                    NrBooksOrdered = model.BooksOrdered
+                    NrBooksOrdered = model.BooksOrdered,
+                    TotalPriceBooks = model.BooksOrdered * model.Price
                 };
                 if (model.BooksOrdered < book.StockOfBooks)
                 {
@@ -114,6 +114,61 @@ namespace BookStore.Controllers
                 }
             }
             return View(model);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> OrderBooks(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with the respective ID:{id} cannot be found.";
+                return View("NotFound");
+            }
+
+            OrderBooksViewModels orderedBooks = new OrderBooksViewModels()
+            {
+                UserBooksDB = _bookStore.GetUserSpecificBooks(user.Id)
+            };
+
+            return View(orderedBooks);
+        }
+
+        [HttpPost]
+        public IActionResult OrderBooksX(string id)
+        {
+            if (id == null)
+            {
+                ViewBag.ErrorMessage = $"Book with the respective ID:{id} cannot be found.";
+                return View("NotFound");
+            }
+
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult DeleteBookOrdered(string id)
+        {
+            if (signInManager.IsSignedIn(User))
+            {
+                //Get the book from the database
+                UserWithBooksDB userBook = _bookStore.GetUserBookId(id);
+                //Check for the book
+                if (userBook == null)
+                {
+                    ViewBag.ErrorMessage = $"User Book with the respective ID:{id} cannot be found.";
+                    return View("NotFound");
+                }
+                BooksDisplayed bookUpdate = _bookStore.GetSpecificBook(userBook.BookId);
+                bookUpdate.StockOfBooks = bookUpdate.StockOfBooks + userBook.NrBooksOrdered;
+                _bookStore.UpdateBook(bookUpdate);
+                _bookStore.DeleteUserBookOrder(id);
+                return RedirectToAction("OrderBooks", "Home",new { id=userBook.UserId});
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

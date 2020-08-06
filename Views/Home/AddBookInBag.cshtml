@@ -14,6 +14,7 @@
             <form method="post" asp-controller="Home" asp-action="AddBookInBag">
                 <input asp-for="UserId" type="hidden" />
                 <input asp-for="BookId" type="hidden" />
+                <input asp-for="Price" type="hidden" />
                 <input asp-for="BooksToBuy" type="hidden" />
                 <p>Email: @Model.Email</p>
                 <p>Price: @Model.Price</p>
@@ -26,7 +27,7 @@
                 <button type="submit">Add to Cart</button>
             </form>
             <button><a asp-controller="Home" asp-action="DisplayBooks">List of Books</a></button>
-            <button><a href="#" <!--asp-route-id="userId"-->>Finish Your Order</a></button>
+            <button><a asp-controller="Home" asp-action="OrderBooks" asp-route-id="@Model.UserId">Finish Your Order</a></button>
         </div>
     </div>
 </body>

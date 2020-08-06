@@ -66,5 +66,49 @@ namespace BookStore.Models
             _context.SaveChanges();
             return userWithBooksDB;
         }
+
+        public IEnumerable<UserWithBooksDB> GetUserSpecificBooks(string id)
+        {
+            IQueryable<UserWithBooksDB> userBooks = null;
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                userBooks = _context.UserBooksConnectionDB.Where(s => s.UserId == id);
+            }
+
+            var booksFromDb = userBooks.AsEnumerable();
+
+            return booksFromDb;
+        }
+
+        public UserWithBooksDB DeleteUserBookOrder(string Id)
+        {
+            UserWithBooksDB book = _context.UserBooksConnectionDB.Find(Id);
+            if (book != null)
+            {
+                _context.UserBooksConnectionDB.Remove(book);
+                _context.SaveChanges();
+            }
+            return book;
+        }
+
+        public UserWithBooksDB GetUserBookId(string Id)
+        {
+            return _context.UserBooksConnectionDB.Find(Id);
+        }
+
+        //public UserWithBooksDB UpdateUserBook(string id)
+        //{
+        //    var userBook = _context.UserBooksConnectionDB.Attach(bookUpdate);
+        //    book.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        //    _context.SaveChanges();
+        //    return bookUpdate;
+        //}
+        public UserWithBooksDB UpdateUserBook(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

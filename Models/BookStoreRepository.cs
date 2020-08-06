@@ -42,6 +42,11 @@ namespace BookStore.Models
             throw new NotImplementedException();
         }
 
+        public UserWithBooksDB DeleteUserBookOrder(string Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<BooksDisplayed> GetBooks()
         {
             return _getBooks;
@@ -57,12 +62,27 @@ namespace BookStore.Models
             throw new NotImplementedException();
         }
 
+        public UserWithBooksDB GetUserBookId(string Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<UserWithBooksDB> GetUserSpecificBooks(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<BooksDisplayed> SearchBook(string searchBook)
         {
             throw new NotImplementedException();
         }
 
         public BooksDisplayed UpdateBook(BooksDisplayed bookUpdate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserWithBooksDB UpdateUserBook(string id)
         {
             throw new NotImplementedException();
         }
