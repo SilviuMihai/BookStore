@@ -69,7 +69,7 @@ namespace BookStore.Controllers
             if (ModelState.IsValid)
             {
 
-                var addUserDetails = await userManager.GetUserAsync(HttpContext.User);   // cauta o noua modalitate de a gasi UserId ul utilizatorului                                                                              
+                var addUserDetails = await userManager.GetUserAsync(HttpContext.User);                                                                                
                                                                              
                 if (addUserDetails == null)
                 {

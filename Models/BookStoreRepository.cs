@@ -82,7 +82,7 @@ namespace BookStore.Models
             throw new NotImplementedException();
         }
 
-        public UserWithBooksDB UpdateUserBook(string id)
+        public UserWithBooksDB UpdateUserBook(UserWithBooksDB model)
         {
             throw new NotImplementedException();
         }

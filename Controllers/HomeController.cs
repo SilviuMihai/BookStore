@@ -34,10 +34,17 @@ namespace BookStore.Controllers
         //2. Search a book, by the name
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult DisplayBooks(HomeViewModels model) 
+        public async Task<IActionResult> DisplayBooks(HomeViewModels model) 
         {
             model.BooksDisplayedInStore = _bookStore.GetBooks(); //display books
             model.BooksSearched = _bookStore.SearchBook(model.SearchBook); //search a book
+
+            if (signInManager.IsSignedIn(User))
+            {
+                var user = await userManager.GetUserAsync(HttpContext.User);
+                ViewBag.userId = user.Id;
+            }
+
             return View(model);
         }
 
@@ -136,18 +143,70 @@ namespace BookStore.Controllers
             return View(orderedBooks);
         }
 
-        [HttpPost]
-        public IActionResult OrderBooksX(string id)
+        [HttpGet]
+        public IActionResult EditOrder(string id)
         {
             if (id == null)
             {
                 ViewBag.ErrorMessage = $"Book with the respective ID:{id} cannot be found.";
                 return View("NotFound");
             }
+            UserWithBooksDB editOrder = _bookStore.GetUserBookId(id);
 
-
-            return View();
+            EditOrderBooksUserViewModels model = new EditOrderBooksUserViewModels()
+            {
+                UserBooksId= editOrder.UserBooksId,
+                BookId=editOrder.BookId,
+                UserId=editOrder.UserId,
+                NrBooksOrdered=editOrder.NrBooksOrdered,
+                BookToBuy= editOrder.BookToBuy
+            };
+               
+            return View(model);
         }
+
+        [HttpPost]
+        public IActionResult EditOrder(EditOrderBooksUserViewModels model)
+        {
+            if (model == null)
+            {
+                ViewBag.ErrorMessage = $"Something has gone wrong.";
+                return View("NotFound");
+            }
+            BooksDisplayed books = _bookStore.GetSpecificBook(model.BookId);
+
+            if (books == null)
+            {
+                ViewBag.ErrorMessage = $"Something has gone wrong.";
+                return View("NotFound");
+            }
+
+            UserWithBooksDB userBooks = _bookStore.GetUserBookId(model.UserBooksId);
+
+            if (userBooks == null)
+            {
+                ViewBag.ErrorMessage = $"Something has gone wrong.";
+                return View("NotFound");
+            }
+
+            if (userBooks.NrBooksOrdered < model.NrBooksOrdered)
+            {
+                var x = model.NrBooksOrdered - userBooks.NrBooksOrdered;
+                books.StockOfBooks = books.StockOfBooks - x;
+                userBooks.NrBooksOrdered = model.NrBooksOrdered;
+                _bookStore.UpdateBook(books);
+                _bookStore.UpdateUserBook(userBooks);
+            }
+            else 
+            {
+                books.StockOfBooks = userBooks.NrBooksOrdered - model.NrBooksOrdered;
+                userBooks.NrBooksOrdered = model.NrBooksOrdered;
+                _bookStore.UpdateBook(books);
+                _bookStore.UpdateUserBook(userBooks);
+            }
+            return RedirectToAction("OrderBooks", "Home", new { id = userBooks.UserId });
+        }
+
 
         [HttpPost]
         public IActionResult DeleteBookOrdered(string id)
@@ -169,6 +228,29 @@ namespace BookStore.Controllers
                 return RedirectToAction("OrderBooks", "Home",new { id=userBook.UserId});
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FinalCommand()
+        {
+            var user = await userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with the respective ID:{user.Id} cannot be found.";
+                return View("NotFound");
+            }
+            if (string.IsNullOrEmpty(user.SurName) || string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.PhoneNumber) ||
+                   string.IsNullOrEmpty(user.Adress) || ((user.Age == 0) || (user.City == 0) || (user.Country == 0)))
+            {
+                return RedirectToAction("CaptureUserDetails", "UserDetails");
+            }
+            OrderBooksViewModels orderedBooks = new OrderBooksViewModels()
+            {
+                UserBooksDB = _bookStore.GetUserSpecificBooks(user.Id)
+            };
+
+            return View(orderedBooks);
         }
     }
 }

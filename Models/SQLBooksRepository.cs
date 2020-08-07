@@ -97,16 +97,12 @@ namespace BookStore.Models
             return _context.UserBooksConnectionDB.Find(Id);
         }
 
-        //public UserWithBooksDB UpdateUserBook(string id)
-        //{
-        //    var userBook = _context.UserBooksConnectionDB.Attach(bookUpdate);
-        //    book.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-        //    _context.SaveChanges();
-        //    return bookUpdate;
-        //}
-        public UserWithBooksDB UpdateUserBook(string id)
+        public UserWithBooksDB UpdateUserBook(UserWithBooksDB userBooks)
         {
-            throw new NotImplementedException();
+            var userBookDB = _context.UserBooksConnectionDB.Attach(userBooks);
+            userBookDB.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
+            return userBooks;
         }
 
 

@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Display Books";
+    var userId = ViewBag.userId;
 }
 
 <head>
@@ -25,7 +26,7 @@
             }
         </div>
         <div class="statusbooks">          
-                <button><a href="#">Order the Books</a></button>
+                <button><a asp-controller="Home" asp-action="OrderBooks" asp-route-id="@userId">Order the Books</a></button>
                 <!--books that were ordered-->
         </div>
         <div class="comedy">
