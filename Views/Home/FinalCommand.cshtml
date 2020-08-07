@@ -1,0 +1,28 @@
+﻿@model OrderBooksViewModels
+
+@{
+    ViewBag.Title = "Final Order";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/orderedbooks.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-area">
+            @foreach (var userBooks in Model.UserBooksDB)
+            {
+                @if (userBooks.NrBooksOrdered > 0)
+                {
+                    <div>
+                        <p>Book: @userBooks.BookToBuy</p>
+                        <p>Books Ordered: @userBooks.NrBooksOrdered</p>
+                        <p>Total Price:@userBooks.TotalPriceBooks</p>
+                    </div>
+                }
+            }
+            <div>
+                <button><a asp-controller="Home" asp-action="DisplayBooks">List of Books</a></button>
+            </div>
+        </div>
+    </div>
+</body>

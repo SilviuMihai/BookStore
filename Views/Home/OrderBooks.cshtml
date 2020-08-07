@@ -9,31 +9,31 @@
 <body>
     <div class="container">
         <div class="main-area">
-                @foreach (var userBooks in Model.UserBooksDB)
+            @foreach (var userBooks in Model.UserBooksDB)
+            {
+                @if (userBooks.NrBooksOrdered > 0)
                 {
-                    @if (userBooks.NrBooksOrdered > 0)
-                    {
-                        <div>
+                    <div>
                         <input asp-for="@userBooks.UserBooksId" type="hidden" />
                         <input asp-for="@userBooks.UserId" type="hidden" />
                         <input asp-for="@userBooks.BookId" type="hidden" />
                         <p>Book: @userBooks.BookToBuy</p>
                         <p>Books Ordered: @userBooks.NrBooksOrdered</p>
                         <p>Total Price:@userBooks.TotalPriceBooks</p>
-                        </div>
+                    </div>
 
-                        <div>
-                            <form method="post">
+                    <div>
+                        <form method="post">
                             <input type="submit" value="Delete Order" asp-action="DeleteBookOrdered" asp-controller="Home" asp-route-id="@userBooks.UserBooksId" />
-                            </form>
-                            <a asp-action="EditOrder" asp-controller="Home" asp-route-id="@userBooks.UserBooksId">Edit Order</a>
-                        </div>
-                     }
-                 }
-        <div>
-            <button><a asp-controller="Home" asp-action="DisplayBooks">List of Books</a></button>
-            <button><a asp-controller="Home" asp-action="FinalCommand">Order the Books</a></button>
-        </div>
+                        </form>
+                        <a asp-action="EditOrder" asp-controller="Home" asp-route-id="@userBooks.UserBooksId">Edit Order</a>
+                    </div>
+                }
+            }
+            <div>
+                <button><a asp-controller="Home" asp-action="DisplayBooks">List of Books</a></button>
+                <button><a asp-controller="Home" asp-action="FinalCommand">Order the Books</a></button>
+            </div>
         </div>
     </div>
 </body>

@@ -194,6 +194,7 @@ namespace BookStore.Controllers
                 var x = model.NrBooksOrdered - userBooks.NrBooksOrdered;
                 books.StockOfBooks = books.StockOfBooks - x;
                 userBooks.NrBooksOrdered = model.NrBooksOrdered;
+                userBooks.TotalPriceBooks = model.NrBooksOrdered * books.Price;
                 _bookStore.UpdateBook(books);
                 _bookStore.UpdateUserBook(userBooks);
             }
@@ -201,6 +202,7 @@ namespace BookStore.Controllers
             {
                 books.StockOfBooks = userBooks.NrBooksOrdered - model.NrBooksOrdered;
                 userBooks.NrBooksOrdered = model.NrBooksOrdered;
+                userBooks.TotalPriceBooks = model.NrBooksOrdered * books.Price;
                 _bookStore.UpdateBook(books);
                 _bookStore.UpdateUserBook(userBooks);
             }
