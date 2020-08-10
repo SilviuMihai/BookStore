@@ -25,20 +25,24 @@
                     <ul>
                         @if (signInManager.IsSignedIn(User))
                         {
-                            if (User.IsInRole("Admin"))
-                            {
                                 <li>
                                     <div class="dropdown">
                                         <button onclick="myFunction()" class="dropbtn">Management</button>
-                                        <div id="myDropdown" class="dropdown-content">  
-                                            <a asp-controller="Administration" asp-action="ListRoles">List Roles</a>      
+                                        <div id="myDropdown" class="dropdown-content">
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                            <a asp-controller="Administration" asp-action="ListRoles">List Roles</a>
                                             <a asp-controller="Administration" asp-action="ListUsers">List Users</a>
-                                            <a asp-controller="AdministrationBooks" asp-action="ListBooks">List Books</a>
-                                            <a asp-controller="AdministrationBooks" asp-action="AddBook">Add Book</a>
+                                            }
+                                            @if (User.IsInRole("Admin") || User.IsInRole("Operators"))
+                                            {
+                                                <a asp-controller="AdministrationBooks" asp-action="ListBooks">List Books</a>
+                                                <a asp-controller="AdministrationBooks" asp-action="AddBook">Add Book</a>
+                                            }
+                                            
                                         </div>
                                     </div>
                                 </li>
-                            }
                             <li><a asp-controller="UserDetails" asp-action="ShowUserDetails">@User.Identity.Name</a></li>
                             <li>
                                 <form method="post" asp-controller="Account" asp-action="LogOut">

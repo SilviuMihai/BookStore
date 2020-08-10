@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Operators")]
     public class AdministrationBooksController:Controller
     {
         private readonly IBookStore _bookStore;
@@ -25,7 +25,6 @@ namespace BookStore.Controllers
         {
             HomeViewModels model = new HomeViewModels();
             model.BooksDisplayedInStore = _bookStore.GetBooks();
-            //var model = _bookStore.GetBooks();
             return View(model);
         }
 
@@ -136,4 +135,10 @@ namespace BookStore.Controllers
  * Use binding to prevent overposting - example :https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/controller-methods-views?view=aspnetcore-3.1
  * 
  * ViewResult and IActionResult - there are big differences between the two functionalities
+ * 
+ *  [Authorize(Roles = "Admin")]
+ *  [Authorize(Roles = "Operators")]
+ * The user must in both roles so that can acces the controller
+ * [Authorize(Roles = "Admin,Operators")] - goes with the meaning that the user must be in one of these two
+ * 
  */
