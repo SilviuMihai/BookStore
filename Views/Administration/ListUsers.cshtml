@@ -6,13 +6,14 @@
 
     <head>
         <link rel="stylesheet" type="text/css" href="~/css/listusers.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
     </head>
     <body>
         <div class="container">
 
             <div class="main-area">
                 <h2>List of Users:</h2>
-                <button><a asp-controller="Account" asp-action="RegisterUser">Add a new User</a></button>
+                <a class="buttonuniversal" asp-controller="Account" asp-action="RegisterUser">Add a new User</a>
                 <!--check if there are any users-->
                 @if (Model.Any())
                 {
@@ -21,22 +22,22 @@
                         <p>@users</p>
                         <br />
                         <br />
-                        <button><a asp-controller="Administration" asp-action="EditUser" asp-route-id="@users.Id">Edit User</a></button>
+                        <a class="buttonuniversal" asp-controller="Administration" asp-action="EditUser" asp-route-id="@users.Id">Edit User</a>
                         <!--delete confirmation with onclick event-->
                         <!--
-                        <form asp-controller="Account" asp-action="DeleteUser" asp-route-id="@users.Id">
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete the user:@users.UserName  ?')">Delete</button>
+                        <form asp-controller="Account" asp-action="DeleteUser" asp-route-id="users.Id">
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete the user:users.UserName  ?')">Delete</button>
 
                         </form>
                             -->
                         <form asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@users.Id" method="post">
                             <span id="confirmationDeleteSpan_@users.Id" style="display:none">
                                 <span>Are you sure, you want to delete the user ?</span>
-                                <button type="submit">Yes</button>
-                                <button><a href="#" onclick="confirmDelete('@users.Id', false)">No</a></button>
+                                <button class="buttonuniversal" type="submit">Yes</button>
+                                <button class="buttonuniversal"><a class="stylehyperlink" href="#" onclick="confirmDelete('@users.Id', false)">No</a></button>
                             </span>
                             <span id="deleteSpan_@users.Id">
-                                <button><a href="#" onclick="confirmDelete('@users.Id', true)">Delete</a></button>
+                                <button class="buttonuniversal"><a class="stylehyperlink" href="#" onclick="confirmDelete('@users.Id', true)">Delete</a></button>
                             </span>
                         </form>
                     }

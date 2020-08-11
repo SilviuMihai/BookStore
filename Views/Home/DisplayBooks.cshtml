@@ -14,7 +14,7 @@
             <form method="get" asp-controller="Home" asp-action="DisplayBooks">
                 <p>
                     Book Name: <input asp-for="SearchBook" placeholder="Type a book !" />
-                    <input type="submit" value="Search" />
+                    <input type="submit" value="Search" class="orderbutton" />
                 </p>
             </form>
             @if (Model.SearchBook != null)
@@ -26,64 +26,144 @@
             }
         </div>
         <div class="statusbooks">          
-                <button><a asp-controller="Home" asp-action="OrderBooks" asp-route-id="@userId">Order the Books</a></button>
+                <a  class="orderbutton" asp-controller="Home" asp-action="OrderBooks" asp-route-id="@userId">Order the Books</a>
                 <!--books that were ordered-->
         </div>
         <div class="comedy">
             <h3>Comedy</h3>
-            @foreach(var books in Model.BooksDisplayedInStore)
-            {
-                @if (books.BookGenre == "Comedy")
+            <table>
+                <tr>
+                    <th style="text-align:left">
+                        Book
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Buy
+                    </th>
+                </tr>
+                @foreach (var books in Model.BooksDisplayedInStore)
                 {
-                     <div>
-                         <p>@books.BooksInStore</p>
-                         <p>@books.Price</p>
-                         <a asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy/Details</a>
-                     </div>
+                    @if (books.BookGenre == "Comedy")
+                    {
+
+                        <tr>
+                            <td style="text-align:left">
+                                @books.BooksInStore
+                            </td>
+                            <td>
+                                @books.Price
+                            </td>
+                            <td>
+                                <a class="sethorizontal setrightcorner" asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy/Details</a>
+                            </td>
+                        </tr>
+
+                    }
                 }
-            }
+            </table>
         </div>
         <div class="drama">
             <h3>Drama</h3>
-            @foreach (var books in Model.BooksDisplayedInStore)
-            {
-                @if (books.BookGenre == "Drama")
+            <table>
+                <tr>
+                    <th style="text-align:left">
+                        Book
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Buy
+                    </th>
+                </tr>
+                @foreach (var books in Model.BooksDisplayedInStore)
                 {
-                    <div>
-                        <p>@books.BooksInStore</p>
-                        <p>@books.Price</p>
-                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy</a>
-                    </div>
+                    @if (books.BookGenre == "Drama")
+                    {
+                        <tr>
+                            <td style="text-align:left">
+                                @books.BooksInStore
+                            </td>
+                            <td>
+                                @books.Price
+                            </td>
+                            <td>
+                                <a class="sethorizontal setrightcorner" asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy/Details</a>
+                            </td>
+                        </tr>
+
+                    }
                 }
-            }
+            </table>
         </div>
+
         <div class="science-fiction">
             <h3>Science-Fiction</h3>
-            @foreach (var books in Model.BooksDisplayedInStore)
-            {
-                @if (books.BookGenre == "Science-Fiction")
+            <table>
+                <tr>
+                    <th style="text-align:left">
+                        Book
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Buy
+                    </th>
+                </tr>
+                @foreach (var books in Model.BooksDisplayedInStore)
                 {
-                    <div>
-                        <p>@books.BooksInStore</p>
-                        <p>@books.Price</p>
-                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy</a>
-                    </div>
+                    @if (books.BookGenre == "Science-Fiction")
+                    {
+                        <tr>
+                            <td style="text-align:left">
+                                @books.BooksInStore
+                            </td>
+                            <td>
+                                @books.Price
+                            </td>
+                            <td>
+                                <a class="sethorizontal setrightcorner" asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy/Details</a>
+                            </td>
+                        </tr>
+                    }
                 }
-            }
+            </table>
         </div>
         <div class="nature-science">
             <h3>Nature-Science</h3>
-            @foreach (var books in Model.BooksDisplayedInStore)
-            {
-                @if (books.BookGenre == "Nature-Science")
+            <table>
+                <tr>
+                    <th style="text-align:left">
+                        Book
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Buy
+                    </th>
+                </tr>
+                @foreach (var books in Model.BooksDisplayedInStore)
                 {
-                    <div>
-                        <p>@books.BooksInStore</p>
-                        <p>@books.Price</p>
-                        <a asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy</a>
-                    </div>
+                    @if (books.BookGenre == "Nature-Science")
+                    {
+                        <tr>
+                            <td style="text-align:left">
+                                @books.BooksInStore
+                            </td>
+                            <td>
+                                @books.Price
+                            </td>
+                            <td>
+                                <a class="sethorizontal setrightcorner" asp-controller="Home" asp-action="AddBookInBag" asp-route-id="@books.BookId">Buy/Details</a>
+                            </td>
+                        </tr>
+                    }
                 }
-            }
-        </div>
+                </table>
+</div>
     </div>
 </body>

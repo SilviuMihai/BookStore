@@ -5,9 +5,10 @@
     var deleteBookId = ViewBag.deleteBookId;
 }
 
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/editbook.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/editbook.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
         <div class="main-area">
@@ -33,8 +34,8 @@
                 <br>
                 <br>
                 <div asp-validation-summary="All"></div>
-                <button type="submit">Update</button>
-                <button><a asp-controller="Home" asp-action="Index">Cancel</a></button>
+                <button  class="buttonuniversal" type="submit">Update</button>
+                <a class="buttonuniversal" asp-controller="Home" asp-action="Index">Cancel</a>
             </form>
             <br>
             <form asp-controller="AdministrationBooks" asp-action="DeleteBook" asp-route-id="@deleteBookId" method="post">

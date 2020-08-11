@@ -3,9 +3,10 @@
     ViewBag.Title = "User Login";
 }
 
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/registeruser.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/registeruser.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
 
@@ -27,9 +28,9 @@
                 <input asp-for="RememberMe"/>
                 <br>
                 <br>
-                <input type="submit" value="Submit">
+                <input class="buttonuniversal" type="submit" value="Submit">
             </form>
-            <div><a asp-controller="Account" asp-action="ForgotPassword">Forgot Password</a></div>
+            <div><a class="buttonuniversal" asp-controller="Account" asp-action="ForgotPassword">Forgot Password</a></div>
     </div>
 
     </div>

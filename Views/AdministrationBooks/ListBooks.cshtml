@@ -5,9 +5,10 @@
     ViewBag.Title = "List Books";
 }
 
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/listsbooks.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/listsbooks.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
         <div class="main-area">
@@ -22,7 +23,7 @@
                             <div>
                                 <p>@books.BooksInStore</p>
                                 <p>@books.Price</p>
-                                <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
+                                <a class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
                             </div>
                         }
                     }
@@ -36,7 +37,7 @@
                             <div>
                                 <p>@books.BooksInStore</p>
                                 <p>@books.Price</p>
-                                <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
+                                <a  class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
                             </div>
                         }
                     }
@@ -50,7 +51,7 @@
                             <div>
                                 <p>@books.BooksInStore</p>
                                 <p>@books.Price</p>
-                                <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
+                                <a  class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
                             </div>
                         }
                     }
@@ -64,7 +65,7 @@
                             <div>
                                 <p>@books.BooksInStore</p>
                                 <p>@books.Price</p>
-                                <a asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
+                                <a  class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
                             </div>
                         }
                     }

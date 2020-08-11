@@ -4,9 +4,10 @@
     ViewBag.Title = "BookStore Page";
 }
 
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/index.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/index.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
         <div class="main-area">
@@ -18,11 +19,7 @@
                 <li>Science Fiction</li>
                 <li>Nature Science</li>
             </ul>
-            <div class="books-link"><p><a asp-controller="home" asp-action="DisplayBooks">Choose a book !</a></p></div>
-            <form>
-                Introduce o carte pe care ai dorii sa o citesti:
-                <input type="text" name="introduceretext">
-            </form>
+            <div class="books-link"><p><a class="buttonuniversal" asp-controller="home" asp-action="DisplayBooks">Choose a book !</a></p></div>
         </div>
         <div class="aside-area">
             <h2>Quotes</h2>
@@ -39,9 +36,9 @@
         <div class="nav-area">
             <h2>Informations</h2>
             <ul class="style-list">
-                <li><a asp-controller="Account" asp-action="RegisterUser">Create Account</a></li>
-                <li><a asp-controller="Account" asp-action="ChangePassword">Change Password</a></li>
-                <li><a asp-controller="UserDetails" asp-action="ShowUserDetails">Profile</a></li>
+                <li><a class="buttonuniversal" asp-controller="Account" asp-action="RegisterUser">Create Account</a></li>
+                <li><a class="buttonuniversal" asp-controller="Account" asp-action="ChangePassword">Change Password</a></li>
+                <li><a class="buttonuniversal" asp-controller="UserDetails" asp-action="ShowUserDetails">Profile</a></li>
             </ul>
         </div>
     </div>

@@ -3,9 +3,10 @@
 @{
     ViewBag.Title = "Order Books";
 }
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/orderedbooks.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/orderedbooks.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
         <div class="main-area">
@@ -24,15 +25,15 @@
 
                     <div>
                         <form method="post">
-                            <input type="submit" value="Delete Order" asp-action="DeleteBookOrdered" asp-controller="Home" asp-route-id="@userBooks.UserBooksId" />
+                            <input  class="buttonuniversal" type="submit" value="Delete Order" asp-action="DeleteBookOrdered" asp-controller="Home" asp-route-id="@userBooks.UserBooksId" />
                         </form>
-                        <a asp-action="EditOrder" asp-controller="Home" asp-route-id="@userBooks.UserBooksId">Edit Order</a>
+                        <a  class="buttonuniversal" asp-action="EditOrder" asp-controller="Home" asp-route-id="@userBooks.UserBooksId">Edit Order</a>
                     </div>
                 }
             }
             <div>
-                <button><a asp-controller="Home" asp-action="DisplayBooks">List of Books</a></button>
-                <button><a asp-controller="Home" asp-action="FinalCommand">Order the Books</a></button>
+                <a class="buttonuniversal" asp-controller="Home" asp-action="DisplayBooks">List of Books</a>
+                <a class="buttonuniversal" asp-controller="Home" asp-action="FinalCommand">Order the Books</a>
             </div>
         </div>
     </div>

@@ -3,9 +3,10 @@
 @{
     ViewBag.Title = "Change Order of Books";
 }
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/editorder.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/editorder.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
         <div class="main-area">
@@ -18,7 +19,7 @@
                         <input asp-for="NrBooksOrdered"/>
                         <input type="submit" value="Update Order" />
             </form>
-            <a asp-controller="Home" asp-action="OrderBooks" asp-route-id="@Model.UserId">Go Back</a>
+            <a class="buttonuniversal" asp-controller="Home" asp-action="OrderBooks" asp-route-id="@Model.UserId">Go Back</a>
         </div>
     </div>
 </body>

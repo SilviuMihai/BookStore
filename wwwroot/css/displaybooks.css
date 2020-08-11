@@ -1,12 +1,12 @@
 ﻿
 .comedy {
     grid-area: c;
-    background-color: brown;
+    background-color: cornflowerblue;
 }
 
 .drama {
     grid-area: d;
-    background-color: coral;
+    background-color: cornflowerblue;
 }
 
 .science-fiction {
@@ -16,20 +16,20 @@
 
 .nature-science {
     grid-area: n;
-    background-color: darkgray;
+    background-color: cornflowerblue;
 }
 .searchbook {
     grid-area: sb;
-    background-color: darkgray;
+    background-color: #ff99ff;
 }
 .statusbooks {
     grid-area: stb;
-    background-color: darkgray;
+    background-color: #ff99ff;
 }
 
 body {
     margin: 10px;
-    background-color: skyblue;
+    background-color: #6b5b95;
 }
 
 /* CSS Design !!! */
@@ -97,6 +97,39 @@ body {
     .nature-science p {
         text-align: left;
     }
+    /*------------------*/
+
+/*Style the table*/
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom:8px;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
+td {
+    text-align:center;
+}
+/*----------------------*/
+
+/*Order Button*/
+.orderbutton {
+    background-color: orangered; /* Green */
+    border: none;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    padding:5px;
+    border-radius:15px;
+}
+
+
+
 
     /*FOOTER-AREA*/
     .footer-area h1, h2, p {
@@ -115,11 +148,10 @@ body {
     grid-template-areas: 
         "sb sb sb sb sb sb sb sb" 
         "stb stb stb stb stb stb stb stb"
-        "c c s s n n d d" 
-        "c c s s n n d d"
-        "c c s s n n d d" 
-        "c c s s n n d d" 
-        "c c s s n n d d";
+        "c c c c s s s s" 
+        "c c c c s s s s"
+        "n n n n d d d d" 
+        "n n n n d d d d";
     padding: 0px 10px;
     grid-gap: 10px;
 }

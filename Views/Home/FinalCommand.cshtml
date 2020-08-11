@@ -3,9 +3,10 @@
 @{
     ViewBag.Title = "Final Order";
 }
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/orderedbooks.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/orderedbooks.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
         <div class="main-area">
@@ -21,7 +22,7 @@
                 }
             }
             <div>
-                <button><a asp-controller="Home" asp-action="DisplayBooks">List of Books</a></button>
+                <a class="buttonuniversal" asp-controller="Home" asp-action="DisplayBooks">List of Books</a>
             </div>
         </div>
     </div>

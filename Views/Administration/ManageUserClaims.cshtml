@@ -2,9 +2,10 @@
 @{ 
     ViewBag.Title = "Manage User Claims";
 }
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/manageuserclaims.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/manageuserclaims.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
         <div class="main-area">
@@ -20,8 +21,8 @@
                 <div asp-validation-summary="All"></div>
                 <br>
                 <br>
-                <button type="submit">Update</button>
-                <button><a asp-controller="Administration" asp-action="EditUser" asp-route-id="@Model.UserId">Cancel</a></button>
+                <button class="buttonuniversal" type="submit">Update</button>
+                <a class="buttonuniversal" asp-controller="Administration" asp-action="EditUser" asp-route-id="@Model.UserId">Cancel</a>
             </form>
         </div>
     </div>

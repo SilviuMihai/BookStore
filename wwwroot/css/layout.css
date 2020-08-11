@@ -16,12 +16,15 @@
     padding: 5px;
 }
     /*FOOTER-AREA*/
-    .footer-area h1, h2, p {
+    .footer-area h1, .footer-area h2, .footer-area p {
         margin: 0;
         padding: 0;
     }
 
-    .footer-area h2, p {
+    .footer-area h2 {
+        text-align: center;
+    }
+    .footer-area p {
         text-align: center;
     }
 

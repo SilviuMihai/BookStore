@@ -4,9 +4,10 @@
     ViewBag.Title = "Edit User";
 }
 
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/edituser.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/edituser.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
             <div class="main-area">
@@ -53,8 +54,8 @@
                     <br>
                     <br>
                     <div asp-validation-summary="All"></div>
-                    <button type="submit">Update</button>
-                    <button><a asp-controller="Administration" asp-action="ListUsers">Cancel</a></button>
+                    <button class="buttonuniversal" type="submit">Update</button>
+                    <a class="buttonuniversal" asp-controller="Administration" asp-action="ListUsers">Cancel</a>
                     </form>
             </div>
             <div class="second-layer-roles">
@@ -74,7 +75,7 @@
                     }
                     <br>
                     <br>
-                    <button><a asp-controller="Administration" asp-action="ManageUserRoles" asp-route-userId="@Model.Id">Manage Roles</a></button>
+                    <a class="buttonuniversal" asp-controller="Administration" asp-action="ManageUserRoles" asp-route-userId="@Model.Id">Manage Roles</a>
                 </form>
             </div>
             <div class="third-layer-claims">
@@ -94,7 +95,7 @@
                     }
                     <br>
                     <br>
-                    <button><a asp-controller="Administration" asp-action="ManageUserClaims" asp-route-userId="@Model.Id">Manage Claims</a></button>
+                    <a class="buttonuniversal" asp-controller="Administration" asp-action="ManageUserClaims" asp-route-userId="@Model.Id">Manage Claims</a>
                 </form>
             </div>
 

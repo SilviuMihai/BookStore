@@ -3,9 +3,10 @@
     ViewBag.Title = "Edit Role";
 }
 
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/editrole.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/editrole.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
         <div class="main-area">
@@ -21,7 +22,7 @@
                 <br>
                 <div asp-validation-summary="All"></div>
                 <button type="submit">Update Role Name</button>
-                <button><a asp-controller="Administration" asp-action="ListRoles">Cancel</a></button>
+                <button class="buttonuniversal"><a  class="buttonuniversal" asp-controller="Administration" asp-action="ListRoles">Cancel</a></button>
             </form>
         </div>
         <div class="second-area">
@@ -39,7 +40,7 @@
             }
             <br>
             <br>
-            <button><a asp-controller="Administration" asp-action="EditUsersInRole" asp-route-id="@Model.RoleId">Add or Remove Users</a></button>
+            <a class="buttonuniversal" asp-controller="Administration" asp-action="EditUsersInRole" asp-route-id="@Model.RoleId">Add or Remove Users</a>
         </div>
     </div>
 </body>

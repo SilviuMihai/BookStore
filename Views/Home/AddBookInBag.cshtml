@@ -5,9 +5,10 @@
     var userId = ViewBag.userId;
     var bookId = ViewBag.bookId;
 }
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/bookincart.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/bookincart.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
         <div class="main-area">
@@ -24,10 +25,10 @@
                 <label asp-for="BooksOrdered">How many books do you want:</label>
                 <input asp-for="BooksOrdered" />
                 <span asp-validation-for="BooksOrdered"></span>
-                <button type="submit">Add to Cart</button>
+                <button class="buttonuniversal" type="submit">Add to Cart</button>
             </form>
-            <button><a asp-controller="Home" asp-action="DisplayBooks">List of Books</a></button>
-            <button><a asp-controller="Home" asp-action="OrderBooks" asp-route-id="@Model.UserId">Finish Your Order</a></button>
+            <a class="buttonuniversal" asp-controller="Home" asp-action="DisplayBooks">List of Books</a>
+            <a  class="buttonuniversal" asp-controller="Home" asp-action="OrderBooks" asp-route-id="@Model.UserId">Finish Your Order</a>
         </div>
     </div>
 </body>

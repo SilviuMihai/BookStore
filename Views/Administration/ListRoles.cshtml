@@ -4,15 +4,16 @@
     ViewBag.Title = "List of Roles";
 }
 
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/listroles.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/listroles.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
         <div class="main-area">
             <div>
                 <p>Want to add a new role ? Press the button:</p>
-                <button><a class="stylebutton" asp-action="CreateRole" asp-controller="Administration">Add New Role</a></button>
+                <a class="buttonuniversal" asp-action="CreateRole" asp-controller="Administration">Add New Role</a>
                 <h3>List of Roles:</h3>
                 @if (Model.Any())
                 {
@@ -22,15 +23,15 @@
                         <p>Role Id:@role.Id</p>
                         <p>Role Name:@role.Name</p>
 
-                        <button><a asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit Role</a></button>
+                        <a class="buttonuniversal" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit Role</a>
                         <form asp-controller="Administration" asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
                             <span id="confirmationDeleteSpan_@role.Id" style="display:none">
                                 <span>Are you sure, you want to delete the user ?</span>
-                                <button type="submit">Yes</button>
-                                <button><a href="#" onclick="confirmDelete('@role.Id', false)">No</a></button>
+                                <button class="buttonuniversal" type="submit">Yes</button>
+                                <button class="buttonuniversal"><a class="stylehyperlink" href="#" onclick="confirmDelete('@role.Id', false)">No</a></button>
                             </span>
                             <span id="deleteSpan_@role.Id">
-                                <button><a href="#" onclick="confirmDelete('@role.Id', true)">Delete</a></button>
+                                <button class="buttonuniversal"><a class="stylehyperlink" href="#" onclick="confirmDelete('@role.Id', true)">Delete</a></button>
                             </span>
                         </form>
                     }
@@ -39,7 +40,7 @@
                 {
                     <p>No Roles to display !</p>
                     <p>To Create a Role press the button:</p>
-                    <button><a class="stylebutton" asp-action="CreateRole" asp-controller="Administration">Create Role</a></button>
+                    <a class="buttonuniversal" asp-action="CreateRole" asp-controller="Administration">Create Role</a>
                 }
             </div>
         </div>

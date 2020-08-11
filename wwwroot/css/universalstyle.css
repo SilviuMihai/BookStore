@@ -1,0 +1,20 @@
+﻿/*Style Button*/
+/*Style hyperlinks*/
+.buttonuniversal {
+    background-color: orangered;
+    border: none;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    padding:5px;
+    margin:5px;
+    border-radius: 15px;
+    font-size: 100%;
+    font-style: normal;
+}
+
+.stylehyperlink {
+    text-decoration: none;
+    color:white;
+}

@@ -1,5 +1,6 @@
 ﻿<head>
     <link rel="stylesheet" type="text/css" href="~/css/error.css">
+    <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
 </head>
 <body>
     <div class="container">
@@ -9,7 +10,7 @@
                 <h3>@ViewBag.ErrorMessage</h3>
                 <br>
                 <br>
-                <button><a asp-controller="Administration" asp-action="ListRoles">Back to All Roles</a></button>
+                <a class="buttonuniversal" asp-controller="Administration" asp-action="ListRoles">Back to All Roles</a>
             </div>
         </div>
     </div>
