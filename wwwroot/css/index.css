@@ -1,20 +1,20 @@
 ﻿body {
     margin: 10px;
-    background-color: skyblue;
+    background-color: #4d4dff;
 }
 
 .main-area {
-    background-color: rgb(209, 230, 227);
+    background-color: #4d88ff;
     grid-area: m;
 }
 
 .aside-area {
-    background-color: darkkhaki;
+    background-color: #4d88ff;
     grid-area: a;
 }
 
 .nav-area {
-    background-color: darkseagreen;
+    background-color: #4d88ff;
     grid-area: n;
 }
 

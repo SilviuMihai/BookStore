@@ -2,11 +2,15 @@
     grid-area: m;
     background-color: rgb(209, 230, 227);
     border-radius: 15px;
+    font-size: large;
+    padding: 5px;
 }
 .second-area {
     grid-area: s;
     background-color: rgb(209, 230, 227);
     border-radius: 15px;
+    font-size: large;
+    padding:5px;
 }
 
 /*Grid Layout*/

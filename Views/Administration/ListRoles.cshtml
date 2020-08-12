@@ -14,17 +14,18 @@
             <div>
                 <p>Want to add a new role ? Press the button:</p>
                 <a class="buttonuniversal" asp-action="CreateRole" asp-controller="Administration">Add New Role</a>
+                <hr />
                 <h3>List of Roles:</h3>
                 @if (Model.Any())
                 {
                     @foreach (var role in Model)
                     {
 
-                        <p>Role Id:@role.Id</p>
-                        <p>Role Name:@role.Name</p>
+                        <p>Role Id: @role.Id</p>
+                        <p>Role Name: @role.Name</p>
 
-                        <a class="buttonuniversal" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit Role</a>
-                        <form asp-controller="Administration" asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                        <a style="display:inline-block" class="buttonuniversal" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit Role</a>
+                        <form style="display:inline-block" asp-controller="Administration" asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
                             <span id="confirmationDeleteSpan_@role.Id" style="display:none">
                                 <span>Are you sure, you want to delete the user ?</span>
                                 <button class="buttonuniversal" type="submit">Yes</button>
@@ -34,6 +35,7 @@
                                 <button class="buttonuniversal"><a class="stylehyperlink" href="#" onclick="confirmDelete('@role.Id', true)">Delete</a></button>
                             </span>
                         </form>
+                        <hr />
                     }
                 }
                 else

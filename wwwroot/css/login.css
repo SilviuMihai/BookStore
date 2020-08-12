@@ -1,6 +1,6 @@
 ﻿.main-area {
     grid-area: m;
-    background-color: rgb(209, 230, 227);
+    background-color: #ffbf00;
 }
 .main-area{
     border-radius: 15px;
@@ -9,7 +9,9 @@
 input{
     width:100%;
 }
-
+* {
+    box-sizing: border-box;
+}
 
 /*Grid Layout*/
 .container {

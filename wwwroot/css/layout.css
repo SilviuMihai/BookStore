@@ -1,8 +1,11 @@
-﻿/*============================================*/
+﻿* {
+    box-sizing: border-box;
+}
+/*============================================*/
 /*Areas for the GRID*/
 .top-area {
     grid-area: t;
-    background: burlywood;
+    background: #ff704d;
 }
 .footer-area {
     grid-area: f;
@@ -71,7 +74,7 @@
 .logoutbtn {
     border: none;
     cursor: pointer;
-    background: burlywood;
+    background: #ff704d;
 }
 /*============================================*/
 
@@ -79,7 +82,7 @@
 .dropbtn {
     border: none;
     cursor: pointer;
-    background: burlywood;
+    background: #ff704d;
 }
 
 .dropdown {
@@ -90,7 +93,7 @@
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #ff704d;
     min-width: 160px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);

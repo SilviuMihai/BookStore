@@ -14,68 +14,120 @@
         <div class="main-area">
             @if (Model.BooksDisplayedInStore.Any())
             {
-                <div class="comedy">
-                    <h3>Comedy</h3>
+            <div class="comedy">
+                <h3>Comedy</h3>
+                <table>
+                    <tr>
+                        <th style="text-align:left">
+                            Book
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Edit Book
+                        </th>
+                    </tr>
                     @foreach (var books in Model.BooksDisplayedInStore)
                     {
                         @if (books.BookGenre == "Comedy")
                         {
-                            <div>
-                                <p>@books.BooksInStore</p>
-                                <p>@books.Price</p>
-                                <a class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
-                            </div>
+                            <tr>
+                                <td style="text-align:left">@books.BooksInStore</td>
+                                <td>@books.Price</td>
+                                <td><a class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a></td>
+                            </tr>
                         }
                     }
-                </div>
-                <div class="drama">
-                    <h3>Drama</h3>
+                    </table>
+            </div>
+            <div class="drama">
+                <h3>Drama</h3>
+                <table>
+                    <tr>
+                        <th style="text-align:left">
+                            Book
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Edit Book
+                        </th>
+                    </tr>
                     @foreach (var books in Model.BooksDisplayedInStore)
                     {
                         @if (books.BookGenre == "Drama")
                         {
-                            <div>
-                                <p>@books.BooksInStore</p>
-                                <p>@books.Price</p>
-                                <a  class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
-                            </div>
+                            <tr>
+                                <td style="text-align:left">@books.BooksInStore</td>
+                                <td>@books.Price</td>
+                                <td><a class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a></td>
+                            </tr>
                         }
                     }
-                </div>
-                <div class="science-fiction">
-                    <h3>Science-Fiction</h3>
+                </table>
+            </div>
+            <div class="science-fiction">
+                <h3>Science-Fiction</h3>
+                <table>
+                    <tr>
+                        <th style="text-align:left">
+                            Book
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Edit Book
+                        </th>
+                    </tr>
                     @foreach (var books in Model.BooksDisplayedInStore)
                     {
                         @if (books.BookGenre == "Science-Fiction")
                         {
-                            <div>
-                                <p>@books.BooksInStore</p>
-                                <p>@books.Price</p>
-                                <a  class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
-                            </div>
+                            <tr>
+                                <td style="text-align:left">@books.BooksInStore</td>
+                                <td>@books.Price</td>
+                                <td><a class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a></td>
+                            </tr>
                         }
                     }
-                </div>
-                <div class="nature-science">
-                    <h3>Nature-Science</h3>
+                    </table>
+            </div>
+            <div class="nature-science">
+                <h3>Nature-Science</h3>
+                <table>
+                    <tr>
+                        <th style="text-align:left">
+                            Book
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Edit Book
+                        </th>
+                    </tr>
                     @foreach (var books in Model.BooksDisplayedInStore)
                     {
                         @if (books.BookGenre == "Nature-Science")
                         {
-                            <div>
-                                <p>@books.BooksInStore</p>
-                                <p>@books.Price</p>
-                                <a  class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a>
-                            </div>
+                            <tr>
+                                <td style="text-align:left">@books.BooksInStore</td>
+                                <td>@books.Price</td>
+                                <td><a class="buttonuniversal" asp-controller="AdministrationBooks" asp-action="EditBook" asp-route-id="@books.BookId">Edit Book</a></td>
+                            </tr>
                         }
                     }
+                    </table>
 
-                </div>
-            }
-            else
-            {
-                <p>There are no Books in the Book Store !</p>
-            }
+                    </div>
+                     }
+                     else
+                     {
+                         <p>There are no Books in the Book Store !</p>
+                     }
         </div>
     </div>
 </body>

@@ -14,15 +14,18 @@
                 <h2>Add or remove users from this specific role</h2>
                 @for (int i = 0; i < Model.Count; i++)
                 {
-                    <input type="hidden" asp-for="@roleId"/>
-                    <input type="hidden" asp-for="@Model[i].UserId" />
-                    <input type="hidden" asp-for="@Model[i].UserName" />
-                    <input type="checkbox" asp-for="@Model[i].IsSelected" />
-                    <label asp-for="@Model[i].IsSelected">@Model[i].UserName</label>
-                }
+                    <ol style="list-style-type: square">
+                        <li>
+                        <input type="hidden" asp-for="@roleId" />
+                        <input type="hidden" asp-for="@Model[i].UserId" />
+                        <input type="hidden" asp-for="@Model[i].UserName" />
+                        <input type="checkbox" asp-for="@Model[i].IsSelected" />
+                        <label asp-for="@Model[i].IsSelected">@Model[i].UserName</label>
+                        </li>
+                    </ol>
 
-                <br>
-                <br>
+                }
+                <br />
                 <button class="buttonuniversal" type="submit">Update</button>
                 <a class="buttonuniversal" asp-controller="Administration" asp-action="EditRole" asp-route-id="@roleId">Cancel</a>
             </form>

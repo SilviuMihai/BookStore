@@ -32,7 +32,6 @@
                 <input asp-for="Price">
                 <span asp-validation-for="Price"></span>
                 <br>
-                <br>
                 <div asp-validation-summary="All"></div>
                 <button  class="buttonuniversal" type="submit">Update</button>
                 <a class="buttonuniversal" asp-controller="Home" asp-action="Index">Cancel</a>
@@ -41,11 +40,11 @@
             <form asp-controller="AdministrationBooks" asp-action="DeleteBook" asp-route-id="@deleteBookId" method="post">
                 <span id="confirmationDeleteSpan_@deleteBookId" style="display:none">
                     <span>Are you sure, you want to delete the book ?</span>
-                    <button type="submit">Yes</button>
-                    <button><a href="#" onclick="confirmDelete('@deleteBookId', false)">No</a></button>
+                    <button class="buttonuniversal" type="submit">Yes</button>
+                    <button class="buttonuniversal"><a class="stylehyperlink" href="#" onclick="confirmDelete('@deleteBookId', false)">No</a></button>
                 </span>
                 <span id="deleteSpan_@deleteBookId">
-                    <button><a href="#" onclick="confirmDelete('@deleteBookId', true)">Delete</a></button>
+                    <button class="buttonuniversal"><a class="stylehyperlink" href="#" onclick="confirmDelete('@deleteBookId', true)">Delete</a></button>
                 </span>
             </form>
         </div>
