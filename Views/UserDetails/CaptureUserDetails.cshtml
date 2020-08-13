@@ -1,51 +1,51 @@
 ﻿@model UserDetailsViewModels
 
-<head>
-    <link rel="stylesheet" type="text/css" href="~/css/captureuserdetails.css">
-</head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="~/css/captureuserdetails.css">
+        <link rel="stylesheet" type="text/css" href="~/css/universalstyle.css">
+    </head>
 <body>
     <div class="container">
         <div class="main-area">
 
             <form method="post">
                 <div asp-validation-summary="All"></div>
-                <label asp-for="Name">Prenume:</label>
+                <label asp-for="Name">Name:</label>
                 <input asp-for="Name">
                 <span asp-validation-for="Name"></span>
 
                 <br>
-                <label asp-for="FamilyName">Nume:</label>
+                <label asp-for="FamilyName">Last Name:</label>
                 <input asp-for="FamilyName">
                 <span asp-validation-for="FamilyName"></span>
 
                 <br>
-                <label asp-for="Age">Varsta:</label>
+                <label asp-for="Age">Age:</label>
                 <input asp-for="Age">
                 <span asp-validation-for="Age"></span>
 
                 <br>
-                <label asp-for="PhoneNumber">Numar de telefon:</label>
+                <label asp-for="PhoneNumber">Phone Number:</label>
                 <input asp-for="PhoneNumber">
                 <span asp-validation-for="PhoneNumber"></span>
 
                 <br>
-                <label asp-for="City">Oras:</label>
+                <label asp-for="City">City:</label>
                 <select asp-for="City" asp-items="Html.GetEnumSelectList<Cities>()">
                 </select>
                 <span asp-validation-for="City"></span>
 
                 <br>
-                <label asp-for="Country">Tara:</label>
+                <label asp-for="Country">Country:</label>
                 <select asp-for="Country" asp-items="Html.GetEnumSelectList<Countries>()">
                 </select>
                 <span asp-validation-for="Country"></span>
 
                 <br>
-                <label asp-for="Adress">Adresa:</label>
+                <label asp-for="Adress">Adress:</label>
                 <input asp-for="Adress" >
                 <span asp-validation-for="Adress"></span>
 
-                <br>
                 <br>
                 <input class="buttonuniversal" type="submit" value="Submit">
             </form>

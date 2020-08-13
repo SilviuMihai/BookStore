@@ -2,6 +2,8 @@
     grid-area: m;
     background-color: rgb(209, 230, 227);
     border-radius: 15px;
+    padding:5px;
+    font-size:large;
 }
 
 /*Grid Layout*/
